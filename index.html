@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frost Client 1.8.9</title>
+<style>
+    /* Reset básico */
+    * {margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif;}
+    body {background-color:#121212; color:#EEE;}
+
+    /* Container */
+    .container {width:90%; max-width:1000px; margin:40px auto;}
+
+    /* Navbar */
+    .navbar {display:flex; justify-content:space-between; background:#1f1f1f; padding:15px; border-radius:10px;}
+    .navbar button {background:none; border:none; color:#EEE; font-size:16px; cursor:pointer; padding:10px; transition:0.3s;}
+    .navbar button:hover {color:#00FFFF;}
+    .navbar select {padding:5px; border-radius:5px; border:none; background:#2c2c2c; color:#EEE;}
+
+    /* Sections */
+    .section {display:none; margin-top:30px;}
+    .section.active {display:block;}
+
+    h1, h2 {margin-bottom:20px;}
+    p {margin-bottom:10px; line-height:1.5;}
+
+    /* Buttons */
+    .download-btn {background:#00FFFF; color:#121212; padding:15px 25px; font-size:18px; border:none; border-radius:10px; cursor:pointer; transition:0.3s;}
+    .download-btn:hover {background:#00cccc;}
+
+    /* Mods list */
+    .mod-list {display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+    .mod-card {background:#1f1f1f; padding:15px; border-radius:10px;}
+    .mod-card h3 {margin-bottom:10px; color:#00FFFF;}
+
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <div>
+            <button onclick="showSection('home')" id="btn-home">Home</button>
+            <button onclick="showSection('mods')" id="btn-mods">Mods</button>
+            <button onclick="showSection('download')" id="btn-download">Download</button>
+        </div>
+        <select id="language-select" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="hg">Hogler</option>
+        </select>
+    </div>
+
+    <!-- Home Section -->
+    <div id="home" class="section active">
+        <h1 data-en="Welcome to Frost Client 1.8.9" data-hg="Ygnorng vq Htuvf Etkpvpg 1.8.9">Welcome to Frost Client 1.8.9</h1>
+        <p data-en="Frost Client 1.8.9 is a custom Minecraft client with amazing mods and features." data-hg="Htuvf Etkpvpg 1.8.9 ku c ewuvog Ogzevke pqyvcvk vjcp cokaing oqupvc cpf htgxgtgu." >Frost Client 1.8.9 is a custom Minecraft client with amazing mods and features.</p>
+    </div>
+
+    <!-- Mods Section -->
+    <div id="mods" class="section">
+        <h2 data-en="Available Mods" data-hg="Cxqcnxg Mgfu">Available Mods</h2>
+        <div class="mod-list">
+            <div class="mod-card">
+                <h3 data-en="FrostClient Classic" data-hg="HtuvfEtkpvpg Encueg">FrostClient Classic</h3>
+                <p data-en="Classic features for version 1.8.9" data-hg="Encueg htgxgtgu hqt xgtuxqp 1.8.9">Classic features for version 1.8.9</p>
+            </div>
+            <div class="mod-card">
+                <h3 data-en="Auto-Sprint" data-hg="Cvwv-Utrkpv">Auto-Sprint</h3>
+                <p data-en="Automatically sprint when moving forward" data-hg="Cwvvqewkemgcnatw utrkpv yjcp oqkxkpi hqt yqtfyqhtg hqtcxgt">Automatically sprint when moving forward</p>
+            </div>
+            <div class="mod-card">
+                <h3 data-en="X-Ray" data-hg="Z-Ctca">X-Ray</h3>
+                <p data-en="See ores and hidden items through walls" data-hg="Ugg qtguc cpf jkkfpg kvogpu vjtwuj ycnnwu">See ores and hidden items through walls</p>
+            </div>
+            <div class="mod-card">
+                <h3 data-en="Fullbright" data-hg="Hvnnctkijv">Fullbright</h3>
+                <p data-en="Always see clearly in dark areas" data-hg="Cnxycu ugg ejgnct{k kp fctm ctgct">Always see clearly in dark areas</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download Section -->
+    <div id="download" class="section">
+        <h2 data-en="Download Frost Client 1.8.9" data-hg="Fqypqnf Htuvf Etkpvpg 1.8.9">Download Frost Client 1.8.9</h2>
+        <p data-en="Click the button below to download the client." data-hg="Eknem vjg dwwvqp dnqyq vjgnq vq fqypqnf vjg etkpvpg">Click the button below to download the client.</p>
+        <a href="https://www.mediafire.com/file/jrpj5elne2oce1n/FrostClient_1.8.9.zip/file" target="_blank"><button class="download-btn" data-en="Download Now" data-hg="Fqypqnf Pqy">Download Now</button></a>
+    </div>
+</div>
+
+<script>
+// Função para trocar seções
+function showSection(sectionId){
+    document.querySelectorAll('.section').forEach(sec=>sec.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+}
+
+// Função para converter para Hogler (+2 shift)
+function toHogler(text){
+    return text.split('').map(c=>{
+        let code = c.charCodeAt(0);
+        if(c >= 'a' && c <= 'z'){
+            return String.fromCharCode(((code - 97 + 2) % 26) + 97);
+        }else if(c >= 'A' && c <= 'Z'){
+            return String.fromCharCode(((code - 65 + 2) % 26) + 65);
+        }else{
+            return c;
+        }
+    }).join('');
+}
+
+// Troca de idioma
+function changeLanguage(){
+    let lang = document.getElementById('language-select').value;
+    document.querySelectorAll('[data-en]').forEach(el=>{
+        if(lang==='en') el.textContent = el.dataset.en;
+        if(lang==='hg') el.textContent = toHogler(el.dataset.en);
+    });
+}
+
+// Inicializa Hogler se estiver selecionado
+changeLanguage();
+</script>
+</body>
+</html>

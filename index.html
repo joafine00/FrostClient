@@ -3,151 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frost Client 1.8.9</title>
+    <title>FrostClient Classic 1.8.9</title>
     <style>
-        /* Reset básico */
-        * {margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif;}
-        body {background-color:#121212; color:#EEE;}
-
-        /* Container */
-        .container {width:90%; max-width:1000px; margin:40px auto;}
-
-        /* Navbar */
-        .navbar {display:flex; justify-content:space-between; background:#1f1f1f; padding:15px; border-radius:10px;}
-        .navbar button {background:none; border:none; color:#EEE; font-size:16px; cursor:pointer; padding:10px; transition:0.3s;}
-        .navbar button:hover {color:#00FFFF;}
-        .navbar select {padding:5px; border-radius:5px; border:none; background:#2c2c2c; color:#EEE;}
-
+        /* Basic reset */
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color:#121212; color:#EEE; }
+        .container { width:90%; max-width:1000px; margin:40px auto; }
+        .navbar { display:flex; justify-content:space-between; background:#1f1f1f; padding:15px; border-radius:10px; }
+        .navbar button { background:none; border:none; color:#EEE; font-size:16px; cursor:pointer; padding:10px; transition:0.3s; }
+        .navbar button:hover { color:#00FFFF; }
         /* Sections */
-        .section {display:none; margin-top:30px;}
-        .section.active {display:block;}
-
-        h1, h2 {margin-bottom:20px;}
-        p {margin-bottom:10px; line-height:1.5;}
-
+        .section { display:none; margin-top:30px; }
+        .section.active { display:block; }
+        h1,h2 { margin-bottom:20px; }
+        p { margin-bottom:10px; line-height:1.5; }
         /* Buttons */
-        .download-btn {background:#00FFFF; color:#121212; padding:15px 25px; font-size:18px; border:none; border-radius:10px; cursor:pointer; transition:0.3s;}
-        .download-btn:hover {background:#00cccc;}
-
-        /* Mods list */
-        .mod-list {display:grid; grid-template-columns:1fr 1fr; gap:20px;}
-        .mod-card {background:#1f1f1f; padding:15px; border-radius:10px;}
-        .mod-card h3 {margin-bottom:10px; color:#00FFFF;}
-
-        /* Nickname input */
-        .input-field {margin-bottom:20px;}
-        .input-field label {display:block; margin-bottom:5px; color:#00FFFF;}
-        .input-field input {width:100%; padding:10px; border-radius:5px; border:1px solid #00FFFF; background:#2c2c2c; color:#EEE;}
+        .download-btn { background:#00FFFF; color:#121212; padding:15px 25px; font-size:18px; border:none; border-radius:10px; cursor:pointer; transition:0.3s; }
+        .download-btn:hover { background:#00cccc; }
+        /* Gallery */
+        .gallery { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:20px; }
+        .gallery img { width:100%; border-radius:10px; }
+        /* Input field */
+        .input-field { margin-bottom:20px; }
+        .input-field label { display:block; margin-bottom:5px; color:#00FFFF; }
+        .input-field input { width:100%; padding:10px; border-radius:5px; border:1px solid #00FFFF; background:#2c2c2c; color:#EEE; }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="navbar">
-        <div>
-            <button onclick="showSection('home')" id="btn-home">Home</button>
-            <button onclick="showSection('mods')" id="btn-mods">Mods</button>
-            <button onclick="showSection('download')" id="btn-download">Download</button>
-            <button onclick="showSection('nickname')" id="btn-nickname">Nickname</button>
-        </div>
-        <select id="language-select" onchange="changeLanguage()">
-            <option value="en">English</option>
-            <option value="hg">Hogler</option>
-        </select>
-    </div>
-
-    <!-- Home Section -->
-    <div id="home" class="section active">
-        <h1 data-en="Welcome to Frost Client 1.8.9" data-hg="Ygnorng vq Htuvf Etkpvpg 1.8.9">Welcome to Frost Client 1.8.9</h1>
-        <p data-en="Frost Client 1.8.9 is a custom Minecraft client with amazing mods and features." data-hg="Htuvf Etkpvpg 1.8.9 ku c ewuvog Ogzevke pqyvcvk vjcp cokaing oqupvc cpf htgxgtgu.">Frost Client 1.8.9 is a custom Minecraft client with amazing mods and features.</p>
-    </div>
-
-    <!-- Mods Section -->
-    <div id="mods" class="section">
-        <h2 data-en="Available Mods" data-hg="Cxqcnxg Mgfu">Available Mods</h2>
-        <div class="mod-list">
-            <div class="mod-card">
-                <h3 data-en="Keystrokes Display" data-hg="Mgfu Gtqfcpw">Keystrokes Display</h3>
-                <p data-en="Displays key presses on screen" data-hg="Fqwvkpw hqtqwvqv vqvgtq">Displays key presses on screen</p>
-            </div>
-            <div class="mod-card">
-                <h3 data-en="Show/Hide FPS" data-hg="Uqgq/Ujv Fqv">Show/Hide FPS</h3>
-                <p data-en="Toggle FPS display visibility" data-hg="Vqgqv Fqvgtq vqfgtqvgtq">Toggle FPS display visibility</p>
-            </div>
-            <div class="mod-card">
-                <h3 data-en="OptiFine" data-hg="QgrkHqg">OptiFine</h3>
-                <p data-en="Improves game performance and graphics" data-hg="Kqvjqv cpnqvjqv eqvjqwvqwv cpf iqhgtqwv">Improves game performance and graphics</p>
-            </div>
-            <div class="mod-card">
-                <h3 data-en="FPS Boost" data-hg="Hqvgt Cwqv">FPS Boost</h3>
-                <p data-en="Enhances FPS for smoother gameplay" data-hg="Gqvjqvgtq Cwqv hqt qwvqwvqwv hqvjqwvqwv">Enhances FPS for smoother gameplay</p>
-            </div>
-            <div class="mod-card">
-                <h3 data-en="NoHit Delay Fix" data-hg="PqJgqv Fqvjqv">NoHit Delay Fix</h3>
-                <p data-en="Reduces hit registration delay" data-hg="Tqfgtqv hkrv jqwvqwvqwv hqvjqwvqwv">Reduces hit registration delay</p>
+    <div class="container">
+        <div class="navbar">
+            <div>
+                <button onclick="showSection('home')" id="btn-home">Home</button>
+                <button onclick="showSection('about')" id="btn-about">About</button>
+                <button onclick="showSection('download')" id="btn-download">Download</button>
             </div>
         </div>
-    </div>
 
-    <!-- Download Section -->
-    <div id="download" class="section">
-        <h2 data-en="Download Frost Client 1.8.9" data-hg="Fqypqnf Htuvf Etkpvpg 1.8.9">Download Frost Client 1.8.9</h2>
-        <p data-en="Click the button below to download the client." data-hg="Eknem vjg dwwvqp dnqyq vjgnq vq fqypqnf vjg etkpvpg">Click the button below to download the client.</p>
-        <a href="https://www.mediafire.com/file/wm1oblv9ujcgrb7/FrostClient.zip/file" target="_blank"><button class="download-btn" data-en="Download Now" data-hg="Fqypqnf Pqy">Download Now</button></a>
-    </div>
-
-    <!-- Nickname Section -->
-    <div id="nickname" class="section">
-        <h2 data-en="Set Your Minecraft Nickname" data-hg="Uqgq Vqgqv Hqvgtqwvqv Htuvf Etkpvpg">Set Your Minecraft Nickname</h2>
-        <div class="input-field">
-            <label for="nickname-input" data-en="Enter your nickname" data-hg="Gvqv vqgqv hqvgtqwvqv">Enter your nickname</label>
-            <input type="text" id="nickname-input" placeholder="Enter your nickname">
+        <!-- Home Section -->
+        <div id="home" class="section active">
+            <h1>Welcome to FrostClient Classic 1.8.9</h1>
+            <p>FrostClient Classic is an open-source Minecraft PVP client built for version 1.8.9, offering optimized performance, enhanced UI, and PVP-focused features.</p>
         </div>
-        <button onclick="setNickname()" class="download-btn" data-en="Set Nickname" data-hg="Uqgqv Hqvgtqwvqv">Set Nickname</button>
+
+        <!-- About Section -->
+        <div id="about" class="section">
+            <h2>About FrostClient Classic</h2>
+            <p>FrostClient Classic is a 1.8.9 PVP-client mod that is based on CloudClient, modified and enhanced for better performance and customization. Key features include:</p>
+            <ul>
+                <li>Customized UI for enhanced user experience</li>
+                <li>Optimized performance to boost FPS</li>
+                <li>Enhanced PVP functionalities and utilities</li>
+                <li>Expanded customization options for personalisation</li>
+            </ul>
+            <p><strong>How to use:</strong></p>
+            <ol>
+                <li>Download the FrostClient Classic 1.8.9 JAR file.</li>
+                <li>Install it like any other Minecraft mod (for Minecraft Java Edition 1.8.9).</li>
+                <li>Launch Minecraft and select FrostClient Classic from the launcher.</li>
+                <li>Enjoy enhanced PVP gameplay.</li>
+            </ol>
+
+            <div class="gallery">
+                <img src="https://i.imgur.com/yourFirstImage.jpg" alt="FrostClient Classic screenshot 1">
+                <img src="https://i.imgur.com/yourSecondImage.jpg" alt="FrostClient Classic screenshot 2">
+                <img src="https://i.imgur.com/yourThirdImage.jpg" alt="FrostClient Classic screenshot 3">
+                <img src="https://i.imgur.com/yourFourthImage.jpg" alt="FrostClient Classic screenshot 4">
+            </div>
+        </div>
+
+        <!-- Download Section -->
+        <div id="download" class="section">
+            <h2>Download FrostClient Classic 1.8.9</h2>
+            <p>Click the button below to download the client (hosted externally):</p>
+            <a href="https://files.fm/u/3gz6z7b6bz" target="_blank"><button class="download-btn">Download Now</button></a>
+        </div>
     </div>
-</div>
 
-<script>
-// Função para trocar seções
-function showSection(sectionId){
-    document.querySelectorAll('.section').forEach(sec=>sec.classList.remove('active'));
-    document.getElementById(sectionId).classList.add('active');
-}
-
-// Função para converter para Hogler (+2 shift)
-function toHogler(text){
-    return text.split('').map(c=>{
-        let code = c.charCodeAt(0);
-        if(c >= 'a' && c <= 'z'){
-            return String.fromCharCode(((code - 97 + 2) % 26) + 97);
-        }else if(c >= 'A' && c <= 'Z'){
-            return String.fromCharCode(((code - 65 + 2) % 26) + 65);
-        }else{
-            return c;
+    <script>
+        function showSection(sectionId){
+            document.querySelectorAll('.section').forEach(sec=>sec.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
         }
-    }).join('');
-}
-
-// Troca de idioma
-function changeLanguage(){
-    let lang = document.getElementById('language-select').value;
-    document.querySelectorAll('[data-en]').forEach(el=>{
-        if(lang==='en') el.textContent = el.dataset.en;
-        if(lang==='hg') el.textContent = toHogler(el.dataset.en);
-    });
-}
-
-// Inicializa Hogler se estiver selecionado
-changeLanguage();
-
-// Função para definir o apelido
-function setNickname(){
-    let nickname = document.getElementById('nickname-input').value;
-    if(nickname){
-        alert(`Nickname set to: ${nickname}`);
-    } else {
-        alert('Please enter a valid nickname.');
-    }
-}
-</script>
+    </script>
 </body>
 </html>

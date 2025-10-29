@@ -25,6 +25,7 @@
     .gallery img {width:100%; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); transition:transform 0.3s; cursor:pointer;}
     .gallery img:hover {transform:scale(1.05);}
     iframe, video {width:100%; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3);}
+    input[type="text"] {padding:10px; border-radius:8px; border:none; width:80%; max-width:300px; margin-top:10px; display:block;}
     @media(max-width:600px){.navbar{flex-direction:column; align-items:center;}}
   </style>
 </head>
@@ -42,7 +43,7 @@
       <button onclick="showSection('about')">About</button>
       <button onclick="showSection('features')">Features</button>
       <button onclick="showSection('mods')">All Mods</button>
-      <button onclick="showSection('documents')">Documents</button>
+      <button onclick="showSection('profile')">Profile</button>
       <button onclick="showSection('download')">Download</button>
       <button onclick="showSection('community')">Community</button>
     </div>
@@ -96,15 +97,12 @@
       <p><i>Note: This list covers documented Cloud Client modules; FrostClient Classic may include additional proprietary modules.</i></p>
     </div>
 
-    <!-- Documents Section -->
-    <div id="documents" class="section">
-      <h2>Documents & Guides</h2>
-      <ul>
-        <li><a href="#" style="color:#00FFFF;" target="_blank">Installation Guide</a></li>
-        <li><a href="#" style="color:#00FFFF;" target="_blank">FAQ / Troubleshooting</a></li>
-        <li><a href="#" style="color:#00FFFF;" target="_blank">Changelog / Updates</a></li>
-        <li><a href="#" style="color:#00FFFF;" target="_blank">Terms of Use</a></li>
-      </ul>
+    <!-- Profile Section -->
+    <div id="profile" class="section">
+      <h2>Your Minecraft Nick</h2>
+      <p>Enter your Minecraft nickname below:</p>
+      <input type="text" id="mcNick" placeholder="Seu Nick de Minecraft">
+      <p id="savedMsg" style="color:#00FFFF; margin-top:10px;"></p>
     </div>
 
     <!-- Download Section -->
@@ -131,6 +129,29 @@
       document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
       document.getElementById(sectionId).classList.add('active');
     }
+
+    // Salvar nickname via localStorage
+    const nickInput = document.getElementById('mcNick');
+    const savedMsg = document.getElementById('savedMsg');
+
+    // Carregar nickname salvo
+    const savedNick = localStorage.getItem('mcNick');
+    if(savedNick){
+      nickInput.value = savedNick;
+      savedMsg.textContent = `Seu nick atual é "${savedNick}"`;
+    }
+
+    // Atualizar nickname quando o usuário digitar
+    nickInput.addEventListener('input', () => {
+      const nick = nickInput.value.trim();
+      if(nick){
+        localStorage.setItem('mcNick', nick);
+        savedMsg.textContent = `Seu nick atual é "${nick}"`;
+      } else {
+        localStorage.removeItem('mcNick');
+        savedMsg.textContent = '';
+      }
+    });
   </script>
 </body>
 </html>

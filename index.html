@@ -69,7 +69,7 @@
   }
   #supportBtn:hover{transform:scale(1.1);background:#00cccc;}
   #supportModal{
-    position:fixed;bottom:90px;right:20px;width:330px;height:440px;
+    position:fixed;bottom:90px;right:20px;width:340px;height:460px;
     background:var(--card);border-radius:12px;box-shadow:0 0 20px rgba(0,255,255,0.3);
     display:none;flex-direction:column;overflow:hidden;z-index:1600;
     border:1px solid rgba(0,255,255,0.2);
@@ -121,30 +121,30 @@
 <div class="container">
   <div id="home" class="section active">
     <h2>Welcome to FrostClient Classic</h2>
-    <p>FrostClient Classic is an open-source Minecraft 1.8.9 PvP client inspired by Cloud Client. Designed for smooth performance, modern visuals, and competitive PvP gameplay.</p>
+    <p>FrostClient Classic is an open-source Minecraft 1.8.9 PvP client designed for peak performance and competitive gameplay. It’s based on Cloud Client but reimagined for modern systems and players.</p>
   </div>
 
   <div id="about" class="section">
     <h2>About FrostClient</h2>
-    <p>FrostClient Classic builds upon Cloud Client’s base and introduces a clean UI, improved performance modules, and Frost-exclusive features for advanced customization and PvP precision.</p>
-    <p><b>Open Source Project:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--highlight);" target="_blank">View on GitHub</a></p>
+    <p>FrostClient Classic improves upon Cloud Client by offering cleaner visuals, an optimized framework, and exclusive Frost-only modules that enhance your PvP experience.</p>
+    <p><b>Open Source Repository:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--highlight);" target="_blank">View on GitHub</a></p>
   </div>
 
   <div id="features" class="section">
-    <h2>Client Features</h2>
+    <h2>Main Features</h2>
     <ul>
-      <li>Optimized FPS and network latency</li>
-      <li>Customizable modular UI</li>
-      <li>Drag & drop mod management</li>
-      <li>Crosshair presets and live color editing</li>
-      <li>Enhanced HUD with animations</li>
-      <li>Minimal view bobbing and fireheight control</li>
-      <li>Advanced event handling and rendering pipeline</li>
+      <li>High FPS optimization for smoother gameplay</li>
+      <li>Customizable HUD and overlays</li>
+      <li>Crosshair editor with color presets</li>
+      <li>Direction HUD and Zoom module</li>
+      <li>Full mod toggle menu with categories</li>
+      <li>Enhanced UI responsiveness</li>
+      <li>Cloud-based configuration system (future)</li>
     </ul>
     <div class="gallery">
       <iframe src="https://www.youtube.com/embed/9Xzz6B5M9l8" allowfullscreen></iframe>
-      <img src="https://cdn.modrinth.com/data/aKCamzi7/images/a0059ad8656da1d37a8d1825e9bfaf53171a9e16.webp" alt="">
-      <img src="https://cdn.modrinth.com/data/aKCamzi7/images/75d8624d669989d97f45d80fbfe75c27a49c62e2.webp" alt="">
+      <img src="https://cdn.modrinth.com/data/aKCamzi7/images/c46ff7181310c783f6b1d4fba95985494baad70d.webp">
+      <img src="https://cdn.modrinth.com/data/aKCamzi7/images/75d8624d669989d97f45d80fbfe75c27a49c62e2.webp">
     </div>
   </div>
 
@@ -152,7 +152,7 @@
     <h2>All Mods & Modules</h2>
     <ul>
       <li>NickHider</li>
-      <li>Crosshair Mod (with presets and delete function)</li>
+      <li>Crosshair Mod</li>
       <li>Scroll Zoom</li>
       <li>Nametag Mod</li>
       <li>Scoreboard Mod</li>
@@ -162,51 +162,49 @@
       <li>Minimal View Bobbing</li>
       <li>Colorpicker Rewrite</li>
       <li>Custom HUD Editor</li>
-      <li>Frost-exclusive Visual Enhancements</li>
+      <li>Exclusive Frost Visuals</li>
     </ul>
-    <p><i>This includes all official Cloud Client modules plus FrostClient-exclusive modules.</i></p>
   </div>
 
   <div id="updates" class="section">
-    <h2>Updates & Development</h2>
+    <h2>Development Updates</h2>
     <div class="card">
-      <h3>Client Updates</h3>
-      <p>The FrostClient Classic itself no longer receives mod updates.</p>
-    </div>
-    <div class="card">
-      <h3>Related Projects</h3>
-      <p>Our website, APIs, launchers, and new Frost-related projects continue to receive regular updates and improvements.</p>
+      <h3>Client Status</h3>
+      <p>The FrostClient Classic no longer receives mod updates, but its APIs, site, and related tools still receive continuous improvements.</p>
     </div>
   </div>
 
   <div id="download" class="section">
     <h2>Download FrostClient Classic</h2>
-    <p>Click below to download FrostClient Classic 1.8.9.</p>
+    <p>Click below to download the latest stable version.</p>
     <a href="https://files.fm/u/3gz6z7b6bz" target="_blank"><button class="download-btn">Download Now</button></a>
   </div>
 
   <div id="community" class="section">
-    <h2>Join Our Community</h2>
-    <p>Stay connected with players, receive updates, and share your feedback on our official Discord.</p>
+    <h2>Community</h2>
+    <p>Connect with other players and stay updated on the official Discord server.</p>
     <a href="http://dsc.gg/frost-client" target="_blank"><button class="discord-btn">Join Discord</button></a>
   </div>
 </div>
 
-<!-- Floating Support Button -->
+<!-- Floating Support -->
 <button id="supportBtn" onclick="toggleSupport()">💬</button>
 
-<!-- Support Chat -->
 <div id="supportModal">
   <div id="supportHeader">FrostClient Support</div>
   <div id="supportMessages">
-    <div class="msg bot">Hi! How can I assist you today? Choose a question below 👇</div>
+    <div class="msg bot">Hey! How can I help you? Pick a question below 👇</div>
   </div>
   <div class="question-buttons">
-    <button onclick="ask('download')">How do I download FrostClient?</button>
+    <button onclick="ask('download')">How to download FrostClient?</button>
+    <button onclick="ask('install')">How to install it?</button>
     <button onclick="ask('mods')">Which mods are included?</button>
-    <button onclick="ask('updates')">Are there still updates?</button>
+    <button onclick="ask('features')">What features does it have?</button>
     <button onclick="ask('open')">Is it open source?</button>
-    <button onclick="ask('discord')">Where’s the Discord?</button>
+    <button onclick="ask('videos')">Where can I see gameplay videos?</button>
+    <button onclick="ask('updates')">Does it still get updates?</button>
+    <button onclick="ask('safe')">Is FrostClient safe to use?</button>
+    <button onclick="ask('discord')">Where is the Discord?</button>
   </div>
 </div>
 
@@ -223,12 +221,16 @@ function toggleSupport(){
 function ask(type){
   const area=document.getElementById('supportMessages');
   let res="";
-  if(type==='download') res="You can download FrostClient from the Download section on this website.";
-  if(type==='mods') res="FrostClient includes NickHider, Crosshair, Zoom, Nametag, Scoreboard, Bossbar, Direction HUD, and more!";
-  if(type==='updates') res="The client itself no longer receives mod updates, but the website and APIs are still updated.";
-  if(type==='open') res="Yes! FrostClient is open source: https://github.com/QuiteFrosty/FrostClient";
-  if(type==='discord') res="Join our Discord at: dsc.gg/frost-client";
-  area.innerHTML+=`<div class="msg bot">${res}</div>`;
+  if(type==='download') res="You can download FrostClient Classic from the 'Download' section on this website.";
+  if(type==='install') res="Simply download the ZIP file, extract it, and follow the included installation guide for Minecraft 1.8.9.";
+  if(type==='mods') res="It includes mods like NickHider, Crosshair, Nametag, Scoreboard, Bossbar, Direction HUD, and many more Frost-exclusive modules.";
+  if(type==='features') res="FrostClient brings FPS optimization, clean UI, mod toggle menu, and advanced PvP features.";
+  if(type==='open') res="Yes! FrostClient is completely open-source at https://github.com/QuiteFrosty/FrostClient.";
+  if(type==='videos') res="You can find official showcase videos in the 'Features' section or on YouTube by searching 'FrostClient Classic Showcase'.";
+  if(type==='updates') res="The client itself no longer gets mod updates, but related services like launchers and APIs are still actively maintained.";
+  if(type==='safe') res="Yes, FrostClient is fully open-source and verified safe. You can check its code on GitHub.";
+  if(type==='discord') res="Join the official Discord community at https://dsc.gg/frost-client.";
+  area.innerHTML+=`<div class='msg bot'>${res}</div>`;
   area.scrollTop=area.scrollHeight;
 }
 for(let i=0;i<25;i++){

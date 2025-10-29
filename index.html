@@ -7,107 +7,122 @@
 <link rel="icon" type="image/png" href="frost.png" />
 
 <style>
-  /* === GENERAL STYLES === */
-  *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
-  :root{
-    --highlight:#00FFFF; 
-    --bg1:#0d1117;       
-    --bg2:#001F3F;
-    --text:#EEE;
-    --card:#151a21;
-  }
-  body{
-    background:linear-gradient(-45deg,var(--bg1),#021B27,#002540,var(--bg2));
-    background-size:400% 400%;
-    animation:gradientShift 15s ease infinite;
-    color:var(--text);
-    overflow-x:hidden;
-  }
-  @keyframes gradientShift{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-  }
+/* === GENERAL STYLES === */
+* {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif;}
+:root {
+  --highlight:#00FFFF;
+  --bg1:#0d1117;
+  --bg2:#001F3F;
+  --text:#EEE;
+  --card:#151a21;
+}
+body {
+  background:linear-gradient(-45deg,var(--bg1),#021B27,#002540,var(--bg2));
+  background-size:400% 400%;
+  animation:gradientShift 15s ease infinite;
+  color:var(--text);
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+}
+@keyframes gradientShift {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
 
-  /* === NAVIGATION === */
-  nav{
-    width:100%;
-    background:rgba(20,22,28,0.95);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:12px 30px;
-    position:fixed;
-    top:0;left:0;
-    z-index:1000;
-    box-shadow:0 0 20px rgba(0,255,255,0.25);
-    backdrop-filter:blur(10px);
-  }
-  .nav-left{display:flex;align-items:center;gap:12px;}
-  .nav-left img{height:45px;}
-  .nav-left h1{color:var(--highlight);font-size:1.4em;}
-  .nav-menu button{
-    background:none;border:none;color:var(--text);
-    font-size:15px;cursor:pointer;margin:0 10px;
-    transition:0.3s;
-  }
-  .nav-menu button:hover{color:var(--highlight);transform:scale(1.1);}
+/* === NAVIGATION === */
+nav {
+  width:100%;
+  background:rgba(20,22,28,0.95);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 30px;
+  position:fixed;
+  top:0; left:0;
+  z-index:1000;
+  box-shadow:0 0 20px rgba(0,255,255,0.25);
+  backdrop-filter:blur(10px);
+}
+.nav-left {display:flex; align-items:center; gap:12px;}
+.nav-left img {height:45px;}
+.nav-left h1 {color:var(--highlight); font-size:1.4em;}
+.nav-menu button {
+  background:none; border:none; color:var(--text);
+  font-size:15px; cursor:pointer; margin:0 10px;
+  transition:0.3s;
+}
+.nav-menu button:hover {color:var(--highlight); transform:scale(1.1);}
 
-  /* === CONTENT === */
-  .container{width:90%;max-width:1100px;margin:100px auto 50px auto;}
-  h2,h3{margin-bottom:20px;color:var(--highlight);}
-  p{margin-bottom:15px;line-height:1.6;}
-  ul{margin-left:20px;margin-bottom:20px;}
-  .section{display:none;animation:fadeIn 0.8s;}
-  .section.active{display:block;}
+/* === CONTAINER === */
+.container {width:90%; max-width:1100px; margin:120px auto 50px auto;}
+h2,h3 {margin-bottom:20px; color:var(--highlight);}
+p {margin-bottom:15px; line-height:1.6;}
+ul {margin-left:20px; margin-bottom:20px;}
+.section {display:none; animation:fadeIn 0.8s;}
+.section.active {display:block;}
 
-  .card{
-    background:var(--card);
-    padding:20px;
-    border-radius:12px;
-    margin-bottom:20px;
-    box-shadow:0 0 15px rgba(0,255,255,0.15);
-    border:1px solid rgba(0,255,255,0.08);
-  }
+.card {
+  background:var(--card);
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:20px;
+  box-shadow:0 0 15px rgba(0,255,255,0.15);
+  border:1px solid rgba(0,255,255,0.08);
+}
 
-  /* === IMAGE GALLERY === */
-  .gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:20px;
-  }
-  .gallery img,iframe{
-    width:100%;
-    border-radius:12px;
-    box-shadow:0 0 15px rgba(0,0,0,0.4);
-    transition:transform 0.3s,box-shadow 0.3s;
-  }
-  .gallery img:hover,iframe:hover{
-    transform:scale(1.05);
-    box-shadow:0 0 25px rgba(0,255,255,0.4);
-  }
+/* === IMAGE GALLERY === */
+.gallery {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+}
+.gallery img, iframe {
+  width:100%;
+  border-radius:12px;
+  box-shadow:0 0 15px rgba(0,0,0,0.4);
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+.gallery img:hover, iframe:hover {
+  transform:scale(1.05);
+  box-shadow:0 0 25px rgba(0,255,255,0.4);
+}
 
-  /* === BUTTONS === */
-  .download-btn,.discord-btn{
-    background:var(--highlight);
-    color:#111;
-    padding:15px 30px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:17px;
-    font-weight:600;
-    box-shadow:0 0 15px rgba(0,255,255,0.3);
-  }
-  .download-btn:hover,.discord-btn:hover{
-    background:#00cccc;
-    transform:scale(1.05);
-  }
+/* === BUTTONS === */
+button.download-btn, button.discord-btn {
+  background:var(--highlight);
+  color:#111;
+  padding:15px 30px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:17px;
+  font-weight:600;
+  box-shadow:0 0 15px rgba(0,255,255,0.3);
+  transition:0.3s;
+}
+button.download-btn:hover, button.discord-btn:hover {
+  background:#00cccc;
+  transform:scale(1.05);
+}
 
-  @keyframes fadeIn{
-    from{opacity:0;transform:translateY(20px);}
-    to{opacity:1;transform:translateY(0);}
-  }
+/* === OPEN SOURCE CODE BLOCK === */
+#site-code {
+  max-height:500px;
+  overflow:auto;
+  background:var(--card);
+  padding:15px;
+  border-radius:10px;
+  box-shadow:0 0 15px rgba(0,255,255,0.2);
+  white-space:pre-wrap;
+  word-wrap:break-word;
+}
+
+/* === ANIMATIONS === */
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
+}
 </style>
 </head>
 <body>
@@ -132,7 +147,7 @@
 
 <!-- === MAIN CONTENT === -->
 <div class="container">
-  
+
   <!-- HOME -->
   <div id="home" class="section active">
     <h2>Welcome to FrostClient Classic</h2>
@@ -145,7 +160,7 @@
     <h2>About FrostClient</h2>
     <p>FrostClient Classic enhances Minecraft PvP by combining visual polish, deep mod integration, and open-source transparency.</p>
     <p><b>Open Source Repository:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--highlight);" target="_blank">View on GitHub</a></p>
-    <p>FrostClient supports frequent updates, community-driven features, and smooth integration with major Minecraft PvP servers.</p>
+    <p>Supports frequent updates, community-driven features, and smooth integration with major Minecraft PvP servers.</p>
   </div>
 
   <!-- FEATURES -->
@@ -161,18 +176,12 @@
       <li>Automatic session saving and cloud sync</li>
       <li>Custom skins and cosmetic support</li>
     </ul>
-
-    <div class="gallery" id="feature-gallery">
-      <img src="frostclient1.jpeg" alt="Frost Mod Menu">
-      <img src="frostclient2.jpeg" alt="HUD Editor">
-      <img src="frostclient3.jpeg" alt="Keystrokes Mod">
-    </div>
+    <div class="gallery" id="feature-gallery"></div>
   </div>
 
   <!-- MODS -->
   <div id="mods" class="section">
     <h2>Included Mods & Modules</h2>
-    <p>FrostClient Classic comes with a wide range of competitive PvP mods — and more are constantly added by the community.</p>
     <ul>
       <li>Keystrokes, CPS Counter, FPS Display</li>
       <li>Armor Status, Direction HUD, Coordinates</li>
@@ -189,71 +198,60 @@
     <h2>Development Updates</h2>
     <div class="card">
       <h3>Client Maintenance</h3>
-      <p>The FrostClient Classic no longer receives direct mod updates, but related APIs, launchers, and connected services continue evolving with regular improvements.</p>
+      <p>The client no longer receives direct mod updates, but APIs, launchers, and connected services are continuously improved.</p>
     </div>
     <div class="card">
       <h3>Site Updates</h3>
-      <p>The official site content and gallery images are updated regularly via our JavaScript API (updates occur every 1 day to 1 week).</p>
+      <p>Gallery images and content are updated automatically via a browser API (1-7 days interval).</p>
     </div>
   </div>
 
   <!-- DOWNLOAD -->
   <div id="download" class="section">
     <h2>Download FrostClient Classic</h2>
-    <p>Click below to download the latest official release.</p>
     <a href="https://files.fm/u/3gz6z7b6bz" target="_blank"><button class="download-btn">Download Now</button></a>
   </div>
 
   <!-- COMMUNITY -->
   <div id="community" class="section">
     <h2>Community</h2>
-    <p>Join the FrostClient Discord to connect, share gameplay, and contribute to development.</p>
     <a href="http://dsc.gg/frost-client" target="_blank"><button class="discord-btn">Join Discord</button></a>
   </div>
 
-<!-- OPEN SOURCE -->
-<div id="opensource" class="section">
-  <h2>Open Source</h2>
-  <p>FrostClient Classic and this site are fully open source. Explore the repositories below:</p>
-  <ul>
-    <li><b>Client:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--highlight);" target="_blank">GitHub Repository</a></li>
-  </ul>
+  <!-- OPEN SOURCE -->
+  <div id="opensource" class="section">
+    <h2>Open Source</h2>
+    <p>FrostClient Classic and this site are fully open source. Explore the client repository below:</p>
+    <ul>
+      <li><b>Client:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--highlight);" target="_blank">GitHub Repository</a></li>
+    </ul>
 
-  <h3>Site Code (HTML)</h3>
-  <p>You can view and copy the HTML code of this site below:</p>
-  <button onclick="copySiteCode()" class="download-btn" style="margin-bottom:10px;">Copy Code</button>
-  <pre id="site-code" style="max-height:500px;overflow:auto;background:var(--card);padding:15px;border-radius:10px;box-shadow:0 0 15px rgba(0,255,255,0.2);">
-&lt;!DOCTYPE html&gt;
+    <h3>Site Code (HTML)</h3>
+    <p>View or copy the HTML code of this site:</p>
+    <button onclick="copySiteCode()" class="download-btn" style="margin-bottom:10px;">Copy Code</button>
+    <pre id="site-code">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;!-- ... include your head content here ... --&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;!-- ... include body content here ... --&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-  </pre>
-</div>
-
-<script>
-function copySiteCode() {
-  const code = document.getElementById("site-code").innerText;
-  navigator.clipboard.writeText(code).then(() => {
-    alert("Site HTML code copied to clipboard!");
-  });
-}
-</script>
+&lt;head&gt;...&lt;/head&gt;
+&lt;body&gt;...&lt;/body&gt;
+&lt;/html&gt;</pre>
+  </div>
 
 </div>
 
-<!-- === SECTION SWITCH SCRIPT === -->
 <script>
-function showSection(id){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+// === SECTION SWITCH ===
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-/* === DYNAMIC IMAGE API SIMULATION === */
+// === COPY SITE CODE ===
+function copySiteCode() {
+  const code = document.getElementById("site-code").innerText;
+  navigator.clipboard.writeText(code).then(() => alert("Site HTML code copied!"));
+}
+
+// === DYNAMIC IMAGE API SIMULATION ===
 const apiImages = [
   "frostclient1.jpeg",
   "frostclient2.jpeg",
@@ -265,34 +263,29 @@ const apiImages = [
 function updateGallery() {
   const gallery = document.getElementById("feature-gallery");
   gallery.innerHTML = "";
-  
-  const numImages = Math.floor(Math.random() * apiImages.length) + 1;
-  const shuffled = apiImages.sort(() => 0.5 - Math.random());
-  
-  for(let i=0;i<numImages;i++){
-    const img = document.createElement("img");
-    img.src = shuffled[i];
-    img.alt = "FrostClient Feature " + (i+1);
-    gallery.appendChild(img);
-  }
+  const shuffled = [...apiImages].sort(() => 0.5 - Math.random());
+  shuffled.forEach((img, i) => {
+    const image = document.createElement("img");
+    image.src = img;
+    image.alt = "FrostClient Feature " + (i+1);
+    gallery.appendChild(image);
+  });
 }
 
-// Update images every 1 to 7 days (simulated here in milliseconds for demo purposes)
+// Update images every 1-7 days (demo: milliseconds reduced)
 const minInterval = 1000 * 60 * 60 * 24; // 1 day
 const maxInterval = minInterval * 7;     // 7 days
 
-function scheduleNextUpdate(){
+function scheduleNextUpdate() {
   const delay = Math.random() * (maxInterval - minInterval) + minInterval;
-  setTimeout(()=>{
+  setTimeout(() => {
     updateGallery();
     scheduleNextUpdate();
   }, delay);
 }
 
-// Initialize gallery
 updateGallery();
 scheduleNextUpdate();
 </script>
-
 </body>
 </html>

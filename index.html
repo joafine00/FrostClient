@@ -5,197 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FrostClient Classic 1.8.9</title>
   <style>
-    * {
-      margin:0; padding:0; box-sizing:border-box; 
-      font-family:'Segoe UI',sans-serif;
-    }
-    body {
-      background-color:#0f0f0f; 
-      color:#EEE; 
-      scroll-behavior:smooth;
-    }
-    .container {
-      width:90%; 
-      max-width:1000px; 
-      margin:40px auto;
-    }
-    .navbar {
-      display:flex; 
-      justify-content:space-between; 
-      background:#1f1f1f; 
-      padding:15px; 
-      border-radius:10px;
-      flex-wrap:wrap;
-    }
-    .navbar button {
-      background:none; 
-      border:none; 
-      color:#EEE; 
-      font-size:16px; 
-      cursor:pointer; 
-      padding:10px 15px; 
-      transition:0.3s;
-    }
-    .navbar button:hover {
-      color:#00FFFF;
-    }
-    .section {
-      display:none; 
-      margin-top:30px; 
-      opacity:0; 
-      transition:opacity 0.4s ease-in-out;
-    }
-    .section.active {
-      display:block; 
-      opacity:1;
-    }
-    h1,h2,h3 {
-      margin-bottom:20px;
-      color:#00FFFF;
-    }
-    p {
-      margin-bottom:10px; 
-      line-height:1.6;
-    }
-    ul,ol {
-      margin-left:20px; 
-      margin-bottom:20px;
-    }
-    .download-btn, .discord-btn {
-      background:#00FFFF; 
-      color:#121212; 
-      padding:15px 25px; 
-      font-size:18px; 
-      border:none; 
-      border-radius:10px; 
-      cursor:pointer; 
-      transition:0.3s;
-      display:inline-block;
-      margin-top:10px;
-    }
-    .download-btn:hover, .discord-btn:hover {
-      background:#00cccc;
-    }
-    .gallery {
-      display:grid; 
-      grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); 
-      gap:20px; 
-      margin-top:20px;
-    }
-    .gallery img {
-      width:100%; 
-      border-radius:10px; 
-      box-shadow:0 0 10px rgba(0,0,0,0.3);
-      transition:transform 0.3s;
-    }
-    .gallery img:hover {
-      transform:scale(1.05);
-    }
-    @media(max-width:600px){
-      .navbar{
-        flex-direction:column; 
-        align-items:center;
-      }
-    }
+    * {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif;}
+    body {background-color:#121212; color:#EEE;}
+    .container {width:90%; max-width:1000px; margin:40px auto;}
+    .navbar {display:flex; justify-content:space-between; align-items:center; background:#1f1f1f; padding:15px; border-radius:10px;}
+    .navbar img {height:45px; border-radius:8px;}
+    .navbar div button {background:none; border:none; color:#EEE; font-size:16px; cursor:pointer; padding:10px; transition:0.3s;}
+    .navbar div button:hover {color:#00FFFF;}
+    .section {display:none; margin-top:30px;}
+    .section.active {display:block;}
+    h1,h2,h3 {margin-bottom:20px;}
+    p {margin-bottom:10px; line-height:1.6;}
+    ul,ol {margin-left:20px; margin-bottom:20px;}
+    .download-btn {background:#00FFFF; color:#121212; padding:15px 25px; font-size:18px; border:none; border-radius:10px; cursor:pointer; transition:0.3s;}
+    .download-btn:hover {background:#00cccc;}
+    .gallery {display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:20px; margin-top:20px;}
+    .gallery img {width:100%; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3);}
+    a {color:#00FFFF; text-decoration:none;}
+    a:hover {text-decoration:underline;}
+    @media(max-width:600px){.navbar{flex-direction:column; align-items:center;}}
   </style>
 </head>
 <body>
   <div class="container">
     <div class="navbar">
+      <img src="data:image/jpeg;base64,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" alt="FrostClient Logo">
       <div>
         <button onclick="showSection('home')">Home</button>
-        <button onclick="showSection('about')">About</button>
         <button onclick="showSection('features')">Features</button>
         <button onclick="showSection('download')">Download</button>
-        <button onclick="showSection('community')">Community</button>
+        <button onclick="showSection('discord')">Discord</button>
       </div>
     </div>
 
-    <!-- Home Section -->
+    <!-- Home -->
     <div id="home" class="section active">
       <h1>Welcome to FrostClient Classic 1.8.9</h1>
-      <p>
-        FrostClient Classic is a custom Minecraft 1.8.9 PVP client designed for optimized performance, 
-        sleek visuals, and advanced combat features. Built for competitive players who want smooth gameplay 
-        with better FPS and UI customization.
-      </p>
-      <div class="gallery">
-        <img src="https://cdn.modrinth.com/data/aKCamzi7/images/c46ff7181310c783f6b1d4fba95985494baad70d.webp" alt="Main Menu">
-        <img src="https://media.forgecdn.net/avatars/thumbnails/1043/799/256/256/638571159001849732.webp" alt="In-game HUD">
-      </div>
+      <p>FrostClient Classic is a performance-optimized Minecraft PvP client designed for speed, style, and control. Enjoy ultra-smooth gameplay, advanced HUD customization, and improved FPS with our lightweight 1.8.9 Forge client.</p>
     </div>
 
-    <!-- About Section -->
-    <div id="about" class="section">
-      <h2>About FrostClient Classic</h2>
-      <p>
-        FrostClient Classic is a performance-oriented Minecraft client based on CloudClient and rebuilt 
-        to deliver an optimized experience for version 1.8.9. It includes various PVP utilities, 
-        customization options, and enhancements to improve visuals and responsiveness.
-      </p>
-
-      <h3>Main Features:</h3>
-      <ul>
-        <li>FPS boost and performance optimizations</li>
-        <li>Clean and modern in-game UI</li>
-        <li>Keystrokes, CPS, and Ping displays</li>
-        <li>Toggleable HUD modules</li>
-        <li>Full 1.8.9 Forge compatibility</li>
-      </ul>
-    </div>
-
-    <!-- Features Section -->
+    <!-- Features -->
     <div id="features" class="section">
       <h2>Client Features Showcase</h2>
-      <p>Here’s a closer look at what FrostClient Classic offers through visuals and examples:</p>
-      <div class="gallery">
-        <img src="https://i.imgur.com/xxi4GBU.png" alt="Custom HUD and Keystrokes">
-        <img src="https://i.imgur.com/yVuXoxJ.png" alt="CPS & FPS Display">
-        <img src="https://i.imgur.com/KY1zNfP.png" alt="In-game Mod Menu">
-        <img src="https://i.imgur.com/lYkxyy1.png" alt="Settings Interface">
-      </div>
+      <p>Discover everything FrostClient Classic has to offer for competitive Minecraft PvP players.</p>
 
-      <h3>Extra Highlights:</h3>
       <ul>
-        <li>Dynamic motion blur and smooth animations.</li>
-        <li>Customizable crosshair and HUD layout editor.</li>
-        <li>Advanced toggles for performance tuning.</li>
-        <li>Support for PvP texture packs and shader mods.</li>
-        <li>Frequent updates and bug fixes from the community.</li>
+        <li>⚡ FPS Boost & Lag Reduction</li>
+        <li>🎨 Clean & Customizable UI</li>
+        <li>⌨️ Keystrokes, CPS, and Ping Display</li>
+        <li>🧭 Modular HUD Editor</li>
+        <li>🧊 Full Forge 1.8.9 Compatibility</li>
+        <li>🌐 Built-in Discord Integration</li>
       </ul>
+
+      <div class="gallery">
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/..." alt="Feature Screenshot 1">
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/..." alt="Feature Screenshot 2">
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/..." alt="Feature Screenshot 3">
+      </div>
     </div>
 
-    <!-- Download Section -->
+    <!-- Download -->
     <div id="download" class="section">
       <h2>Download FrostClient Classic 1.8.9</h2>
-      <p>Click the button below to download FrostClient Classic. Hosted on Files.fm.</p>
+      <p>Click below to get the latest version of FrostClient Classic. Hosted on Files.fm.</p>
       <a href="https://files.fm/u/3gz6z7b6bz" target="_blank">
         <button class="download-btn">Download Now</button>
       </a>
     </div>
 
-    <!-- Community / Discord Section -->
-    <div id="community" class="section">
-      <h2>Join the FrostClient Community</h2>
-      <p>
-        Stay updated, share suggestions, and connect with other players by joining our official Discord server!
-      </p>
+    <!-- Discord -->
+    <div id="discord" class="section">
+      <h2>Join Our Community</h2>
+      <p>Stay up to date with FrostClient news, updates, and support on our official Discord server.</p>
       <a href="http://dsc.gg/frost-client" target="_blank">
-        <button class="discord-btn">Join Discord Server</button>
+        <button class="download-btn">Join Discord</button>
       </a>
-      <div class="gallery">
-        <img src="https://cdn.discordapp.com/attachments/1120700000000000000/1184800000000000000/frostdiscord.png" alt="Discord Community Preview">
-        <img src="https://i.imgur.com/fv4JYRH.png" alt="Community Events">
-      </div>
     </div>
   </div>
 
   <script>
-    function showSection(sectionId){
-      document.querySelectorAll('.section').forEach(sec => {
-        sec.classList.remove('active');
-      });
-      document.getElementById(sectionId).classList.add('active');
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
     }
   </script>
 </body>

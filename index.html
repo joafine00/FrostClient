@@ -7,23 +7,23 @@
   <link rel="icon" type="image/png" href="frost.png" />
   <style>
     * {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif;}
-    body {background-color:#121212; color:#EEE;}
+    body {background:#121212; color:#EEE;}
     .container {width:90%; max-width:1000px; margin:40px auto;}
     header {text-align:center; margin-bottom:30px;}
-    header img {height:80px; width:auto; display:block; margin:0 auto 10px auto;}
+    header img {height:80px; width:auto; display:block; margin:0 auto 10px;}
     .navbar {display:flex; justify-content:center; flex-wrap:wrap; background:#1f1f1f; padding:15px; border-radius:10px;}
     .navbar button {background:none; border:none; color:#EEE; font-size:16px; cursor:pointer; padding:10px 15px; transition:0.3s;}
     .navbar button:hover {color:#00FFFF;}
     .section {display:none; margin-top:30px;}
     .section.active {display:block;}
     h1,h2,h3 {margin-bottom:20px; color:#00FFFF;}
-    p {margin-bottom:10px; line-height:1.6;}
+    p {margin-bottom:15px; line-height:1.6;}
     ul,ol {margin-left:20px; margin-bottom:20px;}
     .download-btn, .discord-btn {background:#00FFFF; color:#121212; padding:15px 25px; font-size:18px; border:none; border-radius:10px; cursor:pointer; transition:0.3s; display:inline-block; margin-top:10px;}
     .download-btn:hover, .discord-btn:hover {background:#00cccc;}
-    .gallery {display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px; margin-top:20px;}
+    .gallery {display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:20px; margin-top:20px;}
     video {width:100%; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3);}
-    @media(max-width:600px){.navbar{flex-direction:column; align-items:center;}}
+    @media(max-width:600px){ .navbar{flex-direction:column; align-items:center;} }
   </style>
 </head>
 <body>
@@ -41,67 +41,64 @@
       <button onclick="showSection('community')">Community</button>
     </div>
 
-    <!-- Home -->
+    <!-- Home Section -->
     <div id="home" class="section active">
       <h2>Welcome</h2>
       <p>FrostClient Classic is a Minecraft 1.8.9 PvP client built for optimized performance and clean visuals, offering advanced features for competitive players.</p>
     </div>
 
-    <!-- About -->
+    <!-- About Section -->
     <div id="about" class="section">
       <h2>About FrostClient Classic</h2>
       <p>Built on a lightweight architecture and optimized for PvP, FrostClient Classic brings enhanced FPS, HUD customization, and a modern interface for Minecraft 1.8.9.</p>
       <ul>
-        <li>FPS Boost and optimization</li>
-        <li>Custom HUD and modular UI</li>
-        <li>Keystrokes, CPS, and Ping display</li>
+        <li>FPS Boost & Lag Reduction</li>
+        <li>Custom HUD Modules</li>
+        <li>Keystrokes, CPS & Ping Display</li>
         <li>Fully compatible with Forge 1.8.9</li>
       </ul>
     </div>
 
-    <!-- Features -->
+    <!-- Features Section -->
     <div id="features" class="section">
       <h2>Client Features Showcase</h2>
-      <p>Watch the FrostClient Classic in action — showing its modules, interface, and smooth PvP performance.</p>
+      <p>Watch the FrostClient Classic in action — showing modules, interface, and smooth PvP performance.</p>
       <div class="gallery">
         <video controls loop muted>
-          <source src="https://cdn.discordapp.com/attachments/1287875009993375806/1301658657751085157/frostclient_showcase1.mp4" type="video/mp4">
+          <source src="https://www.youtube.com/embed/9Xzz6B5M9l8" type="video/mp4">
           Your browser does not support the video tag.
         </video>
         <video controls loop muted>
-          <source src="https://cdn.discordapp.com/attachments/1287875009993375806/1301658658199889930/frostclient_showcase2.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <video controls loop muted>
-          <source src="https://cdn.discordapp.com/attachments/1287875009993375806/1301658658434838548/frostclient_showcase3.mp4" type="video/mp4">
+          <source src="https://www.youtube.com/embed/cACaj0-ajLA" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       </div>
     </div>
 
-    <!-- Download -->
+    <!-- Download Section -->
     <div id="download" class="section">
       <h2>Download FrostClient Classic 1.8.9</h2>
-      <p>Get the latest version of FrostClient Classic below:</p>
+      <p>Click the button below to download FrostClient Classic. Hosted on Files.fm.</p>
       <a href="https://files.fm/u/3gz6z7b6bz" target="_blank">
         <button class="download-btn">Download Now</button>
       </a>
     </div>
 
-    <!-- Community -->
+    <!-- Community Section -->
     <div id="community" class="section">
       <h2>Join the Community</h2>
       <p>Connect with other players, get updates, and share feedback on our official Discord server.</p>
       <a href="http://dsc.gg/frost-client" target="_blank">
-        <button class="discord-btn">Join Discord</button>
+        <button class="discord-btn">Join Discord Server</button>
       </a>
     </div>
+
   </div>
 
   <script>
-    function showSection(sectionId) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.getElementById(sectionId).classList.add('active');
+    function showSection(id){
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
     }
   </script>
 </body>

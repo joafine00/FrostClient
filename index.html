@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FrostClient Creative Hub</title>
+<title>FrostClient Classic 1.8.9</title>
 <link rel="icon" type="image/png" href="frost.png">
 <style>
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
@@ -60,8 +60,8 @@
 <div class="container">
   <header>
     <img src="frost.png" alt="FrostClient Logo">
-    <h1>FrostClient Creative Hub</h1>
-    <p class="subtitle">Explore and personalize your Minecraft PvP experience</p>
+    <h1>FrostClient Classic 1.8.9</h1>
+    <p class="subtitle">Custom PvP client for Minecraft 1.8.9</p>
     <p class="welcome" id="welcomeNick"></p>
   </header>
 
@@ -76,24 +76,22 @@
     <button onclick="showSection('community')">Community</button>
   </div>
 
+  <!-- Home Section -->
   <div id="home" class="section active">
     <h2>Welcome</h2>
-    <p>FrostClient Classic is a sleek Minecraft 1.8.9 PvP client based on Cloud Client, optimized for performance, advanced features, and clean visuals.</p>
-    <p>Use the left sidebar to customize the site and explore creative options!</p>
-    <div class="card">
-      <h3>Pro Tip:</h3>
-      <p>Set your Minecraft nick in the Profile section to personalize your experience.</p>
-    </div>
+    <p>FrostClient Classic is a custom Minecraft 1.8.9 PvP client, based on Cloud Client, optimized for performance and advanced features.</p>
   </div>
 
+  <!-- About Section -->
   <div id="about" class="section">
     <h2>About FrostClient Classic</h2>
-    <p>Built upon the Cloud Client base, FrostClient Classic introduces new modules, enhanced UI, and exclusive features to elevate your PvP gameplay.</p>
+    <p>FrostClient Classic adds customization, UI improvements, and exclusive modules for an optimized PvP experience.</p>
   </div>
 
+  <!-- Features Section -->
   <div id="features" class="section">
-    <h2>Feature Showcase</h2>
-    <p>Check FrostClient Classic in action:</p>
+    <h2>Client Features Showcase</h2>
+    <p>Explore FrostClient Classic in action:</p>
     <div class="gallery">
       <iframe width="560" height="315" src="https://www.youtube.com/embed/9Xzz6B5M9l8" frameborder="0" allowfullscreen></iframe>
       <img src="https://cdn.modrinth.com/data/aKCamzi7/images/c46ff7181310c783f6b1d4fba95985494baad70d.webp" alt="Screenshot 1">
@@ -103,11 +101,29 @@
     </div>
   </div>
 
+  <!-- Mods Section -->
   <div id="mods" class="section">
     <h2>All Mods & Modules</h2>
-    <p>Includes core Cloud Client modules plus exclusive FrostClient enhancements. Note: The client itself no longer receives updates for mods, but other services and tools remain up-to-date.</p>
+    <p>The FrostClient Classic includes all core Cloud Client modules plus additional custom modules:</p>
+    <ul>
+      <li>Mod Categories</li>
+      <li>Search Bar</li>
+      <li>Nickhider Mod</li>
+      <li>Crosshair Mod</li>
+      <li>Scroll Zoom</li>
+      <li>Nametag Mod</li>
+      <li>Scoreboard Mod</li>
+      <li>Bossbar Mod</li>
+      <li>Direction HUD</li>
+      <li>Fireheight Option</li>
+      <li>Minimal View Bobbing</li>
+      <li>Colorpicker Rewrite</li>
+      <li>Additional FrostClient-exclusive modules</li>
+    </ul>
+    <p><i>Note: This list covers documented modules; proprietary modules may also exist.</i></p>
   </div>
 
+  <!-- Profile Section -->
   <div id="profile" class="section">
     <h2>Your Minecraft Nick</h2>
     <p>Enter your Minecraft nickname to personalize your experience:</p>
@@ -115,6 +131,7 @@
     <p id="savedMsg"></p>
   </div>
 
+  <!-- Updates Section -->
   <div id="updates" class="section">
     <h2>Update Status</h2>
     <div class="card">
@@ -123,21 +140,23 @@
     </div>
     <div class="card">
       <h3>Site & APIs:</h3>
-      <p>Website, APIs, launchers, and other services are continuously updated with improvements and new features.</p>
+      <p>Website, APIs, launchers, and other services continue receiving updates.</p>
     </div>
   </div>
 
+  <!-- Download Section -->
   <div id="download" class="section">
     <h2>Download FrostClient Classic 1.8.9</h2>
-    <p>Click the button below to download the client.</p>
+    <p>Click below to download the client:</p>
     <a href="https://files.fm/u/3gz6z7b6bz" target="_blank">
       <button class="download-btn">Download Now</button>
     </a>
   </div>
 
+  <!-- Community Section -->
   <div id="community" class="section">
     <h2>Join the Community</h2>
-    <p>Connect with players, receive updates, and share feedback on our official Discord server.</p>
+    <p>Connect with other players, get updates, and share feedback on our Discord server.</p>
     <a href="http://dsc.gg/frost-client" target="_blank">
       <button class="discord-btn">Join Discord</button>
     </a>
@@ -148,26 +167,22 @@
 <div id="settingsToggle">⚙️ Settings</div>
 <div id="settingsPanel">
   <h2>Site Customizations</h2>
-  <label>
-    Theme:
+  <label>Theme:
     <select id="themeSelect">
       <option value="dark">Dark</option>
       <option value="light">Light</option>
     </select>
   </label>
-  <label>
-    Highlight Color:
+  <label>Highlight Color:
     <input type="color" id="highlightColor">
   </label>
-  <label>
-    Background Color:
+  <label>Background Color:
     <input type="color" id="bgColor">
   </label>
   <label>
     <input type="checkbox" id="showWelcome"> Show welcome message
   </label>
-  <label>
-    Gallery Layout:
+  <label>Gallery Layout:
     <select id="galleryLayout">
       <option value="grid">Grid</option>
       <option value="list">List</option>
@@ -240,6 +255,5 @@ animations.addEventListener('change',()=>{localStorage.setItem('animations',anim
 
 loadCustomizations();
 </script>
-
 </body>
 </html>

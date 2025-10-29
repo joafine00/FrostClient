@@ -13,36 +13,15 @@
     --text:#EEE;
     --card:#151a21;
   }
-  body{
-    background:var(--bg);
-    color:var(--text);
-    overflow-x:hidden;
-  }
+  body{background:var(--bg);color:var(--text);overflow-x:hidden;}
+  body,button,a,input{transition:all 0.3s ease;}
+  @keyframes float{0%{transform:translateY(0);}50%{transform:translateY(-10px);}100%{transform:translateY(0);}}
 
-  /* Smooth transitions */
-  body, button, a, input {
-    transition: all 0.3s ease;
-  }
-
-  /* Floating animation */
-  @keyframes float {
-    0% {transform:translateY(0);}
-    50% {transform:translateY(-10px);}
-    100% {transform:translateY(0);}
-  }
-
-  /* Navbar */
   nav{
-    width:100%;
-    background:rgba(20,22,28,0.95);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:12px 30px;
-    position:fixed;
-    top:0;left:0;z-index:1000;
-    box-shadow:0 0 20px rgba(0,255,255,0.25);
-    backdrop-filter: blur(10px);
+    width:100%;background:rgba(20,22,28,0.95);
+    display:flex;justify-content:space-between;align-items:center;
+    padding:12px 30px;position:fixed;top:0;left:0;z-index:1000;
+    box-shadow:0 0 20px rgba(0,255,255,0.25);backdrop-filter:blur(10px);
   }
   .nav-left{display:flex;align-items:center;gap:12px;}
   .nav-left img{height:45px;animation:float 4s ease-in-out infinite;}
@@ -52,8 +31,6 @@
     font-size:15px;cursor:pointer;margin:0 10px;transition:0.3s;
   }
   .nav-menu button:hover{color:var(--highlight);transform:scale(1.1);}
-
-  /* Main Container */
   .container{width:90%;max-width:1100px;margin:100px auto 50px auto;}
   h2,h3{margin-bottom:20px;color:var(--highlight);}
   p{margin-bottom:15px;line-height:1.6;}
@@ -61,65 +38,65 @@
   .section{display:none;animation:fadeIn 0.8s;}
   .section.active{display:block;}
   .card{
-    background:var(--card);
-    padding:20px;
-    border-radius:12px;
-    margin-bottom:20px;
-    box-shadow:0 0 15px rgba(0,255,255,0.15);
+    background:var(--card);padding:20px;border-radius:12px;
+    margin-bottom:20px;box-shadow:0 0 15px rgba(0,255,255,0.15);
     border:1px solid rgba(0,255,255,0.08);
   }
   .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;}
   .gallery img,iframe{
-    width:100%;
-    border-radius:12px;
-    box-shadow:0 0 15px rgba(0,0,0,0.4);
-    transition:transform 0.3s, box-shadow 0.3s;
+    width:100%;border-radius:12px;box-shadow:0 0 15px rgba(0,0,0,0.4);
+    transition:transform 0.3s,box-shadow 0.3s;
   }
   .gallery img:hover,iframe:hover{
     transform:scale(1.05);
     box-shadow:0 0 25px rgba(0,255,255,0.4);
   }
-  .download-btn,.discord-btn,.support-btn{
+  .download-btn,.discord-btn{
     background:var(--highlight);color:#111;
-    padding:15px 30px;border:none;
-    border-radius:10px;cursor:pointer;font-size:17px;
-    font-weight:600;transition:0.3s;
+    padding:15px 30px;border:none;border-radius:10px;
+    cursor:pointer;font-size:17px;font-weight:600;
     box-shadow:0 0 15px rgba(0,255,255,0.3);
   }
-  .download-btn:hover,.discord-btn:hover,.support-btn:hover{
-    background:#00cccc;transform:scale(1.05);
-  }
+  .download-btn:hover,.discord-btn:hover{background:#00cccc;transform:scale(1.05);}
 
   /* Support Chat */
+  #supportBtn{
+    position:fixed;bottom:20px;right:20px;width:60px;height:60px;
+    border-radius:50%;border:none;background:var(--highlight);
+    box-shadow:0 0 20px rgba(0,255,255,0.5);
+    font-size:28px;cursor:pointer;z-index:1500;color:#111;
+    transition:0.3s;
+  }
+  #supportBtn:hover{transform:scale(1.1);background:#00cccc;}
   #supportModal{
-    position:fixed;bottom:20px;right:20px;width:320px;height:420px;
+    position:fixed;bottom:90px;right:20px;width:330px;height:440px;
     background:var(--card);border-radius:12px;box-shadow:0 0 20px rgba(0,255,255,0.3);
-    display:none;flex-direction:column;overflow:hidden;z-index:1500;
+    display:none;flex-direction:column;overflow:hidden;z-index:1600;
     border:1px solid rgba(0,255,255,0.2);
   }
   #supportHeader{
-    background:var(--highlight);color:#111;padding:10px;text-align:center;font-weight:700;
+    background:var(--highlight);color:#111;padding:10px;text-align:center;
+    font-weight:700;
   }
-  #supportMessages{flex:1;overflow-y:auto;padding:10px;font-size:14px;}
+  #supportMessages{
+    flex:1;overflow-y:auto;padding:10px;font-size:14px;
+  }
   .msg{margin-bottom:8px;}
-  .msg.user{color:var(--highlight);text-align:right;}
   .msg.bot{color:#DDD;}
-  #supportInput{
-    display:flex;padding:10px;gap:5px;background:#0f141a;
+  .question-buttons{
+    display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:8px;background:#0f141a;
   }
-  #supportInput input{
-    flex:1;padding:6px;border:none;border-radius:8px;background:#1a1f27;color:#EEE;
+  .question-buttons button{
+    background:rgba(0,255,255,0.1);color:var(--highlight);
+    border:1px solid rgba(0,255,255,0.3);
+    border-radius:8px;padding:6px 10px;cursor:pointer;font-size:13px;
+    transition:0.3s;
   }
-  #supportInput button{
-    padding:6px 10px;border:none;background:var(--highlight);color:#111;border-radius:8px;cursor:pointer;font-weight:600;
-  }
-
-  /* Particle Effect */
+  .question-buttons button:hover{background:rgba(0,255,255,0.25);}
   .particle{
     position:fixed;width:6px;height:6px;background:var(--highlight);
     border-radius:50%;opacity:0.7;animation:float 4s infinite ease-in-out;
   }
-
   @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
@@ -142,20 +119,17 @@
 </nav>
 
 <div class="container">
-  <!-- HOME -->
   <div id="home" class="section active">
     <h2>Welcome to FrostClient Classic</h2>
     <p>FrostClient Classic is an open-source Minecraft 1.8.9 PvP client inspired by Cloud Client. Designed for smooth performance, modern visuals, and competitive PvP gameplay.</p>
   </div>
 
-  <!-- ABOUT -->
   <div id="about" class="section">
     <h2>About FrostClient</h2>
     <p>FrostClient Classic builds upon Cloud Client’s base and introduces a clean UI, improved performance modules, and Frost-exclusive features for advanced customization and PvP precision.</p>
     <p><b>Open Source Project:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--highlight);" target="_blank">View on GitHub</a></p>
   </div>
 
-  <!-- FEATURES -->
   <div id="features" class="section">
     <h2>Client Features</h2>
     <ul>
@@ -174,7 +148,6 @@
     </div>
   </div>
 
-  <!-- MODS -->
   <div id="mods" class="section">
     <h2>All Mods & Modules</h2>
     <ul>
@@ -194,7 +167,6 @@
     <p><i>This includes all official Cloud Client modules plus FrostClient-exclusive modules.</i></p>
   </div>
 
-  <!-- UPDATES -->
   <div id="updates" class="section">
     <h2>Updates & Development</h2>
     <div class="card">
@@ -207,32 +179,34 @@
     </div>
   </div>
 
-  <!-- DOWNLOAD -->
   <div id="download" class="section">
     <h2>Download FrostClient Classic</h2>
     <p>Click below to download FrostClient Classic 1.8.9.</p>
     <a href="https://files.fm/u/3gz6z7b6bz" target="_blank"><button class="download-btn">Download Now</button></a>
   </div>
 
-  <!-- COMMUNITY -->
   <div id="community" class="section">
     <h2>Join Our Community</h2>
     <p>Stay connected with players, receive updates, and share your feedback on our official Discord.</p>
     <a href="http://dsc.gg/frost-client" target="_blank"><button class="discord-btn">Join Discord</button></a>
-    <br><br>
-    <button class="support-btn" onclick="toggleSupport()">💬 Support</button>
   </div>
 </div>
+
+<!-- Floating Support Button -->
+<button id="supportBtn" onclick="toggleSupport()">💬</button>
 
 <!-- Support Chat -->
 <div id="supportModal">
   <div id="supportHeader">FrostClient Support</div>
   <div id="supportMessages">
-    <div class="msg bot">Hi! How can I assist you today?</div>
+    <div class="msg bot">Hi! How can I assist you today? Choose a question below 👇</div>
   </div>
-  <div id="supportInput">
-    <input type="text" id="supportField" placeholder="Ask something...">
-    <button onclick="sendSupport()">Send</button>
+  <div class="question-buttons">
+    <button onclick="ask('download')">How do I download FrostClient?</button>
+    <button onclick="ask('mods')">Which mods are included?</button>
+    <button onclick="ask('updates')">Are there still updates?</button>
+    <button onclick="ask('open')">Is it open source?</button>
+    <button onclick="ask('discord')">Where’s the Discord?</button>
   </div>
 </div>
 
@@ -241,37 +215,22 @@ function showSection(id){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
-
 function toggleSupport(){
-  const s=document.getElementById('supportModal');
-  s.style.display=s.style.display==='flex'?'none':'flex';
-  s.style.flexDirection='column';
+  const modal=document.getElementById('supportModal');
+  modal.style.display=modal.style.display==='flex'?'none':'flex';
+  modal.style.flexDirection='column';
 }
-
-function sendSupport(){
-  const field=document.getElementById('supportField');
-  const msg=field.value.trim();
-  if(!msg)return;
+function ask(type){
   const area=document.getElementById('supportMessages');
-  area.innerHTML+=`<div class="msg user">${msg}</div>`;
-  field.value='';
-  setTimeout(()=>respondSupport(msg),600);
-}
-
-function respondSupport(q){
-  const area=document.getElementById('supportMessages');
-  let res="I'm not sure I understand that.";
-  q=q.toLowerCase();
-  if(q.includes("download")) res="You can download FrostClient from the Download section.";
-  else if(q.includes("mods")) res="FrostClient includes NickHider, Crosshair, Zoom, Scoreboard, and more.";
-  else if(q.includes("open source")||q.includes("github")) res="The project is open source at https://github.com/QuiteFrosty/FrostClient";
-  else if(q.includes("updates")) res="The client no longer receives mod updates, but related Frost services still do.";
-  else if(q.includes("discord")) res="Join our Discord at dsc.gg/frost-client!";
+  let res="";
+  if(type==='download') res="You can download FrostClient from the Download section on this website.";
+  if(type==='mods') res="FrostClient includes NickHider, Crosshair, Zoom, Nametag, Scoreboard, Bossbar, Direction HUD, and more!";
+  if(type==='updates') res="The client itself no longer receives mod updates, but the website and APIs are still updated.";
+  if(type==='open') res="Yes! FrostClient is open source: https://github.com/QuiteFrosty/FrostClient";
+  if(type==='discord') res="Join our Discord at: dsc.gg/frost-client";
   area.innerHTML+=`<div class="msg bot">${res}</div>`;
   area.scrollTop=area.scrollHeight;
 }
-
-// Floating particles
 for(let i=0;i<25;i++){
   const p=document.createElement('div');
   p.classList.add('particle');

@@ -9,37 +9,48 @@
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
   :root{
     --highlight:#00FFFF;
-    --bg:#0d1117;
+    --bg1:#0d1117;
+    --bg2:#001F3F;
     --text:#EEE;
     --card:#151a21;
   }
-  body{background:var(--bg);color:var(--text);overflow-x:hidden;}
-  body,button,a,input{transition:all 0.3s ease;}
-
-  @keyframes floatUp{
-    0%{transform:translateY(100vh);opacity:0;}
-    30%{opacity:1;}
-    70%{opacity:1;}
-    100%{transform:translateY(-10vh);opacity:0;}
+  body{
+    background:linear-gradient(-45deg,var(--bg1),#021B27,#002540,var(--bg2));
+    background-size:400% 400%;
+    animation:gradientShift 15s ease infinite;
+    color:var(--text);
+    overflow-x:hidden;
   }
 
-  /* Navbar */
+  @keyframes gradientShift{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+  }
+
   nav{
-    width:100%;background:rgba(20,22,28,0.95);
-    display:flex;justify-content:space-between;align-items:center;
-    padding:12px 30px;position:fixed;top:0;left:0;z-index:1000;
-    box-shadow:0 0 20px rgba(0,255,255,0.25);backdrop-filter:blur(10px);
+    width:100%;
+    background:rgba(20,22,28,0.95);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 30px;
+    position:fixed;
+    top:0;left:0;
+    z-index:1000;
+    box-shadow:0 0 20px rgba(0,255,255,0.25);
+    backdrop-filter:blur(10px);
   }
   .nav-left{display:flex;align-items:center;gap:12px;}
   .nav-left img{height:45px;}
   .nav-left h1{color:var(--highlight);font-size:1.4em;}
   .nav-menu button{
     background:none;border:none;color:var(--text);
-    font-size:15px;cursor:pointer;margin:0 10px;transition:0.3s;
+    font-size:15px;cursor:pointer;margin:0 10px;
+    transition:0.3s;
   }
   .nav-menu button:hover{color:var(--highlight);transform:scale(1.1);}
   
-  /* Layout */
   .container{width:90%;max-width:1100px;margin:100px auto 50px auto;}
   h2,h3{margin-bottom:20px;color:var(--highlight);}
   p{margin-bottom:15px;line-height:1.6;}
@@ -47,73 +58,48 @@
   .section{display:none;animation:fadeIn 0.8s;}
   .section.active{display:block;}
   .card{
-    background:var(--card);padding:20px;border-radius:12px;
-    margin-bottom:20px;box-shadow:0 0 15px rgba(0,255,255,0.15);
+    background:var(--card);
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 0 15px rgba(0,255,255,0.15);
     border:1px solid rgba(0,255,255,0.08);
   }
-
-  /* Gallery */
-  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;}
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:20px;
+  }
   .gallery img,iframe{
-    width:100%;border-radius:12px;box-shadow:0 0 15px rgba(0,0,0,0.4);
+    width:100%;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(0,0,0,0.4);
     transition:transform 0.3s,box-shadow 0.3s;
   }
   .gallery img:hover,iframe:hover{
     transform:scale(1.05);
     box-shadow:0 0 25px rgba(0,255,255,0.4);
   }
-
-  /* Buttons */
   .download-btn,.discord-btn{
-    background:var(--highlight);color:#111;
-    padding:15px 30px;border:none;border-radius:10px;
-    cursor:pointer;font-size:17px;font-weight:600;
+    background:var(--highlight);
+    color:#111;
+    padding:15px 30px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:17px;
+    font-weight:600;
     box-shadow:0 0 15px rgba(0,255,255,0.3);
   }
-  .download-btn:hover,.discord-btn:hover{background:#00cccc;transform:scale(1.05);}
-
-  /* Support Chat */
-  #supportBtn{
-    position:fixed;bottom:20px;right:20px;width:60px;height:60px;
-    border-radius:50%;border:none;background:var(--highlight);
-    box-shadow:0 0 20px rgba(0,255,255,0.5);
-    font-size:28px;cursor:pointer;z-index:1500;color:#111;
-    transition:0.3s;
-  }
-  #supportBtn:hover{transform:scale(1.1);background:#00cccc;}
-
-  #supportModal{
-    position:fixed;bottom:90px;right:20px;width:340px;height:500px;
-    background:var(--card);border-radius:12px;box-shadow:0 0 20px rgba(0,255,255,0.3);
-    display:none;flex-direction:column;overflow:hidden;z-index:1600;
-    border:1px solid rgba(0,255,255,0.2);
-  }
-  #supportHeader{
-    background:var(--highlight);color:#111;padding:10px;text-align:center;
-    font-weight:700;
-  }
-  #supportMessages{
-    flex:1;overflow-y:auto;padding:10px;font-size:14px;
-  }
-  .msg{margin-bottom:10px;max-width:80%;padding:8px 12px;border-radius:10px;}
-  .msg.user{background:rgba(0,255,255,0.15);align-self:flex-end;text-align:right;color:var(--highlight);}
-  .msg.bot{background:#0e1117;color:#DDD;}
-  .question-buttons{
-    display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:8px;background:#0f141a;
-  }
-  .question-buttons button{
-    background:rgba(0,255,255,0.1);color:var(--highlight);
-    border:1px solid rgba(0,255,255,0.3);
-    border-radius:8px;padding:6px 10px;cursor:pointer;font-size:13px;
-    transition:0.3s;
-  }
-  .question-buttons button:hover{background:rgba(0,255,255,0.25);}
-  .particle{
-    position:fixed;width:6px;height:6px;background:var(--highlight);
-    border-radius:50%;opacity:0.7;animation:floatUp linear infinite;
+  .download-btn:hover,.discord-btn:hover{
+    background:#00cccc;
+    transform:scale(1.05);
   }
 
-  @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes fadeIn{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
+  }
 </style>
 </head>
 <body>
@@ -137,46 +123,43 @@
 <div class="container">
   <div id="home" class="section active">
     <h2>Welcome to FrostClient Classic</h2>
-    <p>FrostClient Classic is an open-source Minecraft 1.8.9 PvP client designed for peak performance and competitive gameplay. Built upon Cloud Client, it's optimized for smooth experience and enhanced mod customization.</p>
+    <p>FrostClient Classic is an open-source Minecraft 1.8.9 PvP client designed for competitive gameplay. Built for smooth FPS, perfect mod balance, and a clean experience.</p>
   </div>
 
   <div id="about" class="section">
     <h2>About FrostClient</h2>
-    <p>FrostClient Classic enhances Minecraft PvP by combining sleek visuals, advanced settings, and deep mod integration. It’s open-source, community-driven, and built for both casual and competitive players.</p>
+    <p>FrostClient Classic enhances Minecraft PvP by combining visual polish, deep mod integration, and open-source transparency.</p>
     <p><b>Open Source Repository:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--highlight);" target="_blank">View on GitHub</a></p>
   </div>
 
   <div id="features" class="section">
     <h2>Client Features</h2>
     <ul>
-      <li>Ultra-optimized for FPS stability</li>
-      <li>Custom HUD and module layout editor</li>
-      <li>Exclusive Frost-only mod integrations</li>
-      <li>Dynamic crosshair and motion settings</li>
-      <li>Animation smoothness engine</li>
-      <li>Clean modern menu design with hotkey support</li>
-      <li>Support for mod customization through FrostAPI</li>
+      <li>Ultra-smooth performance and high FPS optimization</li>
+      <li>Modular design with easy toggles and keybinds</li>
+      <li>Integrated HUD Editor and crosshair customization</li>
+      <li>Animation Engine (1.7 Animations & more)</li>
+      <li>Built-in Replay and Motion Blur modules</li>
+      <li>Lightweight, minimalistic, and fast</li>
     </ul>
     <div class="gallery">
-      <iframe src="https://www.youtube.com/embed/9Xzz6B5M9l8" allowfullscreen></iframe>
-      <img src="https://i.imgur.com/9CrD0vB.png" alt="Gameplay Preview 1">
-      <img src="https://i.imgur.com/BcFXIvh.png" alt="HUD Preview 2">
-      <img src="https://i.imgur.com/d7wzSKb.png" alt="Settings Menu">
-      <img src="https://i.imgur.com/a2f2hRx.png" alt="In-game Visuals">
+      <img src="https://media.forgecdn.net/avatars/932/530/638470298949515812.png" alt="Frost Mod Menu">
+      <img src="https://media.forgecdn.net/avatars/1015/25/638540289619946469.png" alt="HUD Editor">
+      <img src="https://cdn.modrinth.com/data/2mcjCAVX/images/9c9ff7b417dbd70a8a1a22f5b4e29df86b7d0ffb.png" alt="Keystrokes Mod">
+      <img src="https://cdn.modrinth.com/data/nmDCW8Ca/images/4b94799813e653beea3a9e1a4b7c1f8d7b71e31f.png" alt="Crosshair Mod">
     </div>
   </div>
 
   <div id="mods" class="section">
     <h2>Included Mods & Modules</h2>
-    <p>FrostClient Classic includes all the essential PvP mods — and more are being added constantly by contributors.</p>
+    <p>FrostClient Classic comes with a wide range of competitive PvP mods — and more are constantly added by the community.</p>
     <ul>
-      <li>NickHider, Crosshair, Scroll Zoom</li>
-      <li>Nametag Mod, Scoreboard, Bossbar, ArmorStatus</li>
-      <li>Direction HUD, FPS & Ping Display</li>
-      <li>Coordinates, Keystrokes, CPS Counter</li>
-      <li>Motion Blur, Animations, Fire Height</li>
-      <li>Custom Font Rendering & GUI Tweaks</li>
-      <li>and dozens more Frost-exclusive modules</li>
+      <li>Keystrokes, CPS Counter, FPS Display</li>
+      <li>Armor Status, Direction HUD, Coordinates</li>
+      <li>Nick Hider, Crosshair, Motion Blur, Animations</li>
+      <li>Ping Display, Combo Counter, Hit Color</li>
+      <li>Dynamic Zoom, Full Bright, TNT Timer</li>
+      <li>and many more exclusive Frost modules</li>
     </ul>
   </div>
 
@@ -184,36 +167,20 @@
     <h2>Development Updates</h2>
     <div class="card">
       <h3>Client Maintenance</h3>
-      <p>The main FrostClient Classic no longer receives mod updates, but its associated tools, APIs, and launchers continue to evolve with frequent improvements.</p>
+      <p>The FrostClient Classic no longer receives direct mod updates, but related APIs, launchers, and connected services continue evolving with regular improvements.</p>
     </div>
   </div>
 
   <div id="download" class="section">
     <h2>Download FrostClient Classic</h2>
-    <p>Click below to download the latest stable release.</p>
+    <p>Click below to download the latest official release.</p>
     <a href="https://files.fm/u/3gz6z7b6bz" target="_blank"><button class="download-btn">Download Now</button></a>
   </div>
 
   <div id="community" class="section">
     <h2>Community</h2>
-    <p>Join the FrostClient community on Discord to discuss mods, share gameplay, and contribute to the open-source project.</p>
+    <p>Join the FrostClient Discord to connect, share gameplay, and contribute to development.</p>
     <a href="http://dsc.gg/frost-client" target="_blank"><button class="discord-btn">Join Discord</button></a>
-  </div>
-</div>
-
-<!-- Floating Support -->
-<button id="supportBtn" onclick="toggleSupport()">💬</button>
-
-<div id="supportModal">
-  <div id="supportHeader">FrostClient Support</div>
-  <div id="supportMessages">
-    <div class="msg bot">Hey there! Choose a question below 👇</div>
-  </div>
-  <div class="question-buttons">
-    <button onclick="ask('download')">How to download?</button>
-    <button onclick="ask('install')">How to install?</button>
-    <button onclick="ask('mods')">What mods exist?</button>
-    <button onclick="ask('servers')">Where can I host my server?</button>
   </div>
 </div>
 
@@ -222,41 +189,7 @@ function showSection(id){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
-function toggleSupport(){
-  const modal=document.getElementById('supportModal');
-  modal.style.display=modal.style.display==='flex'?'none':'flex';
-  modal.style.flexDirection='column';
-}
-function ask(type){
-  const area=document.getElementById('supportMessages');
-  const userMsg=document.createElement('div');
-  userMsg.className='msg user';
-  let q='';
-  if(type==='download') q='How can I download FrostClient?';
-  if(type==='install') q='How do I install FrostClient?';
-  if(type==='mods') q='What mods are available?';
-  if(type==='servers') q='Where can I host my Minecraft server?';
-  userMsg.textContent=q;
-  area.appendChild(userMsg);
-
-  const botMsg=document.createElement('div');
-  botMsg.className='msg bot';
-  let res='';
-  if(type==='download') res="You can download FrostClient Classic from the 'Download' section above.";
-  if(type==='install') res="Simply unzip the file, place it in your Minecraft mods folder (1.8.9 Forge), and launch the game.";
-  if(type==='mods') res="FrostClient includes Crosshair, NickHider, CPS, Keystrokes, FPS Counter, Animations, and many exclusive Frost modules.";
-  if(type==='servers') res="OVHCloud — The best hosting service in the world, loved internationally. Visit https://www.ovhcloud.com/ and search 'Minecraft' for plans.";
-  setTimeout(()=>{area.appendChild(botMsg);botMsg.textContent=res;area.scrollTop=area.scrollHeight;},600);
-}
-
-for(let i=0;i<25;i++){
-  const p=document.createElement('div');
-  p.classList.add('particle');
-  p.style.left=Math.random()*100+'%';
-  p.style.animationDuration=(6+Math.random()*4)+'s';
-  p.style.animationDelay=(Math.random()*5)+'s';
-  document.body.appendChild(p);
-}
 </script>
+
 </body>
 </html>

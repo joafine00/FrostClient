@@ -7,26 +7,92 @@
   <link rel="icon" type="image/png" href="frost.png" />
   <style>
     * {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif;}
-    body {background:#121212; color:#EEE; scroll-behavior:smooth;}
-    .container {width:90%; max-width:1000px; margin:40px auto;}
-    header {text-align:center; margin-bottom:30px;}
-    header img {height:80px; display:block; margin:0 auto 10px;}
-    .navbar {display:flex; justify-content:center; flex-wrap:wrap; background:#1f1f1f; padding:15px; border-radius:10px;}
-    .navbar button {background:none; border:none; color:#EEE; font-size:16px; cursor:pointer; padding:10px 15px; transition:0.3s;}
-    .navbar button:hover {color:#00FFFF;}
-    .section {display:none; margin-top:30px;}
+    body {
+      background:#121212;
+      color:#EEE;
+      scroll-behavior:smooth;
+      transition: background 0.3s, color 0.3s;
+    }
+    .container {width:90%; max-width:1100px; margin:50px auto;}
+    header {text-align:center; margin-bottom:40px; animation: fadeIn 1s ease;}
+    header img {height:90px; display:block; margin:0 auto 15px;}
+    header h1 {font-size:2.5em; letter-spacing:1px; color:#00FFFF; text-shadow: 0 0 10px #00FFFF;}
+    .navbar {
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      background:#1f1f1f;
+      padding:15px;
+      border-radius:12px;
+      box-shadow: 0 0 15px rgba(0,255,255,0.2);
+      margin-bottom:30px;
+    }
+    .navbar button {
+      background:none;
+      border:none;
+      color:#EEE;
+      font-size:16px;
+      cursor:pointer;
+      padding:12px 20px;
+      margin:5px;
+      transition:0.3s;
+      font-weight:500;
+    }
+    .navbar button:hover {
+      color:#00FFFF;
+      transform: scale(1.05);
+    }
+    .section {display:none; margin-top:30px; animation: fadeIn 0.8s ease;}
     .section.active {display:block;}
-    h1,h2,h3 {margin-bottom:20px; color:#00FFFF;}
+    h2,h3 {margin-bottom:20px; color:#00FFFF; text-shadow: 0 0 5px #00FFFF;}
     p {margin-bottom:15px; line-height:1.6;}
     ul,ol {margin-left:20px; margin-bottom:20px;}
-    .download-btn, .discord-btn {background:#00FFFF; color:#121212; padding:15px 25px; font-size:18px; border:none; border-radius:10px; cursor:pointer; transition:0.3s; display:inline-block; margin-top:10px;}
-    .download-btn:hover, .discord-btn:hover {background:#00cccc;}
-    .gallery {display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:20px; margin-top:20px;}
-    .gallery img {width:100%; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); transition:transform 0.3s; cursor:pointer;}
-    .gallery img:hover {transform:scale(1.05);}
-    iframe, video {width:100%; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3);}
-    input[type="text"] {padding:10px; border-radius:8px; border:none; width:80%; max-width:300px; margin-top:10px; display:block;}
+    .download-btn, .discord-btn {
+      background:#00FFFF;
+      color:#121212;
+      padding:15px 30px;
+      font-size:18px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      transition:0.3s;
+      display:inline-block;
+      margin-top:10px;
+      box-shadow: 0 0 10px rgba(0,255,255,0.4);
+    }
+    .download-btn:hover, .discord-btn:hover {
+      background:#00cccc;
+      transform: scale(1.05);
+    }
+    .gallery {display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:20px; margin-top:20px;}
+    .gallery img, iframe {
+      width:100%;
+      border-radius:12px;
+      box-shadow:0 0 15px rgba(0,0,0,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor:pointer;
+    }
+    .gallery img:hover, iframe:hover {
+      transform: scale(1.05);
+      box-shadow:0 0 20px rgba(0,255,255,0.6);
+    }
+    input[type="text"] {
+      padding:12px;
+      border-radius:10px;
+      border:none;
+      width:80%;
+      max-width:320px;
+      margin-top:10px;
+      display:block;
+      font-size:16px;
+      box-shadow: 0 0 8px rgba(0,255,255,0.3);
+      background:#1f1f1f;
+      color:#EEE;
+    }
+    input[type="text"]::placeholder {color:#AAAAAA;}
+    #savedMsg {color:#00FFFF; margin-top:10px; font-weight:500;}
     @media(max-width:600px){.navbar{flex-direction:column; align-items:center;}}
+    @keyframes fadeIn {from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);}}
   </style>
 </head>
 <body>
@@ -35,6 +101,8 @@
     <header>
       <img src="frost.png" alt="FrostClient Logo">
       <h1>FrostClient Classic 1.8.9</h1>
+      <p style="color:#AAA; font-size:1.1em;">Custom PvP client for Minecraft 1.8.9</p>
+      <p id="welcomeNick" style="color:#00FFFF; font-size:1.2em; margin-top:10px;"></p>
     </header>
 
     <!-- Navbar -->
@@ -51,23 +119,28 @@
     <!-- Home Section -->
     <div id="home" class="section active">
       <h2>Welcome</h2>
-      <p>FrostClient Classic is a custom Minecraft 1.8.9 PvP client based on Cloud Client, with performance optimizations, sleek visuals, and advanced PvP features.</p>
+      <p>FrostClient Classic is a sleek Minecraft 1.8.9 PvP client based on Cloud Client, optimized for performance, advanced features, and clean visuals.</p>
+      <p>Customize your experience and dominate PvP with precision and style.</p>
     </div>
 
     <!-- About Section -->
     <div id="about" class="section">
       <h2>About FrostClient Classic</h2>
-      <p>FrostClient Classic builds upon the Cloud Client base, adding customization, UI improvements, and new modules for an optimized PvP experience.</p>
+      <p>Built upon the Cloud Client base, FrostClient Classic introduces new modules, enhanced UI, and exclusive features to elevate your PvP gameplay.</p>
+      <ul>
+        <li>Optimized performance for smooth gameplay</li>
+        <li>Customizable HUD and visuals</li>
+        <li>Advanced PvP modules and automation tools</li>
+        <li>User-friendly interface with quick access to modules</li>
+      </ul>
     </div>
 
     <!-- Features Section -->
     <div id="features" class="section">
-      <h2>Client Features Showcase</h2>
-      <p>Explore FrostClient Classic in action:</p>
+      <h2>Feature Showcase</h2>
+      <p>Check FrostClient Classic in action:</p>
       <div class="gallery">
-        <!-- Video Embed -->
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/9Xzz6B5M9l8" title="FrostClient Classic Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <!-- Images -->
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/9Xzz6B5M9l8" title="FrostClient Classic Showcase" frameborder="0" allowfullscreen></iframe>
         <img src="https://cdn.modrinth.com/data/aKCamzi7/images/c46ff7181310c783f6b1d4fba95985494baad70d.webp" alt="Screenshot 1">
         <img src="https://cdn.modrinth.com/data/aKCamzi7/images/eba9a3e1d1aebaca187489e3f9b9302522573830_350.webp" alt="Screenshot 2">
         <img src="https://cdn.modrinth.com/data/aKCamzi7/images/a0059ad8656da1d37a8d1825e9bfaf53171a9e16.webp" alt="Screenshot 3">
@@ -78,37 +151,33 @@
     <!-- All Mods Section -->
     <div id="mods" class="section">
       <h2>All Mods & Modules</h2>
-      <p>The FrostClient Classic includes all core Cloud Client modules, plus additional customizations:</p>
+      <p>Includes core Cloud Client modules plus exclusive FrostClient enhancements:</p>
       <ul>
-        <li>Mod Categories</li>
-        <li>Search Bar</li>
-        <li>Nickhider Mod (textbox)</li>
-        <li>Crosshair Mod (with presets and delete button)</li>
-        <li>Scroll Zoom</li>
-        <li>Nametag Mod</li>
-        <li>Scoreboard Mod</li>
-        <li>Bossbar Mod</li>
-        <li>Direction HUD</li>
-        <li>Fireheight Option</li>
+        <li>Category-based mod organization</li>
+        <li>Search bar for easy access</li>
+        <li>Nickhider Module (text input)</li>
+        <li>Crosshair Module (with presets)</li>
+        <li>Scroll Zoom and Camera adjustments</li>
+        <li>Nametag, Scoreboard, Bossbar mods</li>
+        <li>Directional HUD & Fireheight option</li>
         <li>Minimal View Bobbing</li>
-        <li>Colorpicker Rewrite</li>
-        <li>Additional FrostClient-exclusive modules (custom HUDs, QoL features)</li>
+        <li>Color Picker UI rewrite</li>
+        <li>Custom HUDs and QoL modules exclusive to FrostClient</li>
       </ul>
-      <p><i>Note: This list covers documented Cloud Client modules; FrostClient Classic may include additional proprietary modules.</i></p>
     </div>
 
     <!-- Profile Section -->
     <div id="profile" class="section">
       <h2>Your Minecraft Nick</h2>
       <p>Enter your Minecraft nickname below:</p>
-      <input type="text" id="mcNick" placeholder="Your Minecraft Nickname">
-      <p id="savedMsg" style="color:#00FFFF; margin-top:10px;"></p>
+      <input type="text" id="mcNick" placeholder="Your Minecraft Nick">
+      <p id="savedMsg"></p>
     </div>
 
     <!-- Download Section -->
     <div id="download" class="section">
       <h2>Download FrostClient Classic 1.8.9</h2>
-      <p>Click the button below to download FrostClient Classic. Hosted on Files.fm.</p>
+      <p>Click the button below to download FrostClient Classic.</p>
       <a href="https://files.fm/u/3gz6z7b6bz" target="_blank">
         <button class="download-btn">Download Now</button>
       </a>
@@ -117,9 +186,9 @@
     <!-- Community Section -->
     <div id="community" class="section">
       <h2>Join the Community</h2>
-      <p>Connect with other players, get updates, and share feedback on our official Discord server.</p>
+      <p>Connect with other players, receive updates, and share your feedback on our official Discord server.</p>
       <a href="http://dsc.gg/frost-client" target="_blank">
-        <button class="discord-btn">Join Discord Server</button>
+        <button class="discord-btn">Join Discord</button>
       </a>
     </div>
   </div>
@@ -130,26 +199,29 @@
       document.getElementById(sectionId).classList.add('active');
     }
 
-    // Salvar nickname via localStorage
     const nickInput = document.getElementById('mcNick');
     const savedMsg = document.getElementById('savedMsg');
+    const welcomeNick = document.getElementById('welcomeNick');
 
-    // Carregar nickname salvo
+    // Load saved nick
     const savedNick = localStorage.getItem('mcNick');
     if(savedNick){
       nickInput.value = savedNick;
-      savedMsg.textContent = `Seu nick atual é "${savedNick}"`;
+      savedMsg.textContent = `Your current nick is "${savedNick}"`;
+      welcomeNick.textContent = `Welcome, ${savedNick}!`;
     }
 
-    // Atualizar nickname quando o usuário digitar
+    // Save nick on input
     nickInput.addEventListener('input', () => {
       const nick = nickInput.value.trim();
       if(nick){
         localStorage.setItem('mcNick', nick);
-        savedMsg.textContent = `Seu nick atual é "${nick}"`;
+        savedMsg.textContent = `Your current nick is "${nick}"`;
+        welcomeNick.textContent = `Welcome, ${nick}!`;
       } else {
         localStorage.removeItem('mcNick');
         savedMsg.textContent = '';
+        welcomeNick.textContent = '';
       }
     });
   </script>

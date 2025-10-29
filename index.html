@@ -7,10 +7,10 @@
   <link rel="icon" type="image/png" href="frost.png" />
   <style>
     * {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif;}
-    body {background:#121212; color:#EEE;}
+    body {background:#121212; color:#EEE; scroll-behavior:smooth;}
     .container {width:90%; max-width:1000px; margin:40px auto;}
     header {text-align:center; margin-bottom:30px;}
-    header img {height:80px; width:auto; display:block; margin:0 auto 10px;}
+    header img {height:80px; display:block; margin:0 auto 10px;}
     .navbar {display:flex; justify-content:center; flex-wrap:wrap; background:#1f1f1f; padding:15px; border-radius:10px;}
     .navbar button {background:none; border:none; color:#EEE; font-size:16px; cursor:pointer; padding:10px 15px; transition:0.3s;}
     .navbar button:hover {color:#00FFFF;}
@@ -22,17 +22,21 @@
     .download-btn, .discord-btn {background:#00FFFF; color:#121212; padding:15px 25px; font-size:18px; border:none; border-radius:10px; cursor:pointer; transition:0.3s; display:inline-block; margin-top:10px;}
     .download-btn:hover, .discord-btn:hover {background:#00cccc;}
     .gallery {display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:20px; margin-top:20px;}
-    video {width:100%; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3);}
-    @media(max-width:600px){ .navbar{flex-direction:column; align-items:center;} }
+    .gallery img {width:100%; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); transition:transform 0.3s; cursor:pointer;}
+    .gallery img:hover {transform:scale(1.05);}
+    iframe, video {width:100%; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3);}
+    @media(max-width:600px){.navbar{flex-direction:column; align-items:center;}}
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- Header -->
     <header>
       <img src="frost.png" alt="FrostClient Logo">
       <h1>FrostClient Classic 1.8.9</h1>
     </header>
 
+    <!-- Navbar -->
     <div class="navbar">
       <button onclick="showSection('home')">Home</button>
       <button onclick="showSection('about')">About</button>
@@ -44,34 +48,34 @@
     <!-- Home Section -->
     <div id="home" class="section active">
       <h2>Welcome</h2>
-      <p>FrostClient Classic is a Minecraft 1.8.9 PvP client built for optimized performance and clean visuals, offering advanced features for competitive players.</p>
+      <p>FrostClient Classic is a custom Minecraft 1.8.9 PvP client designed for optimized performance, sleek visuals, and advanced combat features. Built for competitive players who want smooth gameplay with better FPS and UI customization.</p>
     </div>
 
     <!-- About Section -->
     <div id="about" class="section">
       <h2>About FrostClient Classic</h2>
-      <p>Built on a lightweight architecture and optimized for PvP, FrostClient Classic brings enhanced FPS, HUD customization, and a modern interface for Minecraft 1.8.9.</p>
+      <p>FrostClient Classic is a performance-oriented Minecraft client based on CloudClient, rebuilt to deliver an optimized experience for version 1.8.9. It includes PvP utilities, customizable HUD, and performance enhancements.</p>
       <ul>
-        <li>FPS Boost & Lag Reduction</li>
-        <li>Custom HUD Modules</li>
+        <li>FPS Boost & Performance Optimization</li>
+        <li>Customizable HUD & Modular Interface</li>
         <li>Keystrokes, CPS & Ping Display</li>
-        <li>Fully compatible with Forge 1.8.9</li>
+        <li>Full Forge 1.8.9 Compatibility</li>
+        <li>Active Community Support</li>
       </ul>
     </div>
 
     <!-- Features Section -->
     <div id="features" class="section">
       <h2>Client Features Showcase</h2>
-      <p>Watch the FrostClient Classic in action — showing modules, interface, and smooth PvP performance.</p>
+      <p>Explore FrostClient Classic in action:</p>
       <div class="gallery">
-        <video controls loop muted>
-          <source src="https://www.youtube.com/embed/9Xzz6B5M9l8" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <video controls loop muted>
-          <source src="https://www.youtube.com/embed/cACaj0-ajLA" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+        <!-- YouTube Video Embed -->
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/9Xzz6B5M9l8" title="FrostClient Classic Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <!-- Images -->
+        <img src="https://cdn.modrinth.com/data/aKCamzi7/images/c46ff7181310c783f6b1d4fba95985494baad70d.webp" alt="Screenshot 1">
+        <img src="https://cdn.modrinth.com/data/aKCamzi7/images/eba9a3e1d1aebaca187489e3f9b9302522573830_350.webp" alt="Screenshot 2">
+        <img src="https://cdn.modrinth.com/data/aKCamzi7/images/a0059ad8656da1d37a8d1825e9bfaf53171a9e16.webp" alt="Screenshot 3">
+        <img src="https://cdn.modrinth.com/data/aKCamzi7/images/75d8624d669989d97f45d80fbfe75c27a49c62e2.webp" alt="Screenshot 4">
       </div>
     </div>
 
@@ -92,13 +96,12 @@
         <button class="discord-btn">Join Discord Server</button>
       </a>
     </div>
-
   </div>
 
   <script>
-    function showSection(id){
+    function showSection(sectionId){
       document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+      document.getElementById(sectionId).classList.add('active');
     }
   </script>
 </body>

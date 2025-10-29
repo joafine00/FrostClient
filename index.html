@@ -211,16 +211,38 @@
     <a href="http://dsc.gg/frost-client" target="_blank"><button class="discord-btn">Join Discord</button></a>
   </div>
 
-  <!-- OPEN SOURCE -->
-  <div id="opensource" class="section">
-    <h2>Open Source</h2>
-    <p>FrostClient Classic and this site are fully open source. Explore the repositories below:</p>
-    <ul>
-      <li><b>Client:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--highlight);" target="_blank">GitHub Repository</a></li>
-      <li><b>Site:</b> <a href="#" style="color:var(--highlight);" target="_blank">Site Repository</a></li>
-    </ul>
-    <p>Contributions, bug reports, and feature requests are welcome from the community.</p>
-  </div>
+<!-- OPEN SOURCE -->
+<div id="opensource" class="section">
+  <h2>Open Source</h2>
+  <p>FrostClient Classic and this site are fully open source. Explore the repositories below:</p>
+  <ul>
+    <li><b>Client:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--highlight);" target="_blank">GitHub Repository</a></li>
+  </ul>
+
+  <h3>Site Code (HTML)</h3>
+  <p>You can view and copy the HTML code of this site below:</p>
+  <button onclick="copySiteCode()" class="download-btn" style="margin-bottom:10px;">Copy Code</button>
+  <pre id="site-code" style="max-height:500px;overflow:auto;background:var(--card);padding:15px;border-radius:10px;box-shadow:0 0 15px rgba(0,255,255,0.2);">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;!-- ... include your head content here ... --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- ... include body content here ... --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+  </pre>
+</div>
+
+<script>
+function copySiteCode() {
+  const code = document.getElementById("site-code").innerText;
+  navigator.clipboard.writeText(code).then(() => {
+    alert("Site HTML code copied to clipboard!");
+  });
+}
+</script>
 
 </div>
 

@@ -1,89 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FrostClient Classic 1.8.9</title>
-    <style>
-        /* Basic reset */
-        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color:#121212; color:#EEE; }
-        .container { width:90%; max-width:1000px; margin:40px auto; }
-        .navbar { display:flex; justify-content:space-between; background:#1f1f1f; padding:15px; border-radius:10px; }
-        .navbar button { background:none; border:none; color:#EEE; font-size:16px; cursor:pointer; padding:10px; transition:0.3s; }
-        .navbar button:hover { color:#00FFFF; }
-        /* Sections */
-        .section { display:none; margin-top:30px; }
-        .section.active { display:block; }
-        h1,h2 { margin-bottom:20px; }
-        p { margin-bottom:10px; line-height:1.5; }
-        /* Buttons */
-        .download-btn { background:#00FFFF; color:#121212; padding:15px 25px; font-size:18px; border:none; border-radius:10px; cursor:pointer; transition:0.3s; }
-        .download-btn:hover { background:#00cccc; }
-        /* Gallery */
-        .gallery { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:20px; }
-        .gallery img { width:100%; border-radius:10px; }
-        /* Input field */
-        .input-field { margin-bottom:20px; }
-        .input-field label { display:block; margin-bottom:5px; color:#00FFFF; }
-        .input-field input { width:100%; padding:10px; border-radius:5px; border:1px solid #00FFFF; background:#2c2c2c; color:#EEE; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FrostClient Classic 1.8.9</title>
+  <style>
+    * {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif;}
+    body {background-color:#121212; color:#EEE;}
+    .container {width:90%; max-width:1000px; margin:40px auto;}
+    .navbar {display:flex; justify-content:space-between; background:#1f1f1f; padding:15px; border-radius:10px;}
+    .navbar button {background:none; border:none; color:#EEE; font-size:16px; cursor:pointer; padding:10px; transition:0.3s;}
+    .navbar button:hover {color:#00FFFF;}
+    .section {display:none; margin-top:30px;}
+    .section.active {display:block;}
+    h1,h2 {margin-bottom:20px;}
+    p {margin-bottom:10px; line-height:1.6;}
+    ul,ol {margin-left:20px; margin-bottom:20px;}
+    .download-btn {background:#00FFFF; color:#121212; padding:15px 25px; font-size:18px; border:none; border-radius:10px; cursor:pointer; transition:0.3s;}
+    .download-btn:hover {background:#00cccc;}
+    .gallery {display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:20px; margin-top:20px;}
+    .gallery img {width:100%; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3);}
+    @media(max-width:600px){.navbar{flex-direction:column; align-items:center;}}
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="navbar">
-            <div>
-                <button onclick="showSection('home')" id="btn-home">Home</button>
-                <button onclick="showSection('about')" id="btn-about">About</button>
-                <button onclick="showSection('download')" id="btn-download">Download</button>
-            </div>
-        </div>
-
-        <!-- Home Section -->
-        <div id="home" class="section active">
-            <h1>Welcome to FrostClient Classic 1.8.9</h1>
-            <p>FrostClient Classic is an open-source Minecraft PVP client built for version 1.8.9, offering optimized performance, enhanced UI, and PVP-focused features.</p>
-        </div>
-
-        <!-- About Section -->
-        <div id="about" class="section">
-            <h2>About FrostClient Classic</h2>
-            <p>FrostClient Classic is a 1.8.9 PVP-client mod that is based on CloudClient, modified and enhanced for better performance and customization. Key features include:</p>
-            <ul>
-                <li>Customized UI for enhanced user experience</li>
-                <li>Optimized performance to boost FPS</li>
-                <li>Enhanced PVP functionalities and utilities</li>
-                <li>Expanded customization options for personalisation</li>
-            </ul>
-            <p><strong>How to use:</strong></p>
-            <ol>
-                <li>Download the FrostClient Classic 1.8.9 JAR file.</li>
-                <li>Install it like any other Minecraft mod (for Minecraft Java Edition 1.8.9).</li>
-                <li>Launch Minecraft and select FrostClient Classic from the launcher.</li>
-                <li>Enjoy enhanced PVP gameplay.</li>
-            </ol>
-
-            <div class="gallery">
-                <img src="https://i.imgur.com/yourFirstImage.jpg" alt="FrostClient Classic screenshot 1">
-                <img src="https://i.imgur.com/yourSecondImage.jpg" alt="FrostClient Classic screenshot 2">
-                <img src="https://i.imgur.com/yourThirdImage.jpg" alt="FrostClient Classic screenshot 3">
-                <img src="https://i.imgur.com/yourFourthImage.jpg" alt="FrostClient Classic screenshot 4">
-            </div>
-        </div>
-
-        <!-- Download Section -->
-        <div id="download" class="section">
-            <h2>Download FrostClient Classic 1.8.9</h2>
-            <p>Click the button below to download the client (hosted externally):</p>
-            <a href="https://files.fm/u/3gz6z7b6bz" target="_blank"><button class="download-btn">Download Now</button></a>
-        </div>
+  <div class="container">
+    <div class="navbar">
+      <div>
+        <button onclick="showSection('home')" id="btn-home">Home</button>
+        <button onclick="showSection('about')" id="btn-about">About</button>
+        <button onclick="showSection('download')" id="btn-download">Download</button>
+      </div>
     </div>
 
-    <script>
-        function showSection(sectionId){
-            document.querySelectorAll('.section').forEach(sec=>sec.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-        }
-    </script>
+    <!-- Home Section -->
+    <div id="home" class="section active">
+      <h1>Welcome to FrostClient Classic 1.8.9</h1>
+      <p>
+        FrostClient Classic is a custom Minecraft 1.8.9 PVP client designed for optimized performance, 
+        sleek visuals, and advanced combat features. Built for competitive players who want smooth gameplay 
+        with better FPS and UI customization.
+      </p>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" class="section">
+      <h2>About FrostClient Classic</h2>
+      <p>
+        FrostClient Classic is a performance-oriented Minecraft client based on CloudClient and rebuilt 
+        to deliver an optimized experience for version 1.8.9. It includes various PVP utilities, 
+        customization options, and enhancements to improve visuals and responsiveness.
+      </p>
+
+      <h3>Main Features:</h3>
+      <ul>
+        <li>FPS boost and performance optimizations</li>
+        <li>Clean and modern in-game UI</li>
+        <li>Keystrokes, CPS, and Ping displays</li>
+        <li>Toggleable HUD modules</li>
+        <li>Full 1.8.9 Forge compatibility</li>
+      </ul>
+
+      <h3>How to Install:</h3>
+      <ol>
+        <li>Download <b>FrostClient Classic 1.8.9</b> using the button below.</li>
+        <li>Move the JAR file into your Minecraft <code>mods</code> folder.</li>
+        <li>Launch Minecraft (Forge 1.8.9).</li>
+        <li>Select FrostClient Classic and start playing!</li>
+      </ol>
+
+      <div class="gallery">
+        <img src="https://cdn.modrinth.com/data/aKCamzi7/images/c46ff7181310c783f6b1d4fba95985494baad70d.webp" alt="FrostClient Classic Screenshot 1">
+        <img src="https://media.forgecdn.net/avatars/thumbnails/1043/799/256/256/638571159001849732.webp" alt="FrostClient Classic Screenshot 2">
+        <img src="https://cdn.modrinth.com/data/aKCamzi7/images/a0059ad8656da1d37a8d1825e9bfaf53171a9e16.webp" alt="FrostClient Classic Screenshot 3">
+      </div>
+    </div>
+
+    <!-- Download Section -->
+    <div id="download" class="section">
+      <h2>Download FrostClient Classic 1.8.9</h2>
+      <p>Click the button below to download FrostClient Classic. Hosted on Files.fm.</p>
+      <a href="https://files.fm/u/3gz6z7b6bz" target="_blank">
+        <button class="download-btn">Download Now</button>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function showSection(sectionId){
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+    }
+  </script>
 </body>
 </html>

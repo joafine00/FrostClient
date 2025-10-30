@@ -7,127 +7,90 @@
 <link rel="icon" type="image/png" href="frost.png" />
 
 <style>
-/* === GENERAL STYLES === */
-* {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif;}
-:root {
-  --highlight:#00FFFF;
-  --bg1:#0d1117;
-  --bg2:#001F3F;
-  --text:#EEE;
-  --card:#151a21;
-}
-body {
-  background:linear-gradient(-45deg,var(--bg1),#021B27,#002540,var(--bg2));
-  background-size:400% 400%;
-  animation:gradientShift 15s ease infinite;
-  color:var(--text);
-  overflow-x:hidden;
-  scroll-behavior:smooth;
-}
-@keyframes gradientShift {
-  0% {background-position:0% 50%;}
-  50% {background-position:100% 50%;}
-  100% {background-position:0% 50%;}
-}
+  /* ===== VARIABLES & RESET ===== */
+  :root{
+    --highlight: #00FFFF;
+    --bg1: #0d1117;
+    --bg2: #001F3F;
+    --card: #151a21;
+    --text: #EEE;
+    --muted: #98a0aa;
+    --radius: 12px;
+    --glass: rgba(20,22,28,0.85);
+    --accent: var(--highlight);
+    --font-size: 16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;}
+  body{
+    font-size: var(--font-size);
+    background: linear-gradient(-45deg,var(--bg1),#021B27,#002540,var(--bg2));
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  @keyframes gradientShift{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+  }
 
-/* === NAVIGATION === */
-nav {
-  width:100%;
-  background:rgba(20,22,28,0.95);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px 30px;
-  position:fixed;
-  top:0; left:0;
-  z-index:1000;
-  box-shadow:0 0 20px rgba(0,255,255,0.25);
-  backdrop-filter:blur(10px);
-}
-.nav-left {display:flex; align-items:center; gap:12px;}
-.nav-left img {height:45px;}
-.nav-left h1 {color:var(--highlight); font-size:1.4em;}
-.nav-menu button {
-  background:none; border:none; color:var(--text);
-  font-size:15px; cursor:pointer; margin:0 10px;
-  transition:0.3s;
-}
-.nav-menu button:hover {color:var(--highlight); transform:scale(1.1);}
+  /* ===== NAVIGATION ===== */
+  nav{
+    position: fixed; top: 0; left:0; right:0;
+    height: 64px; padding:10px 24px;
+    display: flex; align-items:center; justify-content:space-between;
+    background: var(--glass); backdrop-filter: blur(6px);
+    box-shadow:0 6px 24px rgba(0,0,0,0.4); z-index:999;
+  }
+  .nav-left{display:flex; gap:12px; align-items:center;}
+  .nav-left img{height:44px; width:44px; border-radius:8px; object-fit:cover;}
+  .nav-left h1{color: var(--accent); font-size:18px;}
+  .nav-menu{display:flex; gap:8px; align-items:center;}
+  .nav-menu button{
+    background:none; border:none; color: var(--text);
+    padding:6px 10px; border-radius:8px; cursor:pointer; font-weight:600;
+  }
+  .nav-menu button:hover{color: var(--accent); transform:translateY(-2px);}
 
-/* === CONTAINER === */
-.container {width:90%; max-width:1100px; margin:120px auto 50px auto;}
-h2,h3 {margin-bottom:20px; color:var(--highlight);}
-p {margin-bottom:15px; line-height:1.6;}
-ul {margin-left:20px; margin-bottom:20px;}
-.section {display:none; animation:fadeIn 0.8s;}
-.section.active {display:block;}
+  /* ===== CONTAINER ===== */
+  .container{width:92%; max-width:1200px; margin:96px auto 80px auto;}
+  h2{color: var(--accent); margin-bottom:8px;}
+  p.lead{color: var(--muted); margin-bottom:14px;}
+  ul{margin-left:20px; margin-bottom:20px;}
 
-.card {
-  background:var(--card);
-  padding:20px;
-  border-radius:12px;
-  margin-bottom:20px;
-  box-shadow:0 0 15px rgba(0,255,255,0.15);
-  border:1px solid rgba(0,255,255,0.08);
-}
+  /* ===== CARDS ===== */
+  .card{background: var(--card); padding:16px; border-radius: var(--radius);
+    box-shadow:0 6px 30px rgba(0,0,0,0.6); border:1px solid rgba(0,255,255,0.05);
+    margin-bottom:16px;
+  }
 
-/* === IMAGE GALLERY === */
-.gallery {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:20px;
-}
-.gallery img, iframe {
-  width:100%;
-  border-radius:12px;
-  box-shadow:0 0 15px rgba(0,0,0,0.4);
-  transition:transform 0.3s,box-shadow 0.3s;
-}
-.gallery img:hover, iframe:hover {
-  transform:scale(1.05);
-  box-shadow:0 0 25px rgba(0,255,255,0.4);
-}
+  /* ===== BUTTONS ===== */
+  .btn{
+    background: var(--accent); color:#062;
+    padding:10px 16px; border-radius:10px; border:none;
+    font-weight:700; cursor:pointer; box-shadow:0 8px 20px rgba(0,255,255,0.06);
+    transition:0.3s;
+  }
+  .btn:hover{transform:scale(1.05); background:#00cccc;}
 
-/* === BUTTONS === */
-button.download-btn, button.discord-btn {
-  background:var(--highlight);
-  color:#111;
-  padding:15px 30px;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  font-size:17px;
-  font-weight:600;
-  box-shadow:0 0 15px rgba(0,255,255,0.3);
-  transition:0.3s;
-}
-button.download-btn:hover, button.discord-btn:hover {
-  background:#00cccc;
-  transform:scale(1.05);
-}
+  /* ===== GALLERY ===== */
+  .gallery{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:16px;
+  }
+  .gallery img{width:100%; border-radius:var(--radius); box-shadow:0 0 12px rgba(0,0,0,0.4); transition: transform 0.25s, box-shadow 0.25s;}
+  .gallery img:hover{transform:scale(1.03); box-shadow:0 0 22px rgba(0,255,255,0.12);}
 
-/* === OPEN SOURCE CODE BLOCK === */
-#site-code {
-  max-height:500px;
-  overflow:auto;
-  background:var(--card);
-  padding:15px;
-  border-radius:10px;
-  box-shadow:0 0 15px rgba(0,255,255,0.2);
-  white-space:pre-wrap;
-  word-wrap:break-word;
-}
-
-/* === ANIMATIONS === */
-@keyframes fadeIn {
-  from {opacity:0; transform:translateY(20px);}
-  to {opacity:1; transform:translateY(0);}
-}
+  /* ===== CODE PREVIEW ===== */
+  #site-code{max-height:400px; overflow:auto; background:var(--card); padding:12px; border-radius:var(--radius); white-space:pre-wrap;}
 </style>
 </head>
 <body>
 
-<!-- === NAVIGATION === -->
+<!-- NAVIGATION -->
 <nav>
   <div class="nav-left">
     <img src="frost.png" alt="Frost Logo">
@@ -139,33 +102,30 @@ button.download-btn:hover, button.discord-btn:hover {
     <button onclick="showSection('features')">Features</button>
     <button onclick="showSection('mods')">Mods</button>
     <button onclick="showSection('download')">Download</button>
-    <button onclick="showSection('news')">News</button>
     <button onclick="showSection('community')">Community</button>
     <button onclick="showSection('opensource')">Open Source</button>
   </div>
 </nav>
 
-<!-- === MAIN CONTENT === -->
+<!-- MAIN CONTENT -->
 <div class="container">
 
   <!-- HOME -->
   <div id="home" class="section active">
     <h2>Welcome to FrostClient Classic</h2>
-    <p>FrostClient Classic is an open-source Minecraft 1.8.9 PvP client designed for competitive gameplay. Built for smooth FPS, perfect mod balance, and a clean experience.</p>
-    <p>Enjoy a lightweight, modular client with an extensive mod library and cross-platform compatibility.</p>
+    <p class="lead">FrostClient Classic is an open-source Minecraft 1.8.9 PvP client designed for competitive gameplay. Lightweight, modular, and optimized for FPS.</p>
   </div>
 
   <!-- ABOUT -->
   <div id="about" class="section">
     <h2>About FrostClient</h2>
-    <p>FrostClient Classic enhances Minecraft PvP by combining visual polish, deep mod integration, and open-source transparency.</p>
-    <p><b>Open Source Repository:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--highlight);" target="_blank">View on GitHub</a></p>
-    <p>Supports frequent updates, community-driven features, and smooth integration with major Minecraft PvP servers.</p>
+    <p class="lead">FrostClient Classic combines visual polish, deep mod integration, and open-source transparency.</p>
+    <p><b>Open Source Repository:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--accent);" target="_blank">GitHub</a></p>
   </div>
 
   <!-- FEATURES -->
   <div id="features" class="section">
-    <h2>Client Features</h2>
+    <h2>Features</h2>
     <ul>
       <li>Ultra-smooth performance and high FPS optimization</li>
       <li>Modular design with easy toggles and keybinds</li>
@@ -193,63 +153,53 @@ button.download-btn:hover, button.discord-btn:hover {
     </ul>
   </div>
 
-  <!-- NEWS (DISCORD WIDGET) -->
-  <div id="news" class="section">
-    <h2>Community News</h2>
-    <p>Stay up to date with the latest announcements and discussions directly from our Discord server!</p>
-    <iframe src="https://discord.com/widget?id=1433388734086250598&theme=dark"
-            width="100%" height="500"
-            allowtransparency="true" frameborder="0"
-            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
-    </iframe>
-    <p style="margin-top:10px;">Join our Discord for more updates and support.</p>
-  </div>
-
   <!-- DOWNLOAD -->
   <div id="download" class="section">
     <h2>Download FrostClient Classic</h2>
-    <a href="https://files.fm/u/nefahadbty" target="_blank"><button class="download-btn">Download Now</button></a>
+    <a href="https://files.fm/u/nefahadbty" target="_blank"><button class="btn">Download Now</button></a>
   </div>
 
   <!-- COMMUNITY -->
   <div id="community" class="section">
     <h2>Community</h2>
-    <a href="http://dsc.gg/frost-client" target="_blank"><button class="discord-btn">Join Discord</button></a>
+    <a href="http://dsc.gg/frost-client" target="_blank"><button class="btn">Join Discord</button></a>
   </div>
 
   <!-- OPEN SOURCE -->
   <div id="opensource" class="section">
     <h2>Open Source</h2>
-    <p>FrostClient Classic and this site are fully open source. Explore the client repository below:</p>
+    <p>FrostClient Classic and this website are fully open source. Explore the client repository below:</p>
     <ul>
-      <li><b>Client:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--highlight);" target="_blank">GitHub Repository</a></li>
+      <li><b>Client:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--accent);" target="_blank">GitHub Repository</a></li>
     </ul>
 
     <h3>Site Code (HTML)</h3>
-    <p>View or copy the full HTML code of this site:</p>
-    <button onclick="copySiteCode()" class="download-btn" style="margin-bottom:10px;">Copy Code</button>
+    <button onclick="copySiteCode()" class="btn" style="margin-bottom:10px;">Copy Code</button>
     <pre id="site-code"></pre>
   </div>
 
 </div>
 
 <script>
-// === SECTION SWITCH ===
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  function showSection(id){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
 
-  if(id === 'opensource') showSourceCode();
-}
+    if(id==='opensource') showSiteCode();
+  }
 
-// === MOSTRA O CÓDIGO REAL DO SITE ===
-function showSourceCode() {
-  const clone = document.documentElement.cloneNode(true);
-  clone.querySelectorAll('script').forEach(s => s.remove());
-  const pre = clone.querySelector('#site-code');
-  if(pre) pre.remove();
-  document.getElementById("site-code").textContent = clone.outerHTML;
-}
+  function showSiteCode(){
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll('script').forEach(s=>s.remove());
+    const pre = clone.querySelector('#site-code');
+    if(pre) pre.remove();
+    document.getElementById('site-code').textContent = clone.outerHTML;
+  }
+
+  function copySiteCode(){
+    const code = document.getElementById('site-code').textContent;
+    navigator.clipboard.writeText(code).then(()=>alert("Site code copied!"));
+  }
 </script>
 
 </body>

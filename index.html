@@ -7,90 +7,139 @@
 <link rel="icon" type="image/png" href="frost.png" />
 
 <style>
-  /* ===== VARIABLES & RESET ===== */
-  :root{
-    --highlight: #00FFFF;
-    --bg1: #0d1117;
-    --bg2: #001F3F;
-    --card: #151a21;
-    --text: #EEE;
-    --muted: #98a0aa;
-    --radius: 12px;
-    --glass: rgba(20,22,28,0.85);
-    --accent: var(--highlight);
-    --font-size: 16px;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;}
-  body{
-    font-size: var(--font-size);
-    background: linear-gradient(-45deg,var(--bg1),#021B27,#002540,var(--bg2));
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-  }
-  @keyframes gradientShift{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-  }
+/* ===== VARIABLES & RESET ===== */
+:root{
+  --highlight:#00FFFF;
+  --bg1:#0d1117;
+  --bg2:#001F3F;
+  --text:#EEE;
+  --card:#151a21;
+  --muted:#aaa;
+  --radius:12px;
+  --accent:var(--highlight);
+  --font-size:16px;
+  --transition:0.3s ease-in-out;
+}
 
-  /* ===== NAVIGATION ===== */
-  nav{
-    position: fixed; top: 0; left:0; right:0;
-    height: 64px; padding:10px 24px;
-    display: flex; align-items:center; justify-content:space-between;
-    background: var(--glass); backdrop-filter: blur(6px);
-    box-shadow:0 6px 24px rgba(0,0,0,0.4); z-index:999;
-  }
-  .nav-left{display:flex; gap:12px; align-items:center;}
-  .nav-left img{height:44px; width:44px; border-radius:8px; object-fit:cover;}
-  .nav-left h1{color: var(--accent); font-size:18px;}
-  .nav-menu{display:flex; gap:8px; align-items:center;}
-  .nav-menu button{
-    background:none; border:none; color: var(--text);
-    padding:6px 10px; border-radius:8px; cursor:pointer; font-weight:600;
-  }
-  .nav-menu button:hover{color: var(--accent); transform:translateY(-2px);}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{
+  background:linear-gradient(-45deg,var(--bg1),#021B27,#002540,var(--bg2));
+  background-size:400% 400%;
+  animation:gradientShift 15s ease infinite;
+  color:var(--text);
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+  font-size:var(--font-size);
+}
+@keyframes gradientShift{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
 
-  /* ===== CONTAINER ===== */
-  .container{width:92%; max-width:1200px; margin:96px auto 80px auto;}
-  h2{color: var(--accent); margin-bottom:8px;}
-  p.lead{color: var(--muted); margin-bottom:14px;}
-  ul{margin-left:20px; margin-bottom:20px;}
+/* ===== NAVIGATION ===== */
+nav{
+  width:100%; background:rgba(20,22,28,0.95);
+  display:flex; justify-content:space-between; align-items:center;
+  padding:12px 30px; position:fixed; top:0; left:0;
+  z-index:1000; box-shadow:0 0 20px rgba(0,255,255,0.25);
+  backdrop-filter:blur(10px);
+  transition:var(--transition);
+}
+.nav-left{display:flex; align-items:center; gap:12px;}
+.nav-left img{height:45px;}
+.nav-left h1{color:var(--highlight); font-size:1.4em;}
+.nav-menu button{
+  background:none; border:none; color:var(--text);
+  font-size:15px; cursor:pointer; margin:0 10px;
+  transition:var(--transition);
+}
+.nav-menu button:hover{
+  color:var(--highlight); transform:scale(1.1);
+}
 
-  /* ===== CARDS ===== */
-  .card{background: var(--card); padding:16px; border-radius: var(--radius);
-    box-shadow:0 6px 30px rgba(0,0,0,0.6); border:1px solid rgba(0,255,255,0.05);
-    margin-bottom:16px;
-  }
+/* ===== CONTAINER ===== */
+.container{width:90%; max-width:1100px; margin:120px auto 50px auto;}
+h2,h3{margin-bottom:20px; color:var(--highlight);}
+p{margin-bottom:15px; line-height:1.6;}
+ul{margin-left:20px; margin-bottom:20px;}
+.section{display:none; animation:fadeIn 0.8s;}
+.section.active{display:block;}
 
-  /* ===== BUTTONS ===== */
-  .btn{
-    background: var(--accent); color:#062;
-    padding:10px 16px; border-radius:10px; border:none;
-    font-weight:700; cursor:pointer; box-shadow:0 8px 20px rgba(0,255,255,0.06);
-    transition:0.3s;
-  }
-  .btn:hover{transform:scale(1.05); background:#00cccc;}
+/* ===== CARDS ===== */
+.card{
+  background:var(--card);
+  padding:20px;
+  border-radius:var(--radius);
+  margin-bottom:20px;
+  box-shadow:0 0 20px rgba(0,255,255,0.2);
+  border:1px solid rgba(0,255,255,0.08);
+  transition:var(--transition);
+}
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 0 30px rgba(0,255,255,0.35);
+}
 
-  /* ===== GALLERY ===== */
-  .gallery{
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:16px;
-  }
-  .gallery img{width:100%; border-radius:var(--radius); box-shadow:0 0 12px rgba(0,0,0,0.4); transition: transform 0.25s, box-shadow 0.25s;}
-  .gallery img:hover{transform:scale(1.03); box-shadow:0 0 22px rgba(0,255,255,0.12);}
+/* ===== IMAGE GALLERY ===== */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+}
+.gallery img, iframe{
+  width:100%; border-radius:var(--radius);
+  box-shadow:0 0 15px rgba(0,0,0,0.4);
+  transition:transform 0.3s, box-shadow 0.3s;
+}
+.gallery img:hover, iframe:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 25px rgba(0,255,255,0.4);
+}
 
-  /* ===== CODE PREVIEW ===== */
-  #site-code{max-height:400px; overflow:auto; background:var(--card); padding:12px; border-radius:var(--radius); white-space:pre-wrap;}
+/* ===== BUTTONS ===== */
+button.download-btn, button.discord-btn{
+  background:var(--highlight); color:#111;
+  padding:15px 30px; border:none; border-radius:10px;
+  cursor:pointer; font-size:17px; font-weight:600;
+  box-shadow:0 0 15px rgba(0,255,255,0.3);
+  transition:var(--transition);
+}
+button.download-btn:hover, button.discord-btn:hover{
+  background:#00cccc; transform:scale(1.05);
+}
+
+/* ===== OPEN SOURCE CODE BLOCK ===== */
+#site-code{
+  max-height:500px;
+  overflow:auto;
+  background:var(--card);
+  padding:15px;
+  border-radius:var(--radius);
+  box-shadow:0 0 15px rgba(0,255,255,0.2);
+  white-space:pre-wrap;
+  word-wrap:break-word;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* ===== THEME TOGGLE BUTTON ===== */
+#theme-toggle{
+  position:fixed; bottom:20px; right:20px;
+  padding:10px 15px; border:none; border-radius:10px;
+  cursor:pointer; background:var(--highlight); color:#111;
+  font-weight:600; box-shadow:0 0 15px rgba(0,255,255,0.3);
+  transition:var(--transition);
+}
 </style>
 </head>
 <body>
 
-<!-- NAVIGATION -->
+<!-- NAV -->
 <nav>
   <div class="nav-left">
     <img src="frost.png" alt="Frost Logo">
@@ -107,20 +156,20 @@
   </div>
 </nav>
 
-<!-- MAIN CONTENT -->
+<!-- CONTAINER -->
 <div class="container">
 
   <!-- HOME -->
   <div id="home" class="section active">
     <h2>Welcome to FrostClient Classic</h2>
-    <p class="lead">FrostClient Classic is an open-source Minecraft 1.8.9 PvP client designed for competitive gameplay. Lightweight, modular, and optimized for FPS.</p>
+    <p>FrostClient Classic is an open-source Minecraft 1.8.9 PvP client designed for competitive gameplay. Lightweight, modular, and optimized for FPS.</p>
   </div>
 
   <!-- ABOUT -->
   <div id="about" class="section">
     <h2>About FrostClient</h2>
-    <p class="lead">FrostClient Classic combines visual polish, deep mod integration, and open-source transparency.</p>
-    <p><b>Open Source Repository:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--accent);" target="_blank">GitHub</a></p>
+    <p>FrostClient Classic combines visual polish, deep mod integration, and open-source transparency.</p>
+    <p><b>Open Source Repository:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--highlight);" target="_blank">GitHub Repository</a></p>
   </div>
 
   <!-- FEATURES -->
@@ -156,50 +205,66 @@
   <!-- DOWNLOAD -->
   <div id="download" class="section">
     <h2>Download FrostClient Classic</h2>
-    <a href="https://files.fm/u/nefahadbty" target="_blank"><button class="btn">Download Now</button></a>
+    <a href="https://files.fm/u/nefahadbty" target="_blank"><button class="download-btn">Download Now</button></a>
   </div>
 
   <!-- COMMUNITY -->
   <div id="community" class="section">
     <h2>Community</h2>
-    <a href="http://dsc.gg/frost-client" target="_blank"><button class="btn">Join Discord</button></a>
+    <a href="http://dsc.gg/frost-client" target="_blank"><button class="discord-btn">Join Discord</button></a>
   </div>
 
   <!-- OPEN SOURCE -->
   <div id="opensource" class="section">
     <h2>Open Source</h2>
-    <p>FrostClient Classic and this website are fully open source. Explore the client repository below:</p>
-    <ul>
-      <li><b>Client:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--accent);" target="_blank">GitHub Repository</a></li>
-    </ul>
-
-    <h3>Site Code (HTML)</h3>
-    <button onclick="copySiteCode()" class="btn" style="margin-bottom:10px;">Copy Code</button>
+    <p>FrostClient Classic and this site are fully open source.</p>
+    <button onclick="copySiteCode()" class="download-btn" style="margin-bottom:10px;">Copy Site Code</button>
     <pre id="site-code"></pre>
   </div>
-
 </div>
 
+<!-- THEME TOGGLE -->
+<button id="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
 <script>
-  function showSection(id){
-    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+// Section switch
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 
-    if(id==='opensource') showSiteCode();
-  }
+  if(id==='opensource') showSiteCode();
+}
 
-  function showSiteCode(){
-    const clone = document.documentElement.cloneNode(true);
-    clone.querySelectorAll('script').forEach(s=>s.remove());
-    const pre = clone.querySelector('#site-code');
-    if(pre) pre.remove();
-    document.getElementById('site-code').textContent = clone.outerHTML;
-  }
+// Show site code
+function showSiteCode(){
+  const clone = document.documentElement.cloneNode(true);
+  clone.querySelectorAll('script').forEach(s=>s.remove());
+  const pre = clone.querySelector('#site-code');
+  if(pre) pre.remove();
+  document.getElementById('site-code').textContent = clone.outerHTML;
+}
 
-  function copySiteCode(){
-    const code = document.getElementById('site-code').textContent;
-    navigator.clipboard.writeText(code).then(()=>alert("Site code copied!"));
+// Copy code
+function copySiteCode(){
+  const code = document.getElementById('site-code').textContent;
+  navigator.clipboard.writeText(code).then(()=>alert("Site code copied!"));
+}
+
+// Theme toggle
+function toggleTheme(){
+  document.body.classList.toggle('light-theme');
+  if(document.body.classList.contains('light-theme')){
+    document.documentElement.style.setProperty('--bg1','#f5f8fa');
+    document.documentElement.style.setProperty('--bg2','#e6eef6');
+    document.documentElement.style.setProperty('--card','#fff');
+    document.documentElement.style.setProperty('--text','#111');
+  } else {
+    document.documentElement.style.setProperty('--bg1','#0d1117');
+    document.documentElement.style.setProperty('--bg2','#001F3F');
+    document.documentElement.style.setProperty('--card','#151a21');
+    document.documentElement.style.setProperty('--text','#EEE');
   }
+}
 </script>
 
 </body>

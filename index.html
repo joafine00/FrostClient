@@ -240,57 +240,26 @@ function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 
-  // Se for Open Source, carrega o HTML do site
+  // Se for Open Source, apenas gera o HTML como texto
   if(id === 'opensource') showSourceCode();
 }
 
-// === COPY SITE CODE ===
-function copySiteCode() {
-  const code = document.getElementById("site-code").innerText;
-  navigator.clipboard.writeText(code).then(() => alert("Site HTML code copied!"));
-}
-
-// === MOSTRA O CÓDIGO REAL DO SITE ===
+// === MOSTRA O CÓDIGO REAL DO SITE (sem quebrar a galeria) ===
 function showSourceCode() {
-  const code = document.documentElement.outerHTML;
-  document.getElementById("site-code").textContent = code;
+  // Clona o <html> inteiro, mas não altera a página real
+  const clone = document.documentElement.cloneNode(true);
+
+  // Remove scripts dinâmicos que podem quebrar a renderização
+  clone.querySelectorAll('script').forEach(s => s.remove());
+
+  // Remove a tag <pre> que exibirá o código para evitar loop
+  const pre = clone.querySelector('#site-code');
+  if(pre) pre.remove();
+
+  // Mostra como texto
+  document.getElementById("site-code").textContent = clone.outerHTML;
 }
+  </script>
 
-// === DYNAMIC IMAGE API SIMULATION ===
-const apiImages = [
-  "frostclient1.jpeg",
-  "frostclient2.jpeg",
-  "frostclient3.jpeg",
-  "frostclient4.jpeg",
-  "frostclient5.jpeg"
-];
-
-function updateGallery() {
-  const gallery = document.getElementById("feature-gallery");
-  gallery.innerHTML = "";
-  const shuffled = [...apiImages].sort(() => 0.5 - Math.random());
-  shuffled.forEach((img, i) => {
-    const image = document.createElement("img");
-    image.src = img;
-    image.alt = "FrostClient Feature " + (i+1);
-    gallery.appendChild(image);
-  });
-}
-
-// Atualiza imagens a cada 1-7 dias (simulação em ms)
-const minInterval = 1000 * 60 * 60 * 24; // 1 dia
-const maxInterval = minInterval * 7;     // 7 dias
-
-function scheduleNextUpdate() {
-  const delay = Math.random() * (maxInterval - minInterval) + minInterval;
-  setTimeout(() => {
-    updateGallery();
-    scheduleNextUpdate();
-  }, delay);
-}
-
-updateGallery();
-scheduleNextUpdate();
-</script>
 </body>
 </html>

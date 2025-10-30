@@ -227,13 +227,9 @@ button.download-btn:hover, button.discord-btn:hover {
     </ul>
 
     <h3>Site Code (HTML)</h3>
-    <p>View or copy the HTML code of this site:</p>
+    <p>View or copy the full HTML code of this site:</p>
     <button onclick="copySiteCode()" class="download-btn" style="margin-bottom:10px;">Copy Code</button>
-    <pre id="site-code">&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;...&lt;/head&gt;
-&lt;body&gt;...&lt;/body&gt;
-&lt;/html&gt;</pre>
+    <pre id="site-code"></pre>
   </div>
 
 </div>
@@ -243,12 +239,21 @@ button.download-btn:hover, button.discord-btn:hover {
 function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+
+  // Se for Open Source, carrega o HTML do site
+  if(id === 'opensource') showSourceCode();
 }
 
 // === COPY SITE CODE ===
 function copySiteCode() {
   const code = document.getElementById("site-code").innerText;
   navigator.clipboard.writeText(code).then(() => alert("Site HTML code copied!"));
+}
+
+// === MOSTRA O CÓDIGO REAL DO SITE ===
+function showSourceCode() {
+  const code = document.documentElement.outerHTML;
+  document.getElementById("site-code").textContent = code;
 }
 
 // === DYNAMIC IMAGE API SIMULATION ===
@@ -272,9 +277,9 @@ function updateGallery() {
   });
 }
 
-// Update images every 1-7 days (demo: milliseconds reduced)
-const minInterval = 1000 * 60 * 60 * 24; // 1 day
-const maxInterval = minInterval * 7;     // 7 days
+// Atualiza imagens a cada 1-7 dias (simulação em ms)
+const minInterval = 1000 * 60 * 60 * 24; // 1 dia
+const maxInterval = minInterval * 7;     // 7 dias
 
 function scheduleNextUpdate() {
   const delay = Math.random() * (maxInterval - minInterval) + minInterval;

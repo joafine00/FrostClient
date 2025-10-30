@@ -139,6 +139,7 @@ button.download-btn:hover, button.discord-btn:hover {
     <button onclick="showSection('features')">Features</button>
     <button onclick="showSection('mods')">Mods</button>
     <button onclick="showSection('download')">Download</button>
+    <button onclick="showSection('news')">News</button>
     <button onclick="showSection('community')">Community</button>
     <button onclick="showSection('opensource')">Open Source</button>
   </div>
@@ -192,17 +193,16 @@ button.download-btn:hover, button.discord-btn:hover {
     </ul>
   </div>
 
-  <!-- UPDATES -->
-  <div id="updates" class="section">
-    <h2>Development Updates</h2>
-    <div class="card">
-      <h3>Client Maintenance</h3>
-      <p>The client no longer receives direct mod updates, but APIs, launchers, and connected services are continuously improved.</p>
-    </div>
-    <div class="card">
-      <h3>Site Updates</h3>
-      <p>Gallery images and content are updated automatically via a browser API (1-7 days interval).</p>
-    </div>
+  <!-- NEWS (DISCORD WIDGET) -->
+  <div id="news" class="section">
+    <h2>Community News</h2>
+    <p>Stay up to date with the latest announcements and discussions directly from our Discord server!</p>
+    <iframe src="https://discord.com/widget?id=1433388734086250598&theme=dark"
+            width="100%" height="500"
+            allowtransparency="true" frameborder="0"
+            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+    </iframe>
+    <p style="margin-top:10px;">Join our Discord for more updates and support.</p>
   </div>
 
   <!-- DOWNLOAD -->
@@ -239,26 +239,18 @@ function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 
-  // Se for Open Source, apenas gera o HTML como texto
   if(id === 'opensource') showSourceCode();
 }
 
-// === MOSTRA O CÓDIGO REAL DO SITE (sem quebrar a galeria) ===
+// === MOSTRA O CÓDIGO REAL DO SITE ===
 function showSourceCode() {
-  // Clona o <html> inteiro, mas não altera a página real
   const clone = document.documentElement.cloneNode(true);
-
-  // Remove scripts dinâmicos que podem quebrar a renderização
   clone.querySelectorAll('script').forEach(s => s.remove());
-
-  // Remove a tag <pre> que exibirá o código para evitar loop
   const pre = clone.querySelector('#site-code');
   if(pre) pre.remove();
-
-  // Mostra como texto
   document.getElementById("site-code").textContent = clone.outerHTML;
 }
-  </script>
+</script>
 
 </body>
 </html>

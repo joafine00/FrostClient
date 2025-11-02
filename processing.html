@@ -1,285 +1,345 @@
-<!-- Update Network Flow Section -->
-<div id="update-network-flow" class="section">
-  <h2 data-text-en="Update Network Flow" data-text-pt="Fluxo de Atualização" data-text-es="Flujo de Actualización">Update Network Flow</h2>
-  <p data-text-en="Visualizing the process of skin updates across servers with ping and status."
-     data-text-pt="Visualizando o processo de atualização de skins pelos servidores com ping e status."
-     data-text-es="Visualizando el proceso de actualización de skins a través de servidores con ping y estado.">
-    Visualizing the process of skin updates across servers with ping and status.
-  </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Network Flow Visualization</title>
+  <style>
+    /* Reset básico */
+    body {
+      margin: 0;
+      background-color: #071021;
+      color: #a0dfff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+      min-height: 100vh;
+    }
 
-  <div class="network-graph">
+    /* Aqui vai seu CSS da seção Update Network Flow */
 
-    <!-- Minecraft Skin API -->
-    <div class="node" id="node-minecraft-api" data-text-en="Minecraft Skin API" data-text-pt="API de Skins Minecraft" data-text-es="API de Skins Minecraft">
-      <h3>Minecraft Skin API</h3>
-      <p data-text-en="Source of skin data" data-text-pt="Fonte dos dados das skins" data-text-es="Fuente de datos de skins">Source of skin data</p>
-      <div class="ping-bar" id="ping-minecraft-api"></div>
-      <div class="status" id="status-minecraft-api"></div>
+    /* Estilos da seção */
+    #update-network-flow {
+      margin-top: 60px;
+      background: #0f1a2b;
+      padding: 25px 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px #00ffff66;
+      position: relative;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    #update-network-flow h2 {
+      color: #00ffff;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    #update-network-flow p {
+      text-align: center;
+      font-size: 1rem;
+      color: #a0dfff;
+      margin-bottom: 30px;
+    }
+    .network-graph {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 15px;
+    }
+    .node {
+      flex: 1 0 120px;
+      background: #152538;
+      border-radius: 12px;
+      padding: 15px 10px;
+      box-shadow: 0 0 12px #00ffff66;
+      text-align: center;
+      color: #a0dfff;
+      position: relative;
+      min-width: 120px;
+      user-select: none;
+    }
+    .node h3 {
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+      color: #00ffff;
+    }
+    .node p {
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+      min-height: 36px;
+    }
+    .ping-bar {
+      height: 10px;
+      border-radius: 10px;
+      width: 0;
+      margin: 0 auto 8px auto;
+      box-shadow: 0 0 10px #00ffffaa;
+      transition: width 2s ease-in-out, background-color 0.5s ease;
+    }
+    .status {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: #66ccff;
+      min-height: 20px;
+    }
+
+    /* Seletor de idioma */
+    .lang-selector {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      user-select: none;
+    }
+    #btn-lang {
+      background: transparent;
+      border: 1.5px solid #00ffff;
+      color: #00ffff;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    #btn-lang:hover, #btn-lang:focus {
+      background-color: #00ffff;
+      color: #0f1a2b;
+      outline: none;
+    }
+    #lang-list {
+      position: absolute;
+      right: 0;
+      margin-top: 5px;
+      background: #152538;
+      border-radius: 8px;
+      box-shadow: 0 0 15px #00ffffaa;
+      list-style: none;
+      padding: 5px 0;
+      min-width: 130px;
+      z-index: 1000;
+    }
+    #lang-list li {
+      padding: 7px 15px;
+      cursor: pointer;
+      color: #a0dfff;
+      font-size: 0.9rem;
+    }
+    #lang-list li.selected, #lang-list li:hover {
+      background: #00ffff;
+      color: #0f1a2b;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Update Network Flow Section -->
+  <div id="update-network-flow" class="section">
+    <div class="lang-selector">
+      <button id="btn-lang" aria-haspopup="true" aria-expanded="false">ENG ▼</button>
+      <ul id="lang-list" role="menu" aria-label="Language options" hidden>
+        <li role="menuitem" data-lang="en" class="selected">English (ENG)</li>
+        <li role="menuitem" data-lang="pt">Português (PT)</li>
+        <li role="menuitem" data-lang="es">Español (ES)</li>
+      </ul>
     </div>
 
-    <!-- Arrow -->
-    <div class="arrow" id="arrow-api-to-backend" aria-hidden="true"></div>
+    <h2 data-text-en="Update Network Flow" data-text-pt="Fluxo de Atualização" data-text-es="Flujo de Actualización">Update Network Flow</h2>
+    <p data-text-en="Visualizing the process of skin updates across servers with ping and status."
+       data-text-pt="Visualizando o processo de atualização de skins pelos servidores com ping e status."
+       data-text-es="Visualizando el proceso de actualización de skins a través de servidores con ping y estado.">
+      Visualizing the process of skin updates across servers with ping and status.
+    </p>
 
-    <!-- GitHub Site -->
-    <div class="node" id="node-github" data-text-en="GitHub Site" data-text-pt="Site GitHub" data-text-es="Sitio GitHub">
-      <h3>GitHub Site</h3>
-      <p data-text-en="Code hosting platform" data-text-pt="Plataforma de hospedagem de código" data-text-es="Plataforma de alojamiento de código">Code hosting platform</p>
-      <div class="ping-bar" id="ping-github"></div>
-      <div class="status" id="status-github"></div>
+    <div class="network-graph">
+
+      <div class="node" id="node-minecraft-api" data-text-en="Minecraft Skin API" data-text-pt="API de Skins Minecraft" data-text-es="API de Skins Minecraft">
+        <h3>Minecraft Skin API</h3>
+        <p data-text-en="Source of skin data" data-text-pt="Fonte dos dados das skins" data-text-es="Fuente de datos de skins">Source of skin data</p>
+        <div class="ping-bar" id="ping-minecraft-api"></div>
+        <div class="status" id="status-minecraft-api"></div>
+      </div>
+
+      <div class="node" id="node-github" data-text-en="GitHub Site" data-text-pt="Site GitHub" data-text-es="Sitio GitHub">
+        <h3>GitHub Site</h3>
+        <p data-text-en="Code hosting platform" data-text-pt="Plataforma de hospedagem de código" data-text-es="Plataforma de alojamiento de código">Code hosting platform</p>
+        <div class="ping-bar" id="ping-github"></div>
+        <div class="status" id="status-github"></div>
+      </div>
+
+      <div class="node" id="node-vercel" data-text-en="FrostClient Backend" data-text-pt="Backend FrostClient" data-text-es="Backend FrostClient">
+        <h3>FrostClient Backend</h3>
+        <p data-text-en="Processing & caching" data-text-pt="Processamento e cache" data-text-es="Procesamiento y caché">Processing & caching</p>
+        <div class="ping-bar" id="ping-vercel"></div>
+        <div class="status" id="status-vercel"></div>
+      </div>
+
+      <div class="node" id="node-site" data-text-en="FrostClient Website" data-text-pt="Site FrostClient" data-text-es="Sitio FrostClient">
+        <h3>FrostClient Website</h3>
+        <p data-text-en="Skins published online" data-text-pt="Skins publicadas online" data-text-es="Skins publicadas en línea">Skins published online</p>
+        <div class="ping-bar" id="ping-site"></div>
+        <div class="status" id="status-site"></div>
+      </div>
+
+      <div class="node" id="node-app" data-text-en="Minecraft Client" data-text-pt="Client Minecraft" data-text-es="Cliente Minecraft">
+        <h3>Minecraft Client</h3>
+        <p data-text-en="Direct API fetch" data-text-pt="Busca direta da API" data-text-es="Búsqueda directa de la API">Direct API fetch</p>
+        <div class="ping-bar" id="ping-app"></div>
+        <div class="status" id="status-app"></div>
+      </div>
+
     </div>
-
-    <!-- FrostClient Backend -->
-    <div class="node" id="node-vercel" data-text-en="FrostClient Backend" data-text-pt="Backend FrostClient" data-text-es="Backend FrostClient">
-      <h3>FrostClient Backend</h3>
-      <p data-text-en="Processing & caching" data-text-pt="Processamento e cache" data-text-es="Procesamiento y caché">Processing & caching</p>
-      <div class="ping-bar" id="ping-vercel"></div>
-      <div class="status" id="status-vercel"></div>
-    </div>
-
-    <!-- Arrow -->
-    <div class="arrow" id="arrow-backend-to-site" aria-hidden="true"></div>
-
-    <!-- FrostClient Website -->
-    <div class="node" id="node-site" data-text-en="FrostClient Website" data-text-pt="Site FrostClient" data-text-es="Sitio FrostClient">
-      <h3>FrostClient Website</h3>
-      <p data-text-en="Skins published online" data-text-pt="Skins publicadas online" data-text-es="Skins publicadas en línea">Skins published online</p>
-      <div class="ping-bar" id="ping-site"></div>
-      <div class="status" id="status-site"></div>
-    </div>
-
-    <!-- Arrow -->
-    <div class="arrow" id="arrow-site-to-client" aria-hidden="true"></div>
-
-    <!-- Minecraft Client -->
-    <div class="node" id="node-app" data-text-en="Minecraft Client" data-text-pt="Client Minecraft" data-text-es="Cliente Minecraft">
-      <h3>Minecraft Client</h3>
-      <p data-text-en="Direct API fetch" data-text-pt="Busca direta da API" data-text-es="Búsqueda directa de la API">Direct API fetch</p>
-      <div class="ping-bar" id="ping-app"></div>
-      <div class="status" id="status-app"></div>
-    </div>
-
   </div>
 
-</div>
+  <script>
+    (() => {
+      const langs = ['en', 'pt', 'es'];
+      let currentLang = 'en';
+      const btnLang = document.getElementById('btn-lang');
+      const langList = document.getElementById('lang-list');
+      const langItems = langList.querySelectorAll('li');
 
-<style>
-  /* Update Network Flow Styles */
+      // Dados ping simulados iniciais (ms)
+      const pingTimes = {
+        'minecraft-api': 60,
+        github: 50,
+        vercel: 90,
+        site: 70,
+        app: 40
+      };
 
-  #update-network-flow {
-    margin-top: 60px;
-    background: #0f1a2b;
-    padding: 25px 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 25px #00ffff66;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  #update-network-flow h2 {
-    color: #00ffff;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-  #update-network-flow p {
-    text-align: center;
-    font-size: 1rem;
-    color: #a0dfff;
-    margin-bottom: 30px;
-  }
-  .network-graph {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    gap: 15px;
-    overflow-x: auto;
-    padding-bottom: 15px;
-    position: relative;
-    align-items: center;
-  }
-  .node {
-    flex: 0 0 160px;
-    background: #152538;
-    border-radius: 12px;
-    padding: 15px 12px;
-    box-shadow: 0 0 15px #00ffff88;
-    text-align: center;
-    color: #a0dfff;
-    position: relative;
-    min-width: 160px;
-    user-select: none;
-  }
-  .node h3 {
-    margin-bottom: 8px;
-    font-size: 1.2rem;
-    color: #00ffff;
-  }
-  .node p {
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-    min-height: 40px;
-    line-height: 1.2em;
-  }
-  .ping-bar {
-    height: 12px;
-    background: linear-gradient(90deg, #00ff99, #006622);
-    border-radius: 12px;
-    width: 0;
-    margin: 0 auto 10px auto;
-    box-shadow: 0 0 12px #00ff9966;
-    transition: width 2s ease-in-out, background-color 0.5s ease;
-  }
-  .status {
-    font-size: 0.85rem;
-    font-style: italic;
-    color: #66ccff;
-    min-height: 22px;
-  }
+      // Mensagens status por idioma
+      const statusMsgs = {
+        en: {
+          'minecraft-api': "API responding",
+          github: "Site online",
+          vercel: "Cache updated",
+          site: "Site updated",
+          app: "Client syncing"
+        },
+        pt: {
+          'minecraft-api': "API respondendo",
+          github: "Site online",
+          vercel: "Cache atualizado",
+          site: "Site atualizado",
+          app: "Client sincronizando"
+        },
+        es: {
+          'minecraft-api': "API respondiendo",
+          github: "Sitio en línea",
+          vercel: "Caché actualizado",
+          site: "Sitio actualizado",
+          app: "Cliente sincronizando"
+        }
+      };
 
-  /* Arrows between nodes */
-  .arrow {
-    width: 40px;
-    height: 3px;
-    background: #00ffffcc;
-    position: relative;
-    margin-top: -50px;
-    align-self: center;
-    flex-shrink: 0;
-  }
-  /* Arrowhead */
-  .arrow::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    border: 6px solid transparent;
-    border-left-color: #00ffffcc;
-  }
+      // Troca textos conforme idioma
+      function setLanguage(lang) {
+        const container = document.getElementById('update-network-flow');
+        container.querySelectorAll('[data-text-en]').forEach(el => {
+          if (lang === 'en') el.textContent = el.getAttribute('data-text-en');
+          else if (lang === 'pt') el.textContent = el.getAttribute('data-text-pt');
+          else if (lang === 'es') el.textContent = el.getAttribute('data-text-es');
+        });
+        // Atualiza status
+        updateStatusTexts(lang);
+        // Atualiza botão do idioma
+        btnLang.textContent = lang.toUpperCase() + " ▼";
 
-  /* Responsive scrollbar styling */
-  .network-graph::-webkit-scrollbar {
-    height: 8px;
-  }
-  .network-graph::-webkit-scrollbar-track {
-    background: #0f1a2b;
-  }
-  .network-graph::-webkit-scrollbar-thumb {
-    background: #00ffff88;
-    border-radius: 4px;
-  }
-</style>
+        // Atualiza seleção visual da lista
+        langItems.forEach(item => {
+          item.classList.toggle('selected', item.getAttribute('data-lang') === lang);
+        });
 
-<script>
-  // Language texts for status messages
-  const statusMsgs = {
-    en: {
-      'minecraft-api': "API responding",
-      github: "Site online",
-      vercel: "Cache updated",
-      site: "Site updated",
-      app: "Client syncing"
-    },
-    pt: {
-      'minecraft-api': "API respondendo",
-      github: "Site online",
-      vercel: "Cache atualizado",
-      site: "Site atualizado",
-      app: "Client sincronizando"
-    },
-    es: {
-      'minecraft-api': "API respondiendo",
-      github: "Sitio en línea",
-      vercel: "Caché actualizado",
-      site: "Sitio actualizado",
-      app: "Cliente sincronizando"
-    }
-  };
-
-  // Simulated ping times in ms (random variation every cycle)
-  let pingTimes = {
-    'minecraft-api': 60,
-    github: 50,
-    vercel: 90,
-    site: 70,
-    app: 40
-  };
-
-  // Update ping with a bit of random fluctuation to simulate live data
-  function updatePingValues() {
-    for (let key in pingTimes) {
-      let base = pingTimes[key];
-      // Randomly vary +-20ms but keep between 30 and 150
-      let variation = (Math.random() * 40) - 20;
-      let newPing = Math.min(150, Math.max(30, base + variation));
-      pingTimes[key] = newPing;
-    }
-  }
-
-  // Map ping time to color (green to red)
-  function pingColor(ping) {
-    if (ping < 50) return '#00ff66'; // bright green
-    else if (ping < 100) return '#ffcc00'; // yellowish
-    else return '#ff3300'; // red
-  }
-
-  // Animate the ping bars according to ping times and update their color
-  function animatePingBars() {
-    Object.entries(pingTimes).forEach(([key, time]) => {
-      const bar = document.getElementById(`ping-${key}`);
-      if (bar) {
-        // Convert ping 30-150 ms to width 80% to 20%
-        // Menor ping = barra maior (80%), maior ping = barra menor (20%)
-        let widthPercent = 80 - ((time - 30) * 60 / 120);
-        if (widthPercent < 20) widthPercent = 20;
-        if (widthPercent > 80) widthPercent = 80;
-        bar.style.width = widthPercent + '%';
-
-        // Update bar color
-        bar.style.backgroundColor = pingColor(time);
-        bar.style.boxShadow = `0 0 10px ${pingColor(time)}cc`;
+        currentLang = lang;
       }
-    });
-  }
 
-  // Update the status text according to current language
-  function updateStatusTexts(lang = 'en') {
-    Object.keys(pingTimes).forEach(key => {
-      const statusEl = document.getElementById(`status-${key}`);
-      if (statusEl) {
-        statusEl.textContent = statusMsgs[lang][key] || '';
+      // Atualiza mensagens de status
+      function updateStatusTexts(lang) {
+        Object.keys(pingTimes).forEach(key => {
+          const statusEl = document.getElementById(`status-${key}`);
+          if (statusEl) statusEl.textContent = statusMsgs[lang][key] || '';
+        });
       }
-    });
-  }
 
-  // Language switching function for all text data-text-xx
-  function setLanguage(lang = 'en') {
-    const container = document.getElementById('update-network-flow');
-    container.querySelectorAll('[data-text-en]').forEach(el => {
-      if(lang === 'en') el.textContent = el.getAttribute('data-text-en');
-      else if(lang === 'pt') el.textContent = el.getAttribute('data-text-pt');
-      else if(lang === 'es') el.textContent = el.getAttribute('data-text-es');
-    });
-  }
+      // Retorna cor da barra de ping conforme ms (verde, amarelo, vermelho)
+      function pingColor(ms) {
+        if (ms <= 50) return '#00ff88'; // verde claro
+        if (ms <= 100) return '#ffcc00'; // amarelo
+        return '#ff3300'; // vermelho
+      }
 
-  // Initialize
-  setLanguage('en');
-  updateStatusTexts('en');
-  animatePingBars();
+      // Anima barra de ping com largura e cor proporcional ao ping
+      function animatePingBars() {
+        Object.entries(pingTimes).forEach(([key, time]) => {
+          const bar = document.getElementById(`ping-${key}`);
+          if (bar) {
+            // Mapeia ping de 30ms (80%) até 150ms (20%)
+            let widthPercent = 80 - ((time - 30) * 60 / 120);
+            widthPercent = Math.min(80, Math.max(20, widthPercent));
+            bar.style.width = widthPercent + '%';
 
-  // Loop animation for ping bars and update ping values
-  function pingLoop() {
-    updatePingValues();
-    animatePingBars();
-    setTimeout(pingLoop, 4000);
-  }
-  pingLoop();
+            // Cor da barra e sombra
+            const color = pingColor(time);
+            bar.style.background = color;
+            bar.style.boxShadow = `0 0 10px ${color}aa`;
+          }
+        });
+      }
 
-  // Auto language switch every 10 seconds: en → pt → es
-  const langs = ['en', 'pt', 'es'];
-  let currentLangIndex = 0;
-  setInterval(() => {
-    currentLangIndex = (currentLangIndex + 1) % langs.length;
-    let lang = langs[currentLangIndex];
-    setLanguage(lang);
-    updateStatusTexts(lang);
-  }, 10000);
+      // Atualiza pings simulados (aleatório entre 30 e 150ms)
+      function updatePingValues() {
+        Object.keys(pingTimes).forEach(key => {
+          // simula ping mudando +- 20ms dentro do limite 30-150
+          const base = pingTimes[key];
+          let newPing = base + (Math.random() * 40 - 20);
+          newPing = Math.max(30, Math.min(150, newPing));
+          pingTimes[key] = newPing;
+        });
+      }
 
-</script>
+      // Loop infinito que atualiza ping e anima barras a cada 4 segundos
+      function pingLoop() {
+        updatePingValues();
+        animatePingBars();
+        setTimeout(pingLoop, 4000);
+      }
+
+      // Controla dropdown do seletor de idioma
+      btnLang.addEventListener('click', () => {
+        const expanded = btnLang.getAttribute('aria-expanded') === 'true';
+        btnLang.setAttribute('aria-expanded', String(!expanded));
+        if (expanded) {
+          langList.hidden = true;
+        } else {
+          langList.hidden = false;
+        }
+      });
+
+      // Quando seleciona idioma na lista
+      langItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const selectedLang = item.getAttribute('data-lang');
+          setLanguage(selectedLang);
+          langList.hidden = true;
+          btnLang.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Fecha dropdown se clicar fora
+      document.addEventListener('click', e => {
+        if (!btnLang.contains(e.target) && !langList.contains(e.target)) {
+          langList.hidden = true;
+          btnLang.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Inicializa com inglês
+      setLanguage('en');
+      animatePingBars();
+      pingLoop();
+
+    })();
+  </script>
+
+</body>
+</html>

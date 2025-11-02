@@ -1,232 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>FrostClient Skin Update Flow</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-  
-  body {
-    margin: 0;
-    background: #121926;
-    color: #e0e6f2;
-    font-family: 'Montserrat', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
-    min-height: 100vh;
-  }
-  h1 {
-    color: #61dafb;
-    margin-bottom: 20px;
-  }
-  .container {
-    max-width: 750px;
-    background: #1f2d4d;
-    border-radius: 15px;
-    padding: 30px 40px;
-    box-shadow: 0 0 25px rgba(97, 218, 251, 0.5);
-  }
-  .flow-section {
-    margin-bottom: 40px;
-  }
-  .flow-section h2 {
-    color: #82cfff;
-    margin-bottom: 15px;
-  }
-  .step {
-    display: flex;
-    align-items: center;
-    margin: 15px 0;
-  }
-  .label {
-    flex: 1;
-    font-weight: 600;
-  }
-  .progress-bar {
-    flex: 3;
-    height: 20px;
-    border-radius: 15px;
-    background: #2f3f69;
-    overflow: hidden;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.6);
-    margin-right: 15px;
-  }
-  .progress-bar > div {
-    height: 100%;
-    width: 0;
-    border-radius: 15px;
-    background: linear-gradient(90deg, #00c6ff, #0072ff);
-    box-shadow: 0 0 10px #00c6ff;
-    transition: width 2s ease;
-  }
-  .time {
-    min-width: 100px;
-    font-size: 0.9em;
-    color: #aad8ff;
-    text-align: right;
-  }
-  .description {
-    margin-top: 20px;
-    font-size: 1em;
-    line-height: 1.5em;
-    color: #bcdfff;
-    background: #14203a;
-    padding: 15px 20px;
-    border-radius: 10px;
-    box-shadow: inset 0 0 10px #0d1a2a;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Update Network Flow - FrostClient</title>
+  <style>
+    /* Reset básico */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a1524;
+      color: #a0dfff;
+      display: flex;
+      justify-content: center;
+      padding: 30px;
+    }
 
-  /* Colors for each step */
-  .step.github .progress-bar > div {
-    background: #6cc644;
-    box-shadow: 0 0 10px #6cc644;
-  }
-  .step.vercel .progress-bar > div {
-    background: #000000;
-    box-shadow: 0 0 10px #333333;
-  }
-  .step.frost-server .progress-bar > div {
-    background: #3399ff;
-    box-shadow: 0 0 10px #3399ff;
-  }
-  .step.verification .progress-bar > div {
-    background: #ff9933;
-    box-shadow: 0 0 10px #ff9933;
-  }
-  .step.app .progress-bar > div {
-    background: #33cc66;
-    box-shadow: 0 0 10px #33cc66;
-  }
-</style>
+    #update-network-flow {
+      width: 100%;
+      max-width: 960px;
+      background: #0f1a2b;
+      padding: 25px 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px #00ffff66;
+    }
+    #update-network-flow h2 {
+      color: #00ffff;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    #update-network-flow p {
+      text-align: center;
+      font-size: 1rem;
+      color: #a0dfff;
+      margin-bottom: 30px;
+    }
+    .network-graph {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 15px;
+    }
+    .node {
+      flex: 1 0 120px;
+      background: #152538;
+      border-radius: 12px;
+      padding: 15px 10px;
+      box-shadow: 0 0 12px #00ffff66;
+      text-align: center;
+      color: #a0dfff;
+      position: relative;
+      min-width: 120px;
+    }
+    .node h3 {
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+      color: #00ffff;
+    }
+    .node p {
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+      min-height: 36px;
+    }
+    .ping-bar {
+      height: 10px;
+      background: linear-gradient(90deg, #00ffff, #0066cc);
+      border-radius: 10px;
+      width: 0;
+      margin: 0 auto 8px auto;
+      box-shadow: 0 0 10px #00ffffaa;
+      transition: width 2s ease-in-out;
+    }
+    .status {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: #66ccff;
+      min-height: 20px;
+    }
+  </style>
 </head>
 <body>
 
-<h1>FrostClient Skin Update & Verification Flow</h1>
-<div class="container">
+  <div id="update-network-flow" class="section">
+    <h2 data-text-en="Update Network Flow" data-text-pt="Fluxo de Atualização" data-text-es="Flujo de Actualización">Update Network Flow</h2>
+    <p data-text-en="Visualizing the process of skin updates across servers with ping and status."
+       data-text-pt="Visualizando o processo de atualização de skins pelos servidores com ping e status."
+       data-text-es="Visualizando el proceso de actualización de skins a través de servidores con ping y estado.">
+      Visualizing the process of skin updates across servers with ping and status.
+    </p>
 
-  <div class="flow-section">
-    <h2>FrostClient Website Skin Update Process</h2>
+    <div class="network-graph">
 
-    <div class="step github">
-      <div class="label">1. Skins Data from GitHub API</div>
-      <div class="progress-bar"><div></div></div>
-      <div class="time">~2 days</div>
+      <div class="node" id="node-github" data-text-en="GitHub API" data-text-pt="API do GitHub" data-text-es="API de GitHub">
+        <h3>GitHub API</h3>
+        <p data-text-en="Source of skin data" data-text-pt="Fonte dos dados das skins" data-text-es="Fuente de datos de skins">Source of skin data</p>
+        <div class="ping-bar" id="ping-github"></div>
+        <div class="status" id="status-github"></div>
+      </div>
+
+      <div class="node" id="node-vercel" data-text-en="Vercel Servers" data-text-pt="Servidores Vercel" data-text-es="Servidores Vercel">
+        <h3>Vercel Servers</h3>
+        <p data-text-en="Processing & caching" data-text-pt="Processamento e cache" data-text-es="Procesamiento y caché">Processing & caching</p>
+        <div class="ping-bar" id="ping-vercel"></div>
+        <div class="status" id="status-vercel"></div>
+      </div>
+
+      <div class="node" id="node-frost" data-text-en="FrostClient Servers" data-text-pt="Servidores FrostClient" data-text-es="Servidores FrostClient">
+        <h3>FrostClient Servers</h3>
+        <p data-text-en="Downloading skins & DB" data-text-pt="Download das skins e banco de dados" data-text-es="Descarga de skins y base de datos">Downloading skins & DB</p>
+        <div class="ping-bar" id="ping-frost"></div>
+        <div class="status" id="status-frost"></div>
+      </div>
+
+      <div class="node" id="node-verification" data-text-en="Verification & Staff" data-text-pt="Verificação e equipe" data-text-es="Verificación y equipo">
+        <h3>Verification & Staff</h3>
+        <p data-text-en="Multi-step checks" data-text-pt="Checagens em múltiplas etapas" data-text-es="Chequeos multi-etapa">Multi-step checks</p>
+        <div class="ping-bar" id="ping-verification"></div>
+        <div class="status" id="status-verification"></div>
+      </div>
+
+      <div class="node" id="node-site" data-text-en="FrostClient Website" data-text-pt="Site FrostClient" data-text-es="Sitio FrostClient">
+        <h3>FrostClient Website</h3>
+        <p data-text-en="Skins published online" data-text-pt="Skins publicadas online" data-text-es="Skins publicadas en línea">Skins published online</p>
+        <div class="ping-bar" id="ping-site"></div>
+        <div class="status" id="status-site"></div>
+      </div>
+
+      <div class="node" id="node-app" data-text-en="Minecraft App" data-text-pt="App Minecraft" data-text-es="App Minecraft">
+        <h3>Minecraft App</h3>
+        <p data-text-en="Direct API fetch" data-text-pt="Busca direta da API" data-text-es="Búsqueda directa de la API">Direct API fetch</p>
+        <div class="ping-bar" id="ping-app"></div>
+        <div class="status" id="status-app"></div>
+      </div>
+
     </div>
 
-    <div class="step vercel">
-      <div class="label">2. Processing via Vercel Servers</div>
-      <div class="progress-bar"><div></div></div>
-      <div class="time">~3 days</div>
-    </div>
-
-    <div class="step frost-server">
-      <div class="label">3. Downloading Skins on FrostClient Servers</div>
-      <div class="progress-bar"><div></div></div>
-      <div class="time">~5 days</div>
-    </div>
-
-    <div class="step verification">
-      <div class="label">4. Multiple Verification & Antivirus Checks</div>
-      <div class="progress-bar"><div></div></div>
-      <div class="time">~6 days</div>
-    </div>
-
-    <div class="step frost-server">
-      <div class="label">5. Transfer to FrostClient Central Database</div>
-      <div class="progress-bar"><div></div></div>
-      <div class="time">~3 days</div>
-    </div>
-
-    <div class="step verification">
-      <div class="label">6. Staff Review & Final Approval</div>
-      <div class="progress-bar"><div></div></div>
-      <div class="time">~5 days</div>
-    </div>
-
-    <div class="step frost-server">
-      <div class="label">7. Skin Published on FrostClient Website</div>
-      <div class="progress-bar"><div></div></div>
-      <div class="time">~1 day</div>
-    </div>
   </div>
 
-  <div class="flow-section">
-    <h2>FrostClient Minecraft App Skin Update Process</h2>
-
-    <div class="step app">
-      <div class="label">1. Direct API Skin Pull</div>
-      <div class="progress-bar"><div></div></div>
-      <div class="time">~1 day</div>
-    </div>
-
-    <div class="step app">
-      <div class="label">2. Skin Data Added to FrostClient App Database</div>
-      <div class="progress-bar"><div></div></div>
-      <div class="time">~1 day</div>
-    </div>
-
-    <div class="step app">
-      <div class="label">3. Skin Displayed in Minecraft Client</div>
-      <div class="progress-bar"><div></div></div>
-      <div class="time">Instant</div>
-    </div>
-  </div>
-
-  <div class="description">
-    <strong>Note:</strong> <br><br>
-    • The FrostClient website process is complex and involves many steps of verification, antivirus scanning, and manual staff review to ensure skin authenticity and quality.<br><br>
-    • Network latency between GitHub, Vercel, FrostClient servers (located in the US, Portugal, Brazil, and Canada), and the distributed nature of open-source infrastructure contribute to long update times.<br><br>
-    • Skins sometimes arrive corrupted or fail to display properly due to latency issues, server downtime, or image corruption during transfers.<br><br>
-    • Estimated time for 100 skins to appear fully verified on the website is about <strong>1 week</strong>.<br><br>
-    • Full synchronization and update of all skin and account data across all servers takes approximately <strong>1 month</strong>.<br><br>
-    • The FrostClient Minecraft app skips manual verification and pulls skins directly from the API, providing faster updates but with less verification.<br><br>
-    • Variations in network speed, server uptime, and geographical distance mean these times can vary widely.
-  </div>
-
-</div>
-
-<script>
-  const github = document.querySelector('.step.github .progress-bar > div');
-  const vercel = document.querySelector('.step.vercel .progress-bar > div');
-  const frostServers = document.querySelectorAll('.step.frost-server .progress-bar > div');
-  const verification = document.querySelectorAll('.step.verification .progress-bar > div');
-  const appBars = document.querySelectorAll('.step.app .progress-bar > div');
-
-  const websiteTimes = [2000, 3000, 5000, 6000, 3000, 5000, 1000]; // ms for each step in website flow
-  const appTimes = [1000, 1000, 500]; // ms for each step in app flow
-
-  async function animateSteps(bars, times) {
-    for(let i = 0; i < bars.length; i++) {
-      bars[i].style.width = '100%';
-      await new Promise(r => setTimeout(r, times[i] + 500));
+  <script>
+    // Function para trocar idioma dos textos data-text-xx
+    function setLanguage(lang = 'en') {
+      const container = document.getElementById('update-network-flow');
+      container.querySelectorAll('[data-text-en]').forEach(el => {
+        if(lang === 'en') el.textContent = el.getAttribute('data-text-en');
+        else if(lang === 'pt') el.textContent = el.getAttribute('data-text-pt');
+        else if(lang === 'es') el.textContent = el.getAttribute('data-text-es');
+      });
     }
-  }
 
-  async function runAnimation() {
-    // Animate website flow
-    const websiteBars = [
-      github,
-      vercel,
-      frostServers[0],
-      verification[0],
-      frostServers[1],
-      verification[1],
-      frostServers[2]
-    ];
-    await animateSteps(websiteBars, websiteTimes);
+    // Exemplo ping/status simulados (você pode adaptar para dados reais)
+    const pingTimes = {
+      github: 120,
+      vercel: 80,
+      frost: 90,
+      verification: 70,
+      site: 60,
+      app: 50
+    };
+    const statusMsgs = {
+      en: {
+        github: "API responding",
+        vercel: "Cache updated",
+        frost: "Skins downloading",
+        verification: "Verification in progress",
+        site: "Site updated",
+        app: "App syncing"
+      },
+      pt: {
+        github: "API respondendo",
+        vercel: "Cache atualizado",
+        frost: "Skins baixando",
+        verification: "Verificação em andamento",
+        site: "Site atualizado",
+        app: "App sincronizando"
+      },
+      es: {
+        github: "API respondiendo",
+        vercel: "Caché actualizado",
+        frost: "Descargando skins",
+        verification: "Verificación en progreso",
+        site: "Sitio actualizado",
+        app: "App sincronizando"
+      }
+    };
 
-    // Small delay before app animation
-    await new Promise(r => setTimeout(r, 1500));
+    function animatePingBars() {
+      Object.entries(pingTimes).forEach(([key, time]) => {
+        const bar = document.getElementById(`ping-${key}`);
+        if(bar){
+          // Convert ping 0-150ms to bar width 0-100%
+          let widthPercent = Math.min(100, (150 - time) * 100 / 150);
+          if(widthPercent < 20) widthPercent = 20; // mínimo visual
+          bar.style.width = widthPercent + '%';
+        }
+      });
+    }
 
-    // Animate app flow
-    await animateSteps(appBars, appTimes);
-  }
+    function updateStatusTexts(lang='en') {
+      Object.keys(pingTimes).forEach(key => {
+        const statusEl = document.getElementById(`status-${key}`);
+        if(statusEl) statusEl.textContent = statusMsgs[lang][key];
+      });
+    }
 
-  runAnimation();
-</script>
+    // Inicializar com inglês
+    setLanguage('en');
+    updateStatusTexts('en');
+
+    // Animar barras ping (loop infinito)
+    function pingLoop() {
+      animatePingBars();
+      setTimeout(pingLoop, 4000);
+    }
+    pingLoop();
+
+    // Para teste: trocar idioma a cada 8s (English → Portuguese → Spanish)
+    let langs = ['en', 'pt', 'es'];
+    let currentLangIndex = 0;
+    setInterval(() => {
+      currentLangIndex = (currentLangIndex + 1) % langs.length;
+      const lang = langs[currentLangIndex];
+      setLanguage(lang);
+      updateStatusTexts(lang);
+    }, 8000);
+  </script>
 
 </body>
 </html>

@@ -33,9 +33,11 @@
     box-shadow: 0 0 25px rgba(0,255,255,0.4);
   }
   .skin-card img {
-    width: 100%;
+    width: 150px;
+    height: 225px;
     border-radius: 12px;
     margin-bottom: 10px;
+    image-rendering: pixelated; /* para deixar estilo Minecraft */
   }
   .skin-card h3 {
     color: #00FFFF;
@@ -45,43 +47,59 @@
 </head>
 <body>
 
-<h2>Popular Minecraft Skins</h2>
-<p>Random popular Minecraft skins loaded from Crafatar</p>
+<h2>Popular Minecraft Skins (Rendered)</h2>
+<p>Skins pulled live from Minotar.net - Rendered Minecraft player bodies</p>
 
 <div id="skins-gallery"></div>
 
 <script>
-  // Lista de nomes populares para skins aleatórias
-  const popularUsernames = [
-    "Dream", "Technoblade", "TommyInnit", "Tubbo", "GeorgeNotFound",
-    "BadBoyHalo", "CaptainSparklez", "DanTDM", "PopularMMOs", "StampyLongHead",
-    "Skeppy", "WilburSoot", "Philza", "xNestorio", "Refraction"
+  // Lista de jogadores populares para pegar skins
+  const popularPlayers = [
+    "Dream",
+    "Technoblade",
+    "TommyInnit",
+    "Tubbo",
+    "GeorgeNotFound",
+    "BadBoyHalo",
+    "CaptainSparklez",
+    "DanTDM",
+    "PopularMMOs",
+    "StampyLongHead",
+    "Skeppy",
+    "WilburSoot",
+    "Philza",
+    "xNestorio",
+    "Refraction"
   ];
 
-  // Função para embaralhar o array e pegar N skins aleatórias
-  function getRandomUsernames(arr, count) {
-    const shuffled = arr.slice().sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
+  // Função para randomizar o array e pegar uma quantidade fixa de nomes
+  function getRandomPlayers(arr, count) {
+    return arr.sort(() => 0.5 - Math.random()).slice(0, count);
   }
 
-  function loadSkins() {
+  function renderSkins() {
     const gallery = document.getElementById('skins-gallery');
     gallery.innerHTML = '';
-    const skinsToShow = 8; // Quantidade de skins na galeria
-    const randomNames = getRandomUsernames(popularUsernames, skinsToShow);
 
-    randomNames.forEach(name => {
+    const skinsToShow = 8; // Quantidade de skins a mostrar por vez
+    const selectedPlayers = getRandomPlayers(popularPlayers, skinsToShow);
+
+    selectedPlayers.forEach(player => {
       const card = document.createElement('div');
-      card.className = 'skin-card';
+      card.classList.add('skin-card');
+      
+      // Renderização do corpo do jogador via Minotar (bom visual)
+      // https://minotar.net/body/username/height.png
+      // height 225px para render melhor
       card.innerHTML = `
-        <img src="https://crafatar.com/renders/body/${name}?scale=6&overlay" alt="Skin of ${name}" />
-        <h3>${name}</h3>
+        <img src="https://minotar.net/body/${player}/225.png" alt="Skin of ${player}" />
+        <h3>${player}</h3>
       `;
       gallery.appendChild(card);
     });
   }
 
-  loadSkins();
+  renderSkins();
 </script>
 
 </body>

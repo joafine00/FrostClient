@@ -174,20 +174,14 @@ h2{color:var(--highlight);margin-bottom:20px;}
     <a href="http://dsc.gg/frost-client" target="_blank"><button>Join Discord</button></a>
   </div>
 
-  <!-- Popular Skins Gallery (ely.by) -->
+  <!-- Popular Skins Gallery (Fixed List) -->
   <div id="skins" class="section">
-    <h2>Popular Minecraft Skins (ely.by)</h2>
-    <p>Explore popular Minecraft skins that you can apply directly to your own Minecraft account.</p>
-    <div style="border-radius: var(--radius); overflow: hidden; box-shadow: 0 0 25px rgba(0,255,255,0.4); margin-top: 20px;">
-      <iframe src="https://ely.by/skins" 
-              style="width: 100%; height: 700px; border: none;" 
-              title="ely.by Skins"
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups">
-      </iframe>
+    <h2>Popular Minecraft Skins (Fixed List)</h2>
+    <p>Skins de jogadores famosos para você usar na sua conta Minecraft.</p>
+    <div id="skins-gallery"></div>
+    <div id="skins-disclaimer">
+      Essas skins são para inspiração, você pode aplicar a skin do jogador na sua conta Minecraft.
     </div>
-    <p id="skins-disclaimer">
-      Note: These skins are unofficial and may not represent the actual player's current skin.
-    </p>
   </div>
 
   <div id="opensource" class="section">
@@ -219,6 +213,42 @@ function toggleTheme(){
     document.documentElement.style.setProperty('--text','#EEE');
   }
 }
+
+const players = [
+  'Dream', 'Technoblade', 'TommyInnit', 'WilburSoot', 'Sapnap',
+  'GeorgeNotFound', 'Tubbo', 'BadBoyHalo', 'CaptainPuffy', 'Quackity',
+  'Philza', 'Fundy', 'Nihachu', 'KarlJacobs', 'Ranboo',
+  'Vikkstar123', 'DanTDM', 'PrestonPlayz', 'LDShadowLady', 'Grian',
+  'MumboJumbo', 'HermitCraft', 'Stampy', 'BdoubleO100', 'Xisumavoid',
+  'IBallisticsquid', 'GoodTimesWithScar', 'ZedaphPlays', 'Keralis', 'BajanCanadian',
+  'SSundee', 'JeromeASF', 'CaptainSparklez', 'SkyDoesMinecraft', 'AntVenom',
+  'Paulsoaresjr', 'Yogscast', 'LDShadowLady', 'PopularMMOs', 'Technoblade',
+  'DreamWasTaken', 'WilburSoot', 'TommyInnit', 'BadBoyHalo', 'Fundy',
+  'Ranboo', 'GeorgeNotFound', 'Sapnap', 'KarlJacobs', 'Technoblade2',
+  'Tubbo', 'DreamXD', 'DreamFan', 'Dream_', 'Minecrafter',
+  'Steve', 'Alex', 'Herobrine', 'Notch', 'CaptainSparklez2',
+  'DreamTeam', 'EliteCraft', 'PixelCraft', 'BlockBuilder', 'BuilderBob',
+  'CraftyCat', 'ZombieHunter', 'CreeperKiller', 'DiamondMiner', 'EnderDragon',
+  'NetherExplorer', 'RedstoneEngineer', 'PotionMaster', 'WizardSteve', 'FarmerJoe',
+  'LumberJack', 'MinerMike', 'ExplorerEve', 'SurvivorSam', 'NightStalker',
+  'Moonlight', 'Sunshine', 'StarGazer', 'CloudWalker', 'FireWalker',
+  'IceQueen', 'ShadowNinja', 'ThunderBolt', 'Lightning', 'WaterBender',
+  'EarthShaker', 'WindRider', 'StormCaller', 'Frostbite', 'Glitch',
+  'PixelHero', 'BlockBoss', 'CraftMaster', 'MineLord'
+];
+
+const gallery = document.getElementById('skins-gallery');
+
+players.forEach(username => {
+  const card = document.createElement('div');
+  card.className = 'skin-card';
+  card.innerHTML = `
+    <img src="https://mc-heads.net/body/${username}" alt="Skin of ${username}" />
+    <h3>${username}</h3>
+  `;
+  gallery.appendChild(card);
+});
+
 </script>
 
 </body>

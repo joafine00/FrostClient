@@ -23,16 +23,23 @@
     margin-bottom: 20px;
   }
   .container {
-    max-width: 700px;
+    max-width: 750px;
     background: #1f2d4d;
     border-radius: 15px;
     padding: 30px 40px;
     box-shadow: 0 0 25px rgba(97, 218, 251, 0.5);
   }
+  .flow-section {
+    margin-bottom: 40px;
+  }
+  .flow-section h2 {
+    color: #82cfff;
+    margin-bottom: 15px;
+  }
   .step {
     display: flex;
     align-items: center;
-    margin: 18px 0;
+    margin: 15px 0;
   }
   .label {
     flex: 1;
@@ -56,13 +63,13 @@
     transition: width 2s ease;
   }
   .time {
-    min-width: 80px;
+    min-width: 100px;
     font-size: 0.9em;
     color: #aad8ff;
     text-align: right;
   }
   .description {
-    margin-top: 30px;
+    margin-top: 20px;
     font-size: 1em;
     line-height: 1.5em;
     color: #bcdfff;
@@ -73,109 +80,152 @@
   }
 
   /* Colors for each step */
-  .step:nth-child(1) .progress-bar > div {
-    background: #005f99;
-    box-shadow: 0 0 10px #005f99;
+  .step.github .progress-bar > div {
+    background: #6cc644;
+    box-shadow: 0 0 10px #6cc644;
   }
-  .step:nth-child(2) .progress-bar > div {
-    background: #0080ff;
-    box-shadow: 0 0 12px #0080ff;
+  .step.vercel .progress-bar > div {
+    background: #000000;
+    box-shadow: 0 0 10px #333333;
   }
-  .step:nth-child(3) .progress-bar > div {
-    background: #339966;
-    box-shadow: 0 0 12px #33cc77;
+  .step.frost-server .progress-bar > div {
+    background: #3399ff;
+    box-shadow: 0 0 10px #3399ff;
   }
-  .step:nth-child(4) .progress-bar > div {
-    background: #ff6666;
-    box-shadow: 0 0 12px #ff5555;
+  .step.verification .progress-bar > div {
+    background: #ff9933;
+    box-shadow: 0 0 10px #ff9933;
   }
-  .step:nth-child(5) .progress-bar > div {
-    background: #33ccff;
-    box-shadow: 0 0 12px #33ccff;
-  }
-  .step:nth-child(6) .progress-bar > div {
-    background: #cc99ff;
-    box-shadow: 0 0 12px #aa77ff;
-  }
-  .step:nth-child(7) .progress-bar > div {
-    background: #ffaa00;
-    box-shadow: 0 0 12px #ffaa00;
+  .step.app .progress-bar > div {
+    background: #33cc66;
+    box-shadow: 0 0 10px #33cc66;
   }
 </style>
 </head>
 <body>
 
-<h1>FrostClient Skin Processing Flow</h1>
+<h1>FrostClient Skin Update & Verification Flow</h1>
 <div class="container">
-  <div class="step">
-    <div class="label">1. API Global Database (USA Servers)</div>
-    <div class="progress-bar"><div></div></div>
-    <div class="time">~4 days</div>
+
+  <div class="flow-section">
+    <h2>FrostClient Website Skin Update Process</h2>
+
+    <div class="step github">
+      <div class="label">1. Skins Data from GitHub API</div>
+      <div class="progress-bar"><div></div></div>
+      <div class="time">~2 days</div>
+    </div>
+
+    <div class="step vercel">
+      <div class="label">2. Processing via Vercel Servers</div>
+      <div class="progress-bar"><div></div></div>
+      <div class="time">~3 days</div>
+    </div>
+
+    <div class="step frost-server">
+      <div class="label">3. Downloading Skins on FrostClient Servers</div>
+      <div class="progress-bar"><div></div></div>
+      <div class="time">~5 days</div>
+    </div>
+
+    <div class="step verification">
+      <div class="label">4. Multiple Verification & Antivirus Checks</div>
+      <div class="progress-bar"><div></div></div>
+      <div class="time">~6 days</div>
+    </div>
+
+    <div class="step frost-server">
+      <div class="label">5. Transfer to FrostClient Central Database</div>
+      <div class="progress-bar"><div></div></div>
+      <div class="time">~3 days</div>
+    </div>
+
+    <div class="step verification">
+      <div class="label">6. Staff Review & Final Approval</div>
+      <div class="progress-bar"><div></div></div>
+      <div class="time">~5 days</div>
+    </div>
+
+    <div class="step frost-server">
+      <div class="label">7. Skin Published on FrostClient Website</div>
+      <div class="progress-bar"><div></div></div>
+      <div class="time">~1 day</div>
+    </div>
   </div>
 
-  <div class="step">
-    <div class="label">2. Servers Download Skins (Portugal, Brazil, Canada)</div>
-    <div class="progress-bar"><div></div></div>
-    <div class="time">~7 days</div>
-  </div>
+  <div class="flow-section">
+    <h2>FrostClient Minecraft App Skin Update Process</h2>
 
-  <div class="step">
-    <div class="label">3. Transfer to Central Database</div>
-    <div class="progress-bar"><div></div></div>
-    <div class="time">~5 days</div>
-  </div>
+    <div class="step app">
+      <div class="label">1. Direct API Skin Pull</div>
+      <div class="progress-bar"><div></div></div>
+      <div class="time">~1 day</div>
+    </div>
 
-  <div class="step">
-    <div class="label">4. Antivirus & Quality Check</div>
-    <div class="progress-bar"><div></div></div>
-    <div class="time">~3 days</div>
-  </div>
+    <div class="step app">
+      <div class="label">2. Skin Data Added to FrostClient App Database</div>
+      <div class="progress-bar"><div></div></div>
+      <div class="time">~1 day</div>
+    </div>
 
-  <div class="step">
-    <div class="label">5. Transfer to FrostClient Database</div>
-    <div class="progress-bar"><div></div></div>
-    <div class="time">~4 days</div>
-  </div>
-
-  <div class="step">
-    <div class="label">6. Staff Verification & Approval</div>
-    <div class="progress-bar"><div></div></div>
-    <div class="time">~5 days</div>
-  </div>
-
-  <div class="step">
-    <div class="label">7. Skin Displayed on FrostClient Website</div>
-    <div class="progress-bar"><div></div></div>
-    <div class="time">~1 day</div>
+    <div class="step app">
+      <div class="label">3. Skin Displayed in Minecraft Client</div>
+      <div class="progress-bar"><div></div></div>
+      <div class="time">Instant</div>
+    </div>
   </div>
 
   <div class="description">
-    <strong>Important Notes:</strong><br>
-    • Due to the distributed nature of servers located in the United States, Portugal, Brazil, and Canada, and the use of open-source code on non-official servers, updating and syncing skin data takes significant time.<br><br>
-    • Displaying approximately 100 verified skins on the FrostClient website can take about <strong>1 week</strong> due to download and processing delays.<br><br>
-    • Complete synchronization of all skin and account data across all servers takes a minimum of <strong>1 month</strong>, given network latencies, proxy usage, and server port limitations.<br><br>
-    • The FrostClient Minecraft app bypasses manual staff verification and pulls skins directly from the API and FrostClient database, providing faster but less verified skin data.<br><br>
-    • These timings are estimations and can vary due to network conditions, server load, and geographic latency.
+    <strong>Note:</strong> <br><br>
+    • The FrostClient website process is complex and involves many steps of verification, antivirus scanning, and manual staff review to ensure skin authenticity and quality.<br><br>
+    • Network latency between GitHub, Vercel, FrostClient servers (located in the US, Portugal, Brazil, and Canada), and the distributed nature of open-source infrastructure contribute to long update times.<br><br>
+    • Skins sometimes arrive corrupted or fail to display properly due to latency issues, server downtime, or image corruption during transfers.<br><br>
+    • Estimated time for 100 skins to appear fully verified on the website is about <strong>1 week</strong>.<br><br>
+    • Full synchronization and update of all skin and account data across all servers takes approximately <strong>1 month</strong>.<br><br>
+    • The FrostClient Minecraft app skips manual verification and pulls skins directly from the API, providing faster updates but with less verification.<br><br>
+    • Variations in network speed, server uptime, and geographical distance mean these times can vary widely.
   </div>
+
 </div>
 
 <script>
-  const bars = document.querySelectorAll('.progress-bar > div');
-  const durations = [4000, 7000, 5000, 3000, 4000, 5000, 1000]; // in ms, representing the days as time units
+  const github = document.querySelector('.step.github .progress-bar > div');
+  const vercel = document.querySelector('.step.vercel .progress-bar > div');
+  const frostServers = document.querySelectorAll('.step.frost-server .progress-bar > div');
+  const verification = document.querySelectorAll('.step.verification .progress-bar > div');
+  const appBars = document.querySelectorAll('.step.app .progress-bar > div');
 
-  let index = 0;
+  const websiteTimes = [2000, 3000, 5000, 6000, 3000, 5000, 1000]; // ms for each step in website flow
+  const appTimes = [1000, 1000, 500]; // ms for each step in app flow
 
-  function animateNext() {
-    if (index >= bars.length) return;
-
-    bars[index].style.width = '100%';
-    setTimeout(() => {
-      index++;
-      animateNext();
-    }, durations[index - 1] + 500);
+  async function animateSteps(bars, times) {
+    for(let i = 0; i < bars.length; i++) {
+      bars[i].style.width = '100%';
+      await new Promise(r => setTimeout(r, times[i] + 500));
+    }
   }
 
-  animateNext();
+  async function runAnimation() {
+    // Animate website flow
+    const websiteBars = [
+      github,
+      vercel,
+      frostServers[0],
+      verification[0],
+      frostServers[1],
+      verification[1],
+      frostServers[2]
+    ];
+    await animateSteps(websiteBars, websiteTimes);
+
+    // Small delay before app animation
+    await new Promise(r => setTimeout(r, 1500));
+
+    // Animate app flow
+    await animateSteps(appBars, appTimes);
+  }
+
+  runAnimation();
 </script>
 
 </body>

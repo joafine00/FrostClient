@@ -154,12 +154,49 @@ h2{color:var(--highlight);margin-bottom:20px;}
     <a href="http://dsc.gg/frost-client" target="_blank"><button>Join Discord</button></a>
   </div>
 
-  <!-- === PLAYER SKINS SECTION === -->
-  <div id="skins" class="section">
-    <h2>Player Skins (via Crafatar)</h2>
-    <p>Displaying live Minecraft player skins — identical to NameMC previews.</p>
-    <div id="skins-gallery"></div>
-  </div>
+  <!-- Random Skins Gallery (Minotar) -->
+<div id="skins" class="section">
+  <h2>Random Community Skins (Minotar Preview)</h2>
+  <p>These Minecraft player skins are loaded live from Minotar.net using random player usernames.</p>
+  <div id="skins-gallery" class="gallery"></div>
+</div>
+
+<script>
+const usernames = [
+  "Notch", "jeb_", "Dream", "Technoblade",
+  "GeorgeNotFound", "TommyInnit", "Tubbo",
+  "BadBoyHalo", "Refraction", "WilburSoot",
+  "CaptainSparklez", "DanTDM", "PopularMMOs",
+  "StampyLongHead", "Skeppy"
+];
+
+// Quantas skins mostrar por vez
+const skinsToShow = 6;
+
+function getRandomUsernames(arr, count) {
+  const shuffled = arr.slice().sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
+
+function loadRandomMinotarSkins(){
+  const gallery = document.getElementById("skins-gallery");
+  gallery.innerHTML = "";
+  const randomNames = getRandomUsernames(usernames, skinsToShow);
+
+  randomNames.forEach(name => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <img src="https://minotar.net/armor/body/${name}/100.png" alt="Skin of ${name}">
+      <p style="text-align:center; margin-top:10px;">${name}</p>
+    `;
+    gallery.appendChild(card);
+  });
+}
+
+loadRandomMinotarSkins();
+</script>
+
 
   <div id="opensource" class="section">
     <h2>Open Source</h2>

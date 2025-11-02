@@ -7,20 +7,15 @@
 <link rel="icon" type="image/png" href="frost.png" />
 
 <style>
-/* ===== VARIABLES & RESET ===== */
 :root{
   --highlight:#00FFFF;
   --bg1:#0d1117;
   --bg2:#001F3F;
   --text:#EEE;
   --card:#151a21;
-  --muted:#aaa;
   --radius:12px;
-  --accent:var(--highlight);
-  --font-size:16px;
   --transition:0.3s ease-in-out;
 }
-
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 body{
   background:linear-gradient(-45deg,var(--bg1),#021B27,#002540,var(--bg2));
@@ -28,112 +23,71 @@ body{
   animation:gradientShift 15s ease infinite;
   color:var(--text);
   overflow-x:hidden;
-  scroll-behavior:smooth;
-  font-size:var(--font-size);
+  font-size:16px;
 }
 @keyframes gradientShift{
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
   100%{background-position:0% 50%;}
 }
-
-/* ===== NAVIGATION ===== */
 nav{
-  width:100%; background:rgba(20,22,28,0.95);
-  display:flex; justify-content:space-between; align-items:center;
-  padding:12px 30px; position:fixed; top:0; left:0;
-  z-index:1000; box-shadow:0 0 20px rgba(0,255,255,0.25);
+  width:100%;background:rgba(20,22,28,0.95);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 30px;position:fixed;top:0;left:0;z-index:1000;
+  box-shadow:0 0 20px rgba(0,255,255,0.25);
   backdrop-filter:blur(10px);
-  transition:var(--transition);
 }
-.nav-left{display:flex; align-items:center; gap:12px;}
+.nav-left{display:flex;align-items:center;gap:12px;}
 .nav-left img{height:45px;}
-.nav-left h1{color:var(--highlight); font-size:1.4em;}
+.nav-left h1{color:var(--highlight);font-size:1.4em;}
 .nav-menu button{
-  background:none; border:none; color:var(--text);
-  font-size:15px; cursor:pointer; margin:0 10px;
-  transition:var(--transition);
+  background:none;border:none;color:var(--text);font-size:15px;
+  cursor:pointer;margin:0 10px;transition:var(--transition);
 }
-.nav-menu button:hover{
-  color:var(--highlight); transform:scale(1.1);
-}
-
-/* ===== CONTAINER ===== */
-.container{width:90%; max-width:1100px; margin:120px auto 50px auto;}
-h2,h3{margin-bottom:20px; color:var(--highlight);}
-p{margin-bottom:15px; line-height:1.6;}
-ul{margin-left:20px; margin-bottom:20px;}
-.section{display:none; animation:fadeIn 0.8s;}
+.nav-menu button:hover{color:var(--highlight);transform:scale(1.1);}
+.container{width:90%;max-width:1100px;margin:120px auto 50px auto;}
+.section{display:none;animation:fadeIn 0.8s;}
 .section.active{display:block;}
-
-/* ===== CARDS ===== */
-.card{
-  background:var(--card);
-  padding:20px;
-  border-radius:var(--radius);
-  margin-bottom:20px;
-  box-shadow:0 0 20px rgba(0,255,255,0.2);
-  border:1px solid rgba(0,255,255,0.08);
+h2{color:var(--highlight);margin-bottom:20px;}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+#theme-toggle{
+  position:fixed;bottom:20px;right:20px;
+  padding:10px 15px;border:none;border-radius:10px;
+  cursor:pointer;background:var(--highlight);color:#111;
+  font-weight:600;box-shadow:0 0 15px rgba(0,255,255,0.3);
   transition:var(--transition);
 }
-.card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 0 30px rgba(0,255,255,0.35);
-}
 
-/* ===== IMAGE GALLERY ===== */
-.gallery{
+/* === PLAYER SKINS GALLERY === */
+#skins-gallery{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
   gap:20px;
+  margin-top:30px;
 }
-.gallery img, iframe{
-  width:100%; border-radius:var(--radius);
-  box-shadow:0 0 15px rgba(0,0,0,0.4);
-  transition:transform 0.3s, box-shadow 0.3s;
+.skin-card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:15px;
+  text-align:center;
+  box-shadow:0 0 15px rgba(0,255,255,0.2);
+  transition:var(--transition);
 }
-.gallery img:hover, iframe:hover{
-  transform:scale(1.05);
+.skin-card:hover{
+  transform:translateY(-5px);
   box-shadow:0 0 25px rgba(0,255,255,0.4);
 }
-
-/* ===== BUTTONS ===== */
-button.download-btn, button.discord-btn{
-  background:var(--highlight); color:#111;
-  padding:15px 30px; border:none; border-radius:10px;
-  cursor:pointer; font-size:17px; font-weight:600;
-  box-shadow:0 0 15px rgba(0,255,255,0.3);
-  transition:var(--transition);
-}
-button.download-btn:hover, button.discord-btn:hover{
-  background:#00cccc; transform:scale(1.05);
-}
-
-/* ===== OPEN SOURCE CODE BLOCK ===== */
-#site-code{
-  max-height:500px;
-  overflow:auto;
-  background:var(--card);
-  padding:15px;
+.skin-card img{
+  width:100%;
   border-radius:var(--radius);
-  box-shadow:0 0 15px rgba(0,255,255,0.2);
-  white-space:pre-wrap;
-  word-wrap:break-word;
+  margin-bottom:10px;
 }
-
-/* ===== ANIMATIONS ===== */
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-/* ===== THEME TOGGLE BUTTON ===== */
-#theme-toggle{
-  position:fixed; bottom:20px; right:20px;
-  padding:10px 15px; border:none; border-radius:10px;
-  cursor:pointer; background:var(--highlight); color:#111;
-  font-weight:600; box-shadow:0 0 15px rgba(0,255,255,0.3);
-  transition:var(--transition);
+.skin-card h3{
+  color:var(--highlight);
+  font-size:1em;
 }
 </style>
 </head>
@@ -152,6 +106,7 @@ button.download-btn:hover, button.discord-btn:hover{
     <button onclick="showSection('mods')">Mods</button>
     <button onclick="showSection('download')">Download</button>
     <button onclick="showSection('community')">Community</button>
+    <button onclick="showSection('skins')">Player Skins</button>
     <button onclick="showSection('opensource')">Open Source</button>
   </div>
 </nav>
@@ -159,95 +114,65 @@ button.download-btn:hover, button.discord-btn:hover{
 <!-- CONTAINER -->
 <div class="container">
 
-  <!-- HOME -->
   <div id="home" class="section active">
     <h2>Welcome to FrostClient Classic</h2>
     <p>FrostClient Classic is an open-source Minecraft 1.8.9 PvP client designed for competitive gameplay. Lightweight, modular, and optimized for FPS.</p>
   </div>
 
-  <!-- ABOUT -->
   <div id="about" class="section">
     <h2>About FrostClient</h2>
     <p>FrostClient Classic combines visual polish, deep mod integration, and open-source transparency.</p>
-    <p><b>Open Source Repository:</b> <a href="https://github.com/QuiteFrosty/FrostClient" style="color:var(--highlight);" target="_blank">GitHub Repository</a></p>
+    <p><b>GitHub:</b> <a href="https://github.com/QuiteFrosty/FrostClient" target="_blank" style="color:var(--highlight);">Open Repository</a></p>
   </div>
 
-  <!-- FEATURES -->
   <div id="features" class="section">
     <h2>Features</h2>
     <ul>
       <li>Ultra-smooth performance and high FPS optimization</li>
       <li>Modular design with easy toggles and keybinds</li>
-      <li>Integrated HUD Editor and crosshair customization</li>
-      <li>Animation Engine (1.7 Animations & more)</li>
-      <li>Built-in Replay and Motion Blur modules</li>
-      <li>Lightweight, minimalistic, and fast</li>
-      <li>Automatic session saving and cloud sync</li>
-      <li>Custom skins and cosmetic support</li>
+      <li>Custom HUD editor and cosmetics</li>
+      <li>1.7 animations, motion blur, replay module, etc.</li>
     </ul>
-    <div class="gallery" id="feature-gallery"></div>
   </div>
 
-  <!-- MODS -->
   <div id="mods" class="section">
-    <h2>Included Mods & Modules</h2>
+    <h2>Included Mods</h2>
     <ul>
-      <li>Keystrokes, CPS Counter, FPS Display</li>
-      <li>Armor Status, Direction HUD, Coordinates</li>
-      <li>Nick Hider, Crosshair, Motion Blur, Animations</li>
-      <li>Ping Display, Combo Counter, Hit Color</li>
-      <li>Dynamic Zoom, Full Bright, TNT Timer</li>
-      <li>Extra PvP Enhancements: AutoSoup, Critical Hit Alerts, AutoArmor</li>
-      <li>Community-exclusive Frost modules</li>
+      <li>Keystrokes, CPS, FPS Display</li>
+      <li>Armor Status, Coordinates, Zoom</li>
+      <li>Motion Blur, Animations, Hit Color</li>
     </ul>
   </div>
 
-  <!-- DOWNLOAD -->
   <div id="download" class="section">
     <h2>Download FrostClient Classic</h2>
-    <a href="https://files.fm/u/nefahadbty" target="_blank"><button class="download-btn">Download Now</button></a>
+    <a href="https://files.fm/u/nefahadbty" target="_blank"><button>Download Now</button></a>
   </div>
 
-  <!-- COMMUNITY -->
   <div id="community" class="section">
     <h2>Community</h2>
-    <a href="http://dsc.gg/frost-client" target="_blank"><button class="discord-btn">Join Discord</button></a>
+    <a href="http://dsc.gg/frost-client" target="_blank"><button>Join Discord</button></a>
   </div>
 
-  <!-- OPEN SOURCE -->
+  <!-- === PLAYER SKINS SECTION === -->
+  <div id="skins" class="section">
+    <h2>Player Skins (via Crafatar)</h2>
+    <p>Displaying live Minecraft player skins — identical to NameMC previews.</p>
+    <div id="skins-gallery"></div>
+  </div>
+
   <div id="opensource" class="section">
     <h2>Open Source</h2>
-    <p>FrostClient Classic and this site are fully open source.</p>
-    <button onclick="copySiteCode()" class="download-btn" style="margin-bottom:10px;">Copy Site Code</button>
-    <pre id="site-code"></pre>
+    <p>This site and FrostClient Classic are open-source projects.</p>
   </div>
 </div>
 
-<!-- THEME TOGGLE -->
 <button id="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
 
 <script>
-// Section switch
 function showSection(id){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-
-  if(id==='opensource') showSiteCode();
-}
-
-// Show site code
-function showSiteCode(){
-  const clone = document.documentElement.cloneNode(true);
-  clone.querySelectorAll('script').forEach(s=>s.remove());
-  const pre = clone.querySelector('#site-code');
-  if(pre) pre.remove();
-  document.getElementById('site-code').textContent = clone.outerHTML;
-}
-
-// Copy code
-function copySiteCode(){
-  const code = document.getElementById('site-code').textContent;
-  navigator.clipboard.writeText(code).then(()=>alert("Site code copied!"));
 }
 
 // Theme toggle
@@ -265,6 +190,31 @@ function toggleTheme(){
     document.documentElement.style.setProperty('--text','#EEE');
   }
 }
+
+// === PLAYER SKINS (Crafatar) ===
+const playerNames = ["Dream","Technoblade","Notch","GeorgeNotFound","TommyInnit","Tubbo","Philza","BadBoyHalo","xNestorio","Refraction"];
+
+async function loadSkins(){
+  const gallery = document.getElementById("skins-gallery");
+  gallery.innerHTML = "";
+  for(const name of playerNames){
+    try{
+      const res = await fetch(`https://api.mojang.com/users/profiles/minecraft/${name}`);
+      const data = await res.json();
+      const uuid = data.id;
+      const card = document.createElement("div");
+      card.className = "skin-card";
+      card.innerHTML = `
+        <img src="https://crafatar.com/renders/body/${uuid}?scale=6&overlay" alt="${name}'s skin">
+        <h3>${name}</h3>
+      `;
+      gallery.appendChild(card);
+    }catch(e){
+      console.warn("Failed to load skin for",name);
+    }
+  }
+}
+loadSkins();
 </script>
 
 </body>

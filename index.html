@@ -155,11 +155,19 @@ h2{color:var(--highlight);margin-bottom:20px;}
   </div>
 
   <!-- Random Skins Gallery (Minotar) -->
-<div id="skins" class="section">
-  <h2>Random Community Skins (Minotar Preview)</h2>
-  <p>These Minecraft player skins are loaded live from Minotar.net using random player usernames.</p>
-  <div id="skins-gallery" class="gallery"></div>
+  <div id="skins" class="section">
+    <h2>Random Community Skins (Minotar Preview)</h2>
+    <p>These Minecraft player skins are loaded live from Minotar.net using random player usernames.</p>
+    <div id="skins-gallery" class="gallery"></div>
+  </div>
+
+  <div id="opensource" class="section">
+    <h2>Open Source</h2>
+    <p>This site and FrostClient Classic are open-source projects.</p>
+  </div>
 </div>
+
+<button id="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
 
 <script>
 const usernames = [
@@ -170,7 +178,6 @@ const usernames = [
   "StampyLongHead", "Skeppy"
 ];
 
-// Quantas skins mostrar por vez
 const skinsToShow = 6;
 
 function getRandomUsernames(arr, count) {
@@ -185,31 +192,22 @@ function loadRandomMinotarSkins(){
 
   randomNames.forEach(name => {
     const card = document.createElement("div");
-    card.className = "card";
+    card.className = "skin-card";
     card.innerHTML = `
       <img src="https://minotar.net/armor/body/${name}/100.png" alt="Skin of ${name}">
-      <p style="text-align:center; margin-top:10px;">${name}</p>
+      <h3>${name}</h3>
     `;
     gallery.appendChild(card);
   });
 }
 
-loadRandomMinotarSkins();
-</script>
-
-
-  <div id="opensource" class="section">
-    <h2>Open Source</h2>
-    <p>This site and FrostClient Classic are open-source projects.</p>
-  </div>
-</div>
-
-<button id="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
-
-<script>
 function showSection(id){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+
+  if(id === "skins"){
+    loadRandomMinotarSkins();
+  }
 }
 
 // Theme toggle
@@ -227,31 +225,6 @@ function toggleTheme(){
     document.documentElement.style.setProperty('--text','#EEE');
   }
 }
-
-// === PLAYER SKINS (Crafatar) ===
-const playerNames = ["Dream","Technoblade","Notch","GeorgeNotFound","TommyInnit","Tubbo","Philza","BadBoyHalo","xNestorio","Refraction"];
-
-async function loadSkins(){
-  const gallery = document.getElementById("skins-gallery");
-  gallery.innerHTML = "";
-  for(const name of playerNames){
-    try{
-      const res = await fetch(`https://api.mojang.com/users/profiles/minecraft/${name}`);
-      const data = await res.json();
-      const uuid = data.id;
-      const card = document.createElement("div");
-      card.className = "skin-card";
-      card.innerHTML = `
-        <img src="https://crafatar.com/renders/body/${uuid}?scale=6&overlay" alt="${name}'s skin">
-        <h3>${name}</h3>
-      `;
-      gallery.appendChild(card);
-    }catch(e){
-      console.warn("Failed to load skin for",name);
-    }
-  }
-}
-loadSkins();
 </script>
 
 </body>

@@ -3,64 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FPS Estimator - FrostClient</title>
+<title>Minecraft 1.8.9 FPS Estimator — FrostClient</title>
 <link rel="icon" type="image/png" href="frost.png" />
 <style>
 :root {
   --highlight:#00FFFF;
-  --highlight-glow:rgba(0,255,255,0.7);
+  --glow:rgba(0,255,255,0.8);
   --bg1:#0d1117;
   --bg2:#001F3F;
-  --text:#EEE;
   --card:#151a21;
-  --radius:16px;
-  --transition:0.3s ease-in-out;
+  --text:#EEE;
+  --radius:18px;
 }
-* {
-  margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 body {
-  background:radial-gradient(circle at top, #001F3F 0%, #0d1117 100%);
-  background-size:200% 200%;
-  animation:backgroundShift 10s infinite alternate;
+  background:radial-gradient(circle at 20% 20%,#00203F,#0d1117,#000);
   color:var(--text);
-  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:30px;
+  min-height:100vh;
+  padding:40px;
+  overflow-x:hidden;
+  animation:bgShift 10s infinite alternate;
 }
-@keyframes backgroundShift {
-  0% { background-position:0% 50%; }
-  100% { background-position:100% 50%; }
+@keyframes bgShift {
+  0%{background-position:0% 50%;}
+  100%{background-position:100% 50%;}
 }
 .container {
-  background:rgba(21,26,33,0.9);
+  background:rgba(20,25,33,0.95);
+  padding:40px 50px;
   border-radius:var(--radius);
-  padding:50px 40px;
-  max-width:700px;
+  max-width:800px;
   width:100%;
-  box-shadow:0 0 25px var(--highlight-glow);
-  position:relative;
-  overflow:hidden;
-  animation:fadeIn 1.2s ease-in-out;
+  box-shadow:0 0 25px var(--glow);
+  animation:fadeIn 1s ease;
 }
-@keyframes fadeIn {
-  from {opacity:0; transform:translateY(30px);}
-  to {opacity:1; transform:translateY(0);}
-}
+@keyframes fadeIn { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
 h1 {
   text-align:center;
   color:var(--highlight);
-  text-shadow:0 0 15px var(--highlight-glow);
-  font-size:2rem;
-  margin-bottom:30px;
+  text-shadow:0 0 15px var(--glow);
+  margin-bottom:25px;
 }
 label {
+  font-weight:bold;
   display:block;
-  margin-top:20px;
-  font-weight:600;
-  text-shadow:0 0 8px rgba(0,255,255,0.3);
+  margin-top:18px;
 }
 select, input {
   width:100%;
@@ -72,41 +62,44 @@ select, input {
   color:var(--text);
   box-shadow:inset 0 0 10px rgba(0,255,255,0.2);
   font-size:1rem;
-  transition:var(--transition);
+  transition:0.3s;
 }
-select:focus, input:focus {
+select:focus,input:focus{
   outline:none;
-  box-shadow:0 0 10px var(--highlight-glow);
+  box-shadow:0 0 10px var(--glow);
 }
 button {
   display:block;
-  margin:30px auto 10px auto;
-  padding:12px 25px;
-  font-weight:bold;
-  color:#111;
-  background:var(--highlight);
+  margin:30px auto;
+  padding:14px 30px;
   border:none;
   border-radius:var(--radius);
-  cursor:pointer;
-  box-shadow:0 0 25px var(--highlight-glow);
-  transition:all 0.3s ease;
+  background:var(--highlight);
+  color:#111;
+  font-weight:bold;
   font-size:1.1rem;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  box-shadow:0 0 25px var(--glow);
 }
-button:hover {
-  transform:scale(1.07);
-  box-shadow:0 0 45px var(--highlight-glow);
-}
+button:hover {transform:scale(1.07);box-shadow:0 0 45px var(--glow);}
 .result {
   text-align:center;
-  margin-top:30px;
+  margin-top:25px;
   font-size:2rem;
   color:var(--highlight);
-  text-shadow:0 0 15px var(--highlight-glow);
+  text-shadow:0 0 20px var(--glow);
+}
+.info {
+  text-align:center;
+  margin-top:10px;
+  font-size:0.9rem;
+  color:#aaa;
 }
 footer {
   text-align:center;
-  margin-top:40px;
-  color:#aaa;
+  color:#888;
+  margin-top:30px;
   font-size:0.85rem;
 }
 </style>
@@ -114,8 +107,15 @@ footer {
 <body>
 
 <div class="container">
-  <h1>🎮 FPS Estimator — FrostClient</h1>
-  
+  <h1>❄️ FrostClient — Minecraft 1.8.9 FPS Estimator</h1>
+
+  <label for="graphics">Graphics Settings:</label>
+  <select id="graphics">
+    <option value="fast">Fast</option>
+    <option value="balanced">Balanced</option>
+    <option value="fancy">Fancy (High Quality)</option>
+  </select>
+
   <label for="texture">Texture Pack:</label>
   <select id="texture">
     <option value="none">None (Default)</option>
@@ -130,50 +130,83 @@ footer {
     <option value="16">16 GB or more</option>
   </select>
 
-  <label for="optimizer">Optimization Software:</label>
-  <select id="optimizer">
-    <option value="none">None</option>
-    <option value="exitlag">ExitLag Boost Mode</option>
+  <label for="cpu">CPU Tier:</label>
+  <select id="cpu">
+    <option value="low">Low-End CPU</option>
+    <option value="mid">Mid-Range CPU</option>
+    <option value="high">High-End CPU</option>
   </select>
 
-  <label for="gpu">GPU Type:</label>
+  <label for="gpu">GPU Tier:</label>
   <select id="gpu">
     <option value="low">Integrated / Low-End GPU</option>
     <option value="mid">Mid-Range GPU</option>
     <option value="high">High-End GPU</option>
   </select>
 
+  <label for="ping">Average Ping (ms):</label>
+  <select id="ping">
+    <option value="30">30 ms</option>
+    <option value="60">60 ms</option>
+    <option value="120">120 ms</option>
+    <option value="200">200 ms</option>
+  </select>
+
+  <label for="plan">ExitLag Plan Status:</label>
+  <select id="plan">
+    <option value="paid">Paid</option>
+    <option value="trial">Trial</option>
+    <option value="none">No Paid / No Trial</option>
+  </select>
+
   <button onclick="calculateFPS()">Estimate FPS</button>
 
   <div class="result" id="fpsResult">Select options and click Estimate</div>
+  <div class="info">*This is an estimation only. Actual performance may vary depending on many factors.</div>
 
   <footer>© 2025 FrostClient Project — Real-Time FPS Estimator</footer>
 </div>
 
 <script>
 function calculateFPS() {
+  const graphics = document.getElementById('graphics').value;
   const texture = document.getElementById('texture').value;
   const ram = parseInt(document.getElementById('ram').value);
-  const optimizer = document.getElementById('optimizer').value;
+  const cpu = document.getElementById('cpu').value;
   const gpu = document.getElementById('gpu').value;
+  const ping = parseInt(document.getElementById('ping').value);
+  const plan = document.getElementById('plan').value;
 
-  // Base FPS (average FrostClient performance)
+  // Base FPS for FrostClient 1.8.9
   let fps = 250;
 
+  // Graphics slider
+  if (graphics === "balanced") fps += 50;
+  else if (graphics === "fancy") fps += 100;
+
   // Texture Pack impact
-  if (texture === "joafine") fps += 250;
+  if (texture === "joafine") fps += 300;
 
   // RAM scaling
-  if (ram === 4) fps += 100;
-  else if (ram === 8) fps += 250;
-  else if (ram >= 16) fps += 400;
+  if (ram === 4) fps += 80;
+  else if (ram === 8) fps += 200;
+  else if (ram >= 16) fps += 350;
+
+  // CPU multiplier
+  if (cpu === "mid") fps *= 1.2;
+  else if (cpu === "high") fps *= 1.5;
 
   // GPU multiplier
   if (gpu === "mid") fps *= 1.3;
   else if (gpu === "high") fps *= 1.6;
 
-  // Optimization program bonus
-  if (optimizer === "exitlag") fps *= 1.7;
+  // Ping penalty (higher ping = slightly lower effective smoothness)
+  if (ping > 100) fps *= 0.9;
+
+  // ExitLag Plan impact
+  if (plan === "paid") fps *= 1.7;
+  else if (plan === "trial") fps *= 1.2;
+  else if (plan === "none") fps *= 1.0;
 
   // Random variation for realism
   const randomVariation = (Math.random() * 0.05 + 0.95); // ±5%
@@ -182,7 +215,7 @@ function calculateFPS() {
   // Display FPS result
   const result = document.getElementById("fpsResult");
   result.innerHTML = `Estimated FPS: <strong>${fps}</strong>`;
-  
+
   // Animate result
   result.style.opacity = "0";
   setTimeout(() => {

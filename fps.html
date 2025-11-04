@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FPS Estimator - FrostClient</title>
+<link rel="icon" type="image/png" href="frost.png" />
+<style>
+:root {
+  --highlight:#00FFFF;
+  --highlight-glow:rgba(0,255,255,0.7);
+  --bg1:#0d1117;
+  --bg2:#001F3F;
+  --text:#EEE;
+  --card:#151a21;
+  --radius:16px;
+  --transition:0.3s ease-in-out;
+}
+* {
+  margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif;
+}
+body {
+  background:radial-gradient(circle at top, #001F3F 0%, #0d1117 100%);
+  background-size:200% 200%;
+  animation:backgroundShift 10s infinite alternate;
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:30px;
+}
+@keyframes backgroundShift {
+  0% { background-position:0% 50%; }
+  100% { background-position:100% 50%; }
+}
+.container {
+  background:rgba(21,26,33,0.9);
+  border-radius:var(--radius);
+  padding:50px 40px;
+  max-width:700px;
+  width:100%;
+  box-shadow:0 0 25px var(--highlight-glow);
+  position:relative;
+  overflow:hidden;
+  animation:fadeIn 1.2s ease-in-out;
+}
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(30px);}
+  to {opacity:1; transform:translateY(0);}
+}
+h1 {
+  text-align:center;
+  color:var(--highlight);
+  text-shadow:0 0 15px var(--highlight-glow);
+  font-size:2rem;
+  margin-bottom:30px;
+}
+label {
+  display:block;
+  margin-top:20px;
+  font-weight:600;
+  text-shadow:0 0 8px rgba(0,255,255,0.3);
+}
+select, input {
+  width:100%;
+  padding:10px;
+  margin-top:8px;
+  border:none;
+  border-radius:var(--radius);
+  background:#0f172a;
+  color:var(--text);
+  box-shadow:inset 0 0 10px rgba(0,255,255,0.2);
+  font-size:1rem;
+  transition:var(--transition);
+}
+select:focus, input:focus {
+  outline:none;
+  box-shadow:0 0 10px var(--highlight-glow);
+}
+button {
+  display:block;
+  margin:30px auto 10px auto;
+  padding:12px 25px;
+  font-weight:bold;
+  color:#111;
+  background:var(--highlight);
+  border:none;
+  border-radius:var(--radius);
+  cursor:pointer;
+  box-shadow:0 0 25px var(--highlight-glow);
+  transition:all 0.3s ease;
+  font-size:1.1rem;
+}
+button:hover {
+  transform:scale(1.07);
+  box-shadow:0 0 45px var(--highlight-glow);
+}
+.result {
+  text-align:center;
+  margin-top:30px;
+  font-size:2rem;
+  color:var(--highlight);
+  text-shadow:0 0 15px var(--highlight-glow);
+}
+footer {
+  text-align:center;
+  margin-top:40px;
+  color:#aaa;
+  font-size:0.85rem;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🎮 FPS Estimator — FrostClient</h1>
+  
+  <label for="texture">Texture Pack:</label>
+  <select id="texture">
+    <option value="none">None (Default)</option>
+    <option value="joafine">Joafine Texture Pack FPS Boost</option>
+  </select>
+
+  <label for="ram">RAM Allocated to Minecraft:</label>
+  <select id="ram">
+    <option value="2">2 GB</option>
+    <option value="4">4 GB</option>
+    <option value="8">8 GB</option>
+    <option value="16">16 GB or more</option>
+  </select>
+
+  <label for="optimizer">Optimization Software:</label>
+  <select id="optimizer">
+    <option value="none">None</option>
+    <option value="exitlag">ExitLag Boost Mode</option>
+  </select>
+
+  <label for="gpu">GPU Type:</label>
+  <select id="gpu">
+    <option value="low">Integrated / Low-End GPU</option>
+    <option value="mid">Mid-Range GPU</option>
+    <option value="high">High-End GPU</option>
+  </select>
+
+  <button onclick="calculateFPS()">Estimate FPS</button>
+
+  <div class="result" id="fpsResult">Select options and click Estimate</div>
+
+  <footer>© 2025 FrostClient Project — Real-Time FPS Estimator</footer>
+</div>
+
+<script>
+function calculateFPS() {
+  const texture = document.getElementById('texture').value;
+  const ram = parseInt(document.getElementById('ram').value);
+  const optimizer = document.getElementById('optimizer').value;
+  const gpu = document.getElementById('gpu').value;
+
+  // Base FPS (average FrostClient performance)
+  let fps = 250;
+
+  // Texture Pack impact
+  if (texture === "joafine") fps += 250;
+
+  // RAM scaling
+  if (ram === 4) fps += 100;
+  else if (ram === 8) fps += 250;
+  else if (ram >= 16) fps += 400;
+
+  // GPU multiplier
+  if (gpu === "mid") fps *= 1.3;
+  else if (gpu === "high") fps *= 1.6;
+
+  // Optimization program bonus
+  if (optimizer === "exitlag") fps *= 1.7;
+
+  // Random variation for realism
+  const randomVariation = (Math.random() * 0.05 + 0.95); // ±5%
+  fps = Math.round(fps * randomVariation);
+
+  // Display FPS result
+  const result = document.getElementById("fpsResult");
+  result.innerHTML = `Estimated FPS: <strong>${fps}</strong>`;
+  
+  // Animate result
+  result.style.opacity = "0";
+  setTimeout(() => {
+    result.style.transition = "opacity 0.5s ease";
+    result.style.opacity = "1";
+  }, 50);
+}
+</script>
+
+</body>
+</html>

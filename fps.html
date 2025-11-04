@@ -3,56 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minecraft 1.8.9 FPS Estimator — FrostClient</title>
+<title>FrostClient FPS Estimator — Minecraft 1.8.9</title>
 <link rel="icon" type="image/png" href="frost.png" />
 <style>
 :root {
   --highlight:#00FFFF;
-  --glow:rgba(0,255,255,0.8);
   --bg1:#0d1117;
   --bg2:#001F3F;
   --card:#151a21;
   --text:#EEE;
-  --radius:18px;
+  --radius:16px;
+  --shadow:0 0 25px rgba(0,255,255,0.3);
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 body {
-  background:radial-gradient(circle at 20% 20%,#00203F,#0d1117,#000);
+  background:linear-gradient(-45deg,var(--bg1),#021B27,#002540,var(--bg2));
+  background-size:400% 400%;
+  animation:bgShift 12s ease infinite;
   color:var(--text);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  min-height:100vh;
-  padding:40px;
-  overflow-x:hidden;
-  animation:bgShift 10s infinite alternate;
+  padding:40px 0;
 }
 @keyframes bgShift {
   0%{background-position:0% 50%;}
-  100%{background-position:100% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
 }
 .container {
+  max-width:900px;
+  margin:auto;
   background:rgba(20,25,33,0.95);
-  padding:40px 50px;
   border-radius:var(--radius);
-  max-width:800px;
-  width:100%;
-  box-shadow:0 0 25px var(--glow);
+  padding:40px 50px;
+  box-shadow:var(--shadow);
   animation:fadeIn 1s ease;
 }
-@keyframes fadeIn { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+@keyframes fadeIn {from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 h1 {
   text-align:center;
   color:var(--highlight);
-  text-shadow:0 0 15px var(--glow);
-  margin-bottom:25px;
+  text-shadow:0 0 15px rgba(0,255,255,0.6);
+  margin-bottom:30px;
+}
+h2 {
+  margin-top:30px;
+  color:var(--highlight);
+  border-bottom:1px solid rgba(0,255,255,0.3);
+  padding-bottom:6px;
 }
 label {
-  font-weight:bold;
   display:block;
-  margin-top:18px;
+  margin-top:15px;
+  font-weight:bold;
 }
-select, input {
+select {
   width:100%;
   padding:10px;
   margin-top:8px;
@@ -64,14 +67,11 @@ select, input {
   font-size:1rem;
   transition:0.3s;
 }
-select:focus,input:focus{
-  outline:none;
-  box-shadow:0 0 10px var(--glow);
-}
+select:focus {outline:none;box-shadow:0 0 10px rgba(0,255,255,0.6);}
 button {
   display:block;
-  margin:30px auto;
-  padding:14px 30px;
+  margin:35px auto;
+  padding:14px 32px;
   border:none;
   border-radius:var(--radius);
   background:var(--highlight);
@@ -79,22 +79,38 @@ button {
   font-weight:bold;
   font-size:1.1rem;
   cursor:pointer;
+  box-shadow:0 0 25px rgba(0,255,255,0.6);
   transition:all 0.3s ease;
-  box-shadow:0 0 25px var(--glow);
 }
-button:hover {transform:scale(1.07);box-shadow:0 0 45px var(--glow);}
+button:hover {transform:scale(1.05);box-shadow:0 0 40px rgba(0,255,255,0.8);}
 .result {
   text-align:center;
   margin-top:25px;
   font-size:2rem;
   color:var(--highlight);
-  text-shadow:0 0 20px var(--glow);
+  text-shadow:0 0 20px rgba(0,255,255,0.7);
+}
+.meter {
+  width:100%;
+  height:25px;
+  background:#0b1018;
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin-top:15px;
+  box-shadow:inset 0 0 10px rgba(0,255,255,0.3);
+}
+.meter-fill {
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#00FFFF,#00CCFF,#0088FF);
+  transition:width 1s ease;
+  box-shadow:0 0 25px rgba(0,255,255,0.6);
 }
 .info {
   text-align:center;
-  margin-top:10px;
+  margin-top:12px;
   font-size:0.9rem;
-  color:#aaa;
+  color:#bbb;
 }
 footer {
   text-align:center;
@@ -107,121 +123,159 @@ footer {
 <body>
 
 <div class="container">
-  <h1>❄️ FrostClient — Minecraft 1.8.9 FPS Estimator</h1>
+  <h1>❄️ FrostClient FPS Estimator — Minecraft 1.8.9</h1>
 
+  <!-- Minecraft Information -->
+  <h2>Minecraft Information</h2>
   <label for="graphics">Graphics Settings:</label>
   <select id="graphics">
     <option value="fast">Fast</option>
-    <option value="balanced">Balanced</option>
-    <option value="fancy">Fancy (High Quality)</option>
+    <option value="balanced" selected>Balanced</option>
+    <option value="fancy">Fancy</option>
   </select>
 
   <label for="texture">Texture Pack:</label>
   <select id="texture">
-    <option value="none">None (Default)</option>
-    <option value="joafine">Joafine Texture Pack FPS Boost</option>
+    <option value="none">None</option>
+    <option value="joafine" selected>Joafine Texture Pack FPS Boost</option>
   </select>
 
-  <label for="ram">RAM Allocated to Minecraft:</label>
-  <select id="ram">
-    <option value="2">2 GB</option>
-    <option value="4">4 GB</option>
-    <option value="8">8 GB</option>
-    <option value="16">16 GB or more</option>
+  <label for="mods">Are Mods Enabled?</label>
+  <select id="mods">
+    <option value="no" selected>No</option>
+    <option value="yes">Yes</option>
   </select>
 
-  <label for="cpu">CPU Tier:</label>
+  <!-- Computer Information -->
+  <h2>Computer Information</h2>
+  <label for="cpu">CPU:</label>
   <select id="cpu">
-    <option value="low">Low-End CPU</option>
-    <option value="mid">Mid-Range CPU</option>
-    <option value="high">High-End CPU</option>
+    <option value="i3">Intel Core i3 / Ryzen 3</option>
+    <option value="i5" selected>Intel Core i5-12450H</option>
+    <option value="i7">Intel Core i7 / Ryzen 7</option>
+    <option value="i9">Intel Core i9 / Ryzen 9</option>
   </select>
 
-  <label for="gpu">GPU Tier:</label>
+  <label for="gpu">GPU:</label>
   <select id="gpu">
-    <option value="low">Integrated / Low-End GPU</option>
-    <option value="mid">Mid-Range GPU</option>
-    <option value="high">High-End GPU</option>
+    <option value="integrated">Integrated</option>
+    <option value="mid" selected>4GB Dedicated GPU</option>
+    <option value="high">High-End GPU (RTX Series)</option>
+  </select>
+
+  <label for="ram">RAM:</label>
+  <select id="ram">
+    <option value="8">8 GB</option>
+    <option value="16" selected>16 GB</option>
+    <option value="32">32 GB or more</option>
+  </select>
+
+  <label for="storage">Storage Type:</label>
+  <select id="storage">
+    <option value="hdd">HDD</option>
+    <option value="ssd" selected>SSD</option>
+    <option value="nvme">NVMe SSD</option>
+  </select>
+
+  <label for="resolution">Display Resolution:</label>
+  <select id="resolution">
+    <option value="720">720p</option>
+    <option value="1080" selected>1080p</option>
+    <option value="1440">1440p</option>
+    <option value="2160">4K UHD</option>
+  </select>
+
+  <!-- Optimization & Network -->
+  <h2>Optimization & Network</h2>
+  <label for="exitlag">ExitLag Plan:</label>
+  <select id="exitlag">
+    <option value="paid">Paid</option>
+    <option value="trial" selected>Trial</option>
+    <option value="none">No Plan (Expired)</option>
   </select>
 
   <label for="ping">Average Ping (ms):</label>
   <select id="ping">
     <option value="30">30 ms</option>
-    <option value="60">60 ms</option>
+    <option value="60" selected>60 ms</option>
     <option value="120">120 ms</option>
     <option value="200">200 ms</option>
   </select>
 
-  <label for="plan">ExitLag Plan Status:</label>
-  <select id="plan">
-    <option value="paid">Paid</option>
-    <option value="trial">Trial</option>
-    <option value="none">No Paid / No Trial</option>
-  </select>
-
+  <!-- Estimate Button -->
   <button onclick="calculateFPS()">Estimate FPS</button>
 
-  <div class="result" id="fpsResult">Select options and click Estimate</div>
-  <div class="info">*This is an estimation only. Actual performance may vary depending on many factors.</div>
+  <!-- FPS Result -->
+  <div class="result" id="fpsResult">Estimated FPS: —</div>
+  <div class="meter"><div class="meter-fill" id="fpsMeter"></div></div>
+  <div class="info">*Estimated based on selected settings. Actual FPS may vary depending on conditions.</div>
 
-  <footer>© 2025 FrostClient Project — Real-Time FPS Estimator</footer>
+  <footer>© 2025 FrostClient Project — Realistic FPS Simulator</footer>
 </div>
 
 <script>
-function calculateFPS() {
+function calculateFPS(){
+  let fps = 250; // Base FrostClient FPS
+
   const graphics = document.getElementById('graphics').value;
   const texture = document.getElementById('texture').value;
-  const ram = parseInt(document.getElementById('ram').value);
+  const mods = document.getElementById('mods').value;
   const cpu = document.getElementById('cpu').value;
   const gpu = document.getElementById('gpu').value;
+  const ram = parseInt(document.getElementById('ram').value);
+  const storage = document.getElementById('storage').value;
+  const resolution = parseInt(document.getElementById('resolution').value);
+  const exitlag = document.getElementById('exitlag').value;
   const ping = parseInt(document.getElementById('ping').value);
-  const plan = document.getElementById('plan').value;
 
-  // Base FPS for FrostClient 1.8.9
-  let fps = 250;
+  // Graphics impact
+  if (graphics === "fast") fps += 100;
+  if (graphics === "fancy") fps -= 50;
 
-  // Graphics slider
-  if (graphics === "balanced") fps += 50;
-  else if (graphics === "fancy") fps += 100;
+  // Texture
+  if (texture === "joafine") fps += 250;
 
-  // Texture Pack impact
-  if (texture === "joafine") fps += 300;
+  // Mods reduce performance
+  if (mods === "yes") fps *= 0.85;
 
-  // RAM scaling
-  if (ram === 4) fps += 80;
-  else if (ram === 8) fps += 200;
-  else if (ram >= 16) fps += 350;
+  // CPU
+  if (cpu === "i5") fps *= 1.3;
+  if (cpu === "i7") fps *= 1.6;
+  if (cpu === "i9") fps *= 1.8;
 
-  // CPU multiplier
-  if (cpu === "mid") fps *= 1.2;
-  else if (cpu === "high") fps *= 1.5;
+  // GPU
+  if (gpu === "mid") fps *= 1.4;
+  if (gpu === "high") fps *= 1.8;
 
-  // GPU multiplier
-  if (gpu === "mid") fps *= 1.3;
-  else if (gpu === "high") fps *= 1.6;
+  // RAM
+  if (ram >= 16) fps *= 1.3;
+  else if (ram <= 8) fps *= 0.9;
 
-  // Ping penalty (higher ping = slightly lower effective smoothness)
+  // Storage
+  if (storage === "hdd") fps *= 0.9;
+  if (storage === "nvme") fps *= 1.1;
+
+  // Resolution
+  if (resolution === 720) fps *= 1.3;
+  if (resolution === 1440) fps *= 0.85;
+  if (resolution === 2160) fps *= 0.6;
+
+  // ExitLag Plan
+  if (exitlag === "paid") fps *= 1.7;
+  if (exitlag === "trial") fps *= 1.3;
+  if (exitlag === "none") fps *= 1.0;
+
+  // Ping
   if (ping > 100) fps *= 0.9;
 
-  // ExitLag Plan impact
-  if (plan === "paid") fps *= 1.7;
-  else if (plan === "trial") fps *= 1.2;
-  else if (plan === "none") fps *= 1.0;
-
   // Random variation for realism
-  const randomVariation = (Math.random() * 0.05 + 0.95); // ±5%
-  fps = Math.round(fps * randomVariation);
+  fps *= (0.95 + Math.random() * 0.1);
 
-  // Display FPS result
-  const result = document.getElementById("fpsResult");
-  result.innerHTML = `Estimated FPS: <strong>${fps}</strong>`;
-
-  // Animate result
-  result.style.opacity = "0";
-  setTimeout(() => {
-    result.style.transition = "opacity 0.5s ease";
-    result.style.opacity = "1";
-  }, 50);
+  const result = Math.round(fps);
+  document.getElementById('fpsResult').innerHTML = `Estimated FPS: <strong>${result}</strong>`;
+  const meter = document.getElementById('fpsMeter');
+  let percent = Math.min(result / 1200 * 100, 100);
+  meter.style.width = percent + '%';
 }
 </script>
 

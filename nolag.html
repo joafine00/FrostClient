@@ -1,1 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FrostClient Beta 1.2.4 - What Happened?</title>
+<link rel="icon" type="image/png" href="frost.png" />
+<style>
+:root {
+  --highlight:#00FFFF;
+  --bg1:#0d1117;
+  --bg2:#001F3F;
+  --text:#EEE;
+  --card:#151a21;
+  --radius:12px;
+  --transition:0.3s ease-in-out;
+}
+* {
+  margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif;
+}
+body {
+  background:linear-gradient(-45deg,var(--bg1),#021B27,#002540,var(--bg2));
+  background-size:400% 400%;
+  animation:gradientShift 15s ease infinite;
+  color:var(--text);
+  overflow-x:hidden;
+  font-size:16px;
+  padding:40px;
+}
+@keyframes gradientShift {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+.container {
+  background:var(--card);
+  border-radius:var(--radius);
+  max-width:900px;
+  margin:0 auto;
+  padding:40px;
+  box-shadow:0 0 25px rgba(0,255,255,0.25);
+}
+h1, h2 {
+  color:var(--highlight);
+  text-align:center;
+}
+p {
+  margin:15px 0;
+  line-height:1.7;
+}
+a {
+  color:var(--highlight);
+  text-decoration:none;
+}
+a:hover {
+  text-decoration:underline;
+}
+button {
+  background:var(--highlight);
+  border:none;
+  color:#111;
+  font-weight:bold;
+  padding:10px 20px;
+  border-radius:var(--radius);
+  cursor:pointer;
+  transition:var(--transition);
+  display:block;
+  margin:30px auto 0 auto;
+}
+button:hover {
+  transform:scale(1.05);
+  box-shadow:0 0 20px rgba(0,255,255,0.3);
+}
+footer {
+  text-align:center;
+  margin-top:40px;
+  color:#aaa;
+  font-size:0.9em;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>FrostClient Beta 1.2.4</h1>
+  <h2>What Happened to the Beta Version?</h2>
+  
+  <p>The <strong>Beta version 1.2.4 of FrostClient</strong> was an important experimental release that focused on performance and bug fixes. 
+  During this stage, many issues were resolved, leading to smoother gameplay and higher frame rates for both casual and competitive players.</p>
+  
+  <p>Players discovered that combining <strong>FrostClient</strong> with the optimization software 
+  <a href="https://www.exitlag.com/download" target="_blank">ExitLag</a> could drastically increase FPS, even during the free trial period (3–5 days).</p>
+
+  <p>After the trial ends, users can still use ExitLag’s <strong>Boost</strong> feature to optimize their PC’s performance, 
+  helping Minecraft run much faster even without active routes for online games (which require a paid plan).</p>
+  
+  <h2>Performance Results</h2>
+  <p>With proper optimization:</p>
+  <ul>
+    <li>Low-end PCs can reach up to <strong>900 FPS</strong> in Minecraft.</li>
+    <li>High-end setups can reach an average of <strong>1200 FPS</strong>.</li>
+  </ul>
+
+  <p>These improvements were made possible thanks to better system memory handling, CPU balancing, and GPU rendering tweaks introduced in the FrostClient 1.2.4 Beta update.</p>
+
+  <h2>Official Site</h2>
+  <p>For more information, downloads, and source code, visit the official FrostClient website:</p>
+  <a href="https://frost-client.vercel.app/" target="_blank">
+    <button>Visit FrostClient Website</button>
+  </a>
+
+  <footer>
+    © 2025 FrostClient Project — Open Source Minecraft 1.8.9 PvP Client
+  </footer>
+</div>
+
+</body>
+</html>
 

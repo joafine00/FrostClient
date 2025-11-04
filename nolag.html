@@ -5,91 +5,147 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NoLag - FrostClient FPS Boost Guide</title>
 <link rel="icon" type="image/png" href="frost.png" />
+
 <style>
 :root {
   --highlight:#00FFFF;
+  --highlight-glow:rgba(0,255,255,0.6);
   --bg1:#0d1117;
   --bg2:#001F3F;
   --text:#EEE;
   --card:#151a21;
-  --radius:12px;
+  --radius:16px;
   --transition:0.3s ease-in-out;
 }
 * {
   margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif;
 }
 body {
-  background:linear-gradient(-45deg,var(--bg1),#021B27,#002540,var(--bg2));
-  background-size:400% 400%;
-  animation:gradientShift 15s ease infinite;
+  background:radial-gradient(circle at top, #001F3F 0%, #0d1117 100%);
   color:var(--text);
   overflow-x:hidden;
   font-size:16px;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   padding:40px;
+  animation:backgroundPulse 10s infinite alternate;
 }
-@keyframes gradientShift {
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+
+@keyframes backgroundPulse {
+  0% { background:radial-gradient(circle at top, #001F3F 0%, #0d1117 100%); }
+  100% { background:radial-gradient(circle at bottom, #002540 0%, #0d1117 100%); }
 }
+
 .container {
-  background:var(--card);
+  background:linear-gradient(145deg, rgba(21,26,33,0.95), rgba(10,14,18,0.95));
   border-radius:var(--radius);
   max-width:900px;
-  margin:0 auto;
-  padding:40px;
-  box-shadow:0 0 25px rgba(0,255,255,0.25);
+  width:100%;
+  padding:50px 40px;
+  box-shadow:0 0 25px var(--highlight-glow);
+  position:relative;
+  overflow:hidden;
 }
+
+.container::before {
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background:conic-gradient(from 0deg, transparent, var(--highlight), transparent 90%);
+  animation:spin 6s linear infinite;
+  opacity:0.2;
+}
+@keyframes spin {
+  to { transform:rotate(360deg); }
+}
+
 h1, h2 {
   color:var(--highlight);
   text-align:center;
+  margin-bottom:20px;
+  text-shadow:0 0 10px var(--highlight-glow);
+}
+h1 {
+  font-size:2.2rem;
+  letter-spacing:1px;
+}
+h2 {
+  font-size:1.4rem;
 }
 p {
   margin:15px 0;
-  line-height:1.7;
+  line-height:1.8;
+  text-align:center;
+  font-size:1rem;
 }
 a {
   color:var(--highlight);
   text-decoration:none;
+  transition:var(--transition);
 }
 a:hover {
-  text-decoration:underline;
+  text-shadow:0 0 8px var(--highlight-glow);
 }
 button {
   background:var(--highlight);
   border:none;
   color:#111;
   font-weight:bold;
-  padding:10px 20px;
+  padding:12px 24px;
   border-radius:var(--radius);
   cursor:pointer;
-  transition:var(--transition);
+  transition:all 0.3s ease;
   display:block;
-  margin:20px auto;
+  margin:30px auto;
+  font-size:1.1rem;
+  box-shadow:0 0 20px var(--highlight-glow);
 }
 button:hover {
-  transform:scale(1.05);
-  box-shadow:0 0 20px rgba(0,255,255,0.3);
+  transform:scale(1.07);
+  box-shadow:0 0 40px var(--highlight-glow);
+}
+ul {
+  list-style:none;
+  padding-left:0;
+  margin-top:15px;
+  text-align:center;
+}
+ul li {
+  margin:10px 0;
+  font-size:1.05rem;
+  opacity:0;
+  animation:fadeUp 1s forwards;
+}
+ul li:nth-child(1){animation-delay:0.2s;}
+ul li:nth-child(2){animation-delay:0.4s;}
+ul li:nth-child(3){animation-delay:0.6s;}
+@keyframes fadeUp {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
+}
+.glow-divider {
+  height:2px;
+  background:linear-gradient(90deg, transparent, var(--highlight), transparent);
+  margin:30px auto;
+  width:80%;
+  box-shadow:0 0 20px var(--highlight-glow);
+  opacity:0.6;
 }
 footer {
   text-align:center;
-  margin-top:40px;
+  margin-top:30px;
   color:#aaa;
   font-size:0.9em;
+  animation:fadeIn 2s ease-in-out;
 }
-.img-preview {
-  display:block;
-  margin:25px auto;
-  border-radius:var(--radius);
-  box-shadow:0 0 20px rgba(0,255,255,0.3);
-  max-width:100%;
-}
-ul {
-  list-style: none;
-  padding-left: 0;
-}
-ul li::before {
-  content: "❄️ ";
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
 }
 </style>
 </head>
@@ -97,38 +153,42 @@ ul li::before {
 
 <div class="container">
   <h1>❄️ FrostClient - NoLag Guide</h1>
-  <h2>Boost Your FPS Like Never Before</h2>
-
-  <p>The <strong>NoLag</strong> guide is designed to help players achieve maximum performance using <strong>FrostClient</strong>.</p>
+  <p>Welcome to the <strong>NoLag</strong> section — your ultimate FPS boosting guide for <strong>FrostClient</strong>.</p>
   
-  <p>By following this optimization method, you can dramatically increase your FPS in Minecraft 1.8.9. 
-  It works perfectly with <a href="https://www.exitlag.com/download" target="_blank">ExitLag</a> or any performance booster software.</p>
+  <div class="glow-divider"></div>
 
-  <h2>🎨 Joafine Texture Pack FPS Boost</h2>
-  <img src="https://files.fm/thumb_show.php?i=z3qwp6wnnn" alt="Joafine Texture Pack Preview" class="img-preview">
-  <p>Download the official <strong>Joafine Texture Pack FPS Boost</strong> below:</p>
+  <h2>🚀 Boost Your Performance</h2>
+  <p>By using the optimized <strong>Joafine Texture Pack FPS Boost</strong>, you can significantly increase your frame rate while keeping visuals clean and smooth. Perfect for PvP and high-performance gameplay!</p>
 
   <a href="https://files.fm/f/z3qwp6wnnn" target="_blank">
-    <button>Download Texture Pack</button>
+    <button>Download Joafine Texture Pack</button>
   </a>
 
-  <h2>⚡ Performance Results</h2>
+  <div class="glow-divider"></div>
+
+  <h2>⚡ Expected Performance Gains</h2>
   <ul>
-    <li><strong>FrostClient (default):</strong> 200–300 FPS</li>
-    <li><strong>FrostClient + Joafine Texture Pack:</strong> 500–600 FPS</li>
-    <li><strong>FrostClient + Joafine Pack + ExitLag Boost:</strong> 900–1200 FPS (minimum)</li>
+    <li>💠 <strong>FrostClient (Default):</strong> 200–300 FPS</li>
+    <li>💠 <strong>+ Joafine Texture Pack:</strong> 500–600 FPS</li>
+    <li>💠 <strong>+ Optimization Software (ExitLag):</strong> 900–1200 FPS (minimum)</li>
   </ul>
 
-  <p>This combination allows you to experience <strong>super smooth gameplay</strong> even on low-end PCs. 
-  Perfect for PvP, BedWars, or any competitive scenario where every frame counts!</p>
+  <div class="glow-divider"></div>
 
-  <h2>💻 Official Site</h2>
+  <h2>🌐 Combine with ExitLag</h2>
+  <p>For best results, use <a href="https://www.exitlag.com/download" target="_blank">ExitLag</a> alongside FrostClient.  
+  Even after the free trial (3–5 days), you can use its <strong>Boost</strong> mode to optimize your PC performance.</p>
+
+  <div class="glow-divider"></div>
+
+  <h2>🏠 Return to FrostClient</h2>
   <a href="https://frost-client.vercel.app/" target="_blank">
     <button>Back to FrostClient Website</button>
   </a>
 
   <footer>
-    © 2025 FrostClient Project — Open Source Minecraft 1.8.9 PvP Client
+    © 2025 FrostClient Project — Open Source Minecraft 1.8.9 PvP Client  
+    <br> Designed for Maximum FPS and Minimal Lag.
   </footer>
 </div>
 

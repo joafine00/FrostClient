@@ -124,6 +124,7 @@ h2{color:var(--highlight);margin-bottom:20px;}
     <button onclick="showSection('about')">About</button>
     <button onclick="showSection('features')">Features</button>
     <button onclick="showSection('mods')">Mods</button>
+    <button onclick="showSection('texture')">Texture</button> <!-- NOVA ABA -->
     <button onclick="showSection('download')">Download</button>
     <button onclick="showSection('community')">Community</button>
     <button onclick="showSection('skins')">Player Skins</button>
@@ -162,6 +163,18 @@ h2{color:var(--highlight);margin-bottom:20px;}
       <li>Armor Status, Coordinates, Zoom</li>
       <li>Motion Blur, Animations, Hit Color</li>
     </ul>
+  </div>
+
+  <!-- NOVA SEÇÃO: TEXTURE -->
+  <div id="texture" class="section">
+    <h2>FPS Boost Texture Pack</h2>
+    <p>Melhore seu desempenho e FPS com este pacote de textura otimizado especialmente para PvP e suavidade em Minecraft 1.8.9.</p>
+    <a href="https://files.fm/u/f6zwr88wmf" target="_blank">
+      <button>Download Texture Pack</button>
+    </a>
+    <p style="margin-top:10px;font-size:0.9em;color:#ccc;">
+      Recomendado usar com o <b>FrostClient Classic</b> para máximo desempenho.
+    </p>
   </div>
 
   <div id="download" class="section">
@@ -245,16 +258,6 @@ const players = [
   'AAA_', 'nico43217714', 'Kumikaze', 'MotinhaGod', 'zXsoloX',
   'AntiBook', 'Tibedra', 'HasselPholen', 'TheFlyingAthos', 'CookieSpin',
   '8000ff', 'Spyro', 'rremorse'
-  
-  
-
-
-
-
-
-
-
-
 ];
 
 const gallery = document.getElementById('skins-gallery');
@@ -268,7 +271,6 @@ players.forEach(username => {
   `;
   gallery.appendChild(card);
 });
-
 </script>
 
 </body>

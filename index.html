@@ -13,7 +13,7 @@
   --bg2:#001F3F;
   --text:#EEE;
   --card:#151a21;
-  --radius:12px;
+  --radius:14px;
   --transition:0.3s ease-in-out;
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
@@ -61,8 +61,58 @@ h2{color:var(--highlight);margin-bottom:20px;}
   font-weight:600;box-shadow:0 0 15px rgba(0,255,255,0.3);
   transition:var(--transition);
 }
+#theme-toggle:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 25px rgba(0,255,255,0.6);
+}
 
-/* === PLAYER SKINS GALLERY === */
+/* === TEXTURE PACK SECTION === */
+.texture-card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:25px;
+  text-align:center;
+  box-shadow:0 0 25px rgba(0,255,255,0.2);
+  transition:var(--transition);
+  animation:fadeIn 1s ease;
+}
+.texture-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 0 35px rgba(0,255,255,0.4);
+}
+.texture-preview{
+  width:100%;
+  max-width:450px;
+  border-radius:var(--radius);
+  margin-bottom:20px;
+  transition:transform 0.4s ease;
+}
+.texture-preview:hover{
+  transform:scale(1.05) rotate(1deg);
+}
+.texture-buttons{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+.texture-buttons button{
+  background:var(--highlight);
+  border:none;
+  border-radius:10px;
+  padding:12px 25px;
+  color:#111;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 0 15px rgba(0,255,255,0.3);
+  transition:var(--transition);
+}
+.texture-buttons button:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 25px rgba(0,255,255,0.6);
+}
+
+/* === SKINS GALLERY === */
 #skins-gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
@@ -90,19 +140,6 @@ h2{color:var(--highlight);margin-bottom:20px;}
   color:var(--highlight);
   word-break: break-word;
 }
-
-/* Error message style */
-#error-message {
-  margin-top: 20px;
-  background: #330000;
-  padding: 15px;
-  border-radius: 10px;
-  color: #ff4444;
-  font-weight: bold;
-  white-space: pre-line;
-}
-
-/* Disclaimer text */
 #skins-disclaimer {
   margin-top: 10px;
   font-size: 0.9em;
@@ -124,7 +161,7 @@ h2{color:var(--highlight);margin-bottom:20px;}
     <button onclick="showSection('about')">About</button>
     <button onclick="showSection('features')">Features</button>
     <button onclick="showSection('mods')">Mods</button>
-    <button onclick="showSection('texture')">Texture</button> <!-- NOVA ABA -->
+    <button onclick="showSection('texture')">Texture</button>
     <button onclick="showSection('download')">Download</button>
     <button onclick="showSection('community')">Community</button>
     <button onclick="showSection('skins')">Player Skins</button>
@@ -142,7 +179,7 @@ h2{color:var(--highlight);margin-bottom:20px;}
 
   <div id="about" class="section">
     <h2>About FrostClient</h2>
-    <p>FrostClient Classic combines visual polish, deep mod integration, and open-source transparency.</p>
+    <p>FrostClient Classic combines visual polish, deep mod integration, and open-source transparency for Minecraft PvP lovers.</p>
     <p><b>GitHub:</b> <a href="https://github.com/QuiteFrosty/FrostClient" target="_blank" style="color:var(--highlight);">Open Repository</a></p>
   </div>
 
@@ -165,16 +202,24 @@ h2{color:var(--highlight);margin-bottom:20px;}
     </ul>
   </div>
 
-  <!-- NOVA SEÇÃO: TEXTURE -->
+  <!-- NEW TEXTURE SECTION -->
   <div id="texture" class="section">
     <h2>FPS Boost Texture Pack</h2>
-    <p>Melhore seu desempenho e FPS com este pacote de textura otimizado especialmente para PvP e suavidade em Minecraft 1.8.9.</p>
-    <a href="https://files.fm/u/f6zwr88wmf" target="_blank">
-      <button>Download Texture Pack</button>
-    </a>
-    <p style="margin-top:10px;font-size:0.9em;color:#ccc;">
-      Recomendado usar com o <b>FrostClient Classic</b> para máximo desempenho.
-    </p>
+    <div class="texture-card">
+      <img src="https://i.imgur.com/pEUoxNO.jpeg" alt="Texture Pack Preview" class="texture-preview">
+      <p>This texture pack is built for performance and smoother gameplay. It removes unnecessary high-resolution textures, providing a cleaner and faster PvP experience in Minecraft 1.8.9.</p>
+      <p>Perfect for low-end or mid-range PCs, it helps increase FPS while maintaining FrostClient’s visual style and clarity. Recommended for competitive players who want to maximize speed without losing quality.</p>
+
+      <div class="texture-buttons">
+        <a href="https://files.fm/u/f6zwr88wmf" target="_blank"><button>Download Texture Pack</button></a>
+        <a href="https://frost-client.vercel.app/fps.html" target="_blank"><button>Test Your FPS</button></a>
+      </div>
+
+      <p style="margin-top:15px;font-size:0.9em;color:#ccc;">
+        Compare your FPS with and without the texture pack using the <b>FrostClient FPS Test Tool</b>.<br>
+        FPS results depend on your PC hardware, settings, and installed mods.
+      </p>
+    </div>
   </div>
 
   <div id="download" class="section">
@@ -187,7 +232,6 @@ h2{color:var(--highlight);margin-bottom:20px;}
     <a href="http://dsc.gg/frost-client" target="_blank"><button>Join Discord</button></a>
   </div>
 
-  <!-- Popular Skins Gallery (Fixed List) -->
   <div id="skins" class="section">
     <h2>Popular Minecraft Skins (Fixed List)</h2>
     <p>Famous player skins for you to use on your Minecraft account.</p>
@@ -211,7 +255,6 @@ function showSection(id){
   document.getElementById(id).classList.add('active');
 }
 
-// Theme toggle
 function toggleTheme(){
   document.body.classList.toggle('light-theme');
   if(document.body.classList.contains('light-theme')){
@@ -227,6 +270,7 @@ function toggleTheme(){
   }
 }
 
+// === FULL PLAYER LIST RESTORED ===
 const players = [
   'JoafineCraft123', 'Technoblade', 'TommyInnit', 'WilburSoot', 'Sapnap',
   'GeorgeNotFound', 'Tubbo', 'BadBoyHalo', 'CaptainPuffy', 'Quackity',
@@ -261,7 +305,6 @@ const players = [
 ];
 
 const gallery = document.getElementById('skins-gallery');
-
 players.forEach(username => {
   const card = document.createElement('div');
   card.className = 'skin-card';

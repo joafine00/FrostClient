@@ -1,404 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>FrostClient Classic 1.8.9</title>
-<link rel="icon" type="image/png" href="frost.png" />
-
-<style>
-:root{
-  --highlight:#00FFFF;
-  --bg1:#0d1117;
-  --bg2:#001F3F;
-  --text:#EEE;
-  --card:#151a21;
-  --radius:14px;
-  --transition:0.28s cubic-bezier(.2,.9,.2,1);
-}
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial;}
-body{
-  background:linear-gradient(-45deg,var(--bg1),#021B27,#002540,var(--bg2));
-  background-size:400% 400%;
-  animation:gradientShift 18s ease infinite;
-  color:var(--text);
-  margin:40px;
-  font-size:16px;
-}
-@keyframes gradientShift{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
-nav{
-  position:fixed;top:0;left:0;right:0;height:64px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:10px 28px;background:rgba(12,14,18,0.86);
-  backdrop-filter: blur(8px);
-  box-shadow:0 6px 30px rgba(0,255,255,0.06), inset 0 -1px 0 rgba(255,255,255,0.01);
-  z-index:1000;
-}
-.nav-left{display:flex;align-items:center;gap:12px;}
-.nav-left img{height:44px;width:auto;border-radius:8px;}
-.nav-left h1{color:var(--highlight);font-size:1.25rem;letter-spacing:0.6px;}
-.nav-menu{display:flex;gap:10px;align-items:center;}
-.nav-menu button{
-  background:transparent;border:0;color:var(--text);cursor:pointer;padding:8px 10px;border-radius:8px;font-weight:600;
-  transition:transform var(--transition), color var(--transition);
-}
-.nav-menu button:hover{color:var(--highlight);transform:translateY(-3px) scale(1.03);}
-
-.container{max-width:1100px;margin:100px auto 60px auto;padding:16px;}
-.section{display:none;animation:fadeInUp 0.6s ease both;}
-.section.active{display:block;}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);}}
-
-h2{color:var(--highlight);margin-bottom:12px;font-size:1.4rem;}
-.card{
-  background:var(--card);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.02);
-  box-shadow:0 8px 30px rgba(0,0,0,0.35), 0 0 18px rgba(0,255,255,0.03);
-}
-
-/* Mods list */
-.mods-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:12px;}
-.mods-card{padding:14px;border-radius:12px;}
-.mods-card h3{color:var(--highlight);margin-bottom:8px;}
-.mods-card ul{line-height:1.6;color:#dbe9ee;list-style:disc;margin-left:18px;}
-
-/* Texture area */
-.texture-card{display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;border-radius:12px;}
-.texture-preview{width:100%;max-width:520px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.45);transition:transform .45s ease;}
-.texture-preview:hover{transform:translateY(-6px) scale(1.02);}
-
-/* Buttons */
-.btn{background:var(--highlight);color:#062; padding:10px 16px;border-radius:10px;border:none;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(0,255,255,0.12);transition:transform .28s ease;}
-.btn:hover{transform:translateY(-4px) scale(1.03);}
-
-/* Editor/import area */
-.small-muted{color:#bfc9d1;font-size:0.92rem;}
-.warning{background:#3a0f0f;color:#ffb3b3;padding:10px;border-radius:10px;margin-top:12px;}
-
-/* Skins gallery (kept) */
-#skins-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-top:12px;}
-.skin-card{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;text-align:center;transition:transform .25s ease, box-shadow .25s ease;}
-.skin-card:hover{transform:translateY(-6px);box-shadow:0 8px 22px rgba(0,255,255,0.06);}
-.skin-card img{width:100%;border-radius:8px;margin-bottom:8px;}
-
-#theme-toggle{position:fixed;right:18px;bottom:18px;padding:10px 14px;border-radius:10px;border:0;background:var(--highlight);color:#052;cursor:pointer;font-weight:700;box-shadow:0 10px 30px rgba(0,255,255,0.12);}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Cancelled</title>
+  <style>
+    body {
+      background-color: #0b0b15;
+      color: #e0e0e0;
+      font-family: "Courier New", monospace;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #ff5555;
+      font-size: 2em;
+    }
+    p {
+      font-size: 1.2em;
+      margin-top: 20px;
+    }
+    code {
+      background-color: #1a1a2e;
+      padding: 10px 15px;
+      border-radius: 10px;
+      display: inline-block;
+      margin-top: 15px;
+      color: #7cdfff;
+    }
+  </style>
 </head>
 <body>
-
-<nav>
-  <div class="nav-left">
-    <img src="frost.png" alt="Frost logo">
-    <h1>FrostClient Classic 1.8.9</h1>
-  </div>
-  <div class="nav-menu">
-    <button onclick="showSection('home')">Home</button>
-    <button onclick="showSection('about')">About</button>
-    <button onclick="showSection('features')">Features</button>
-    <button onclick="showSection('mods')">Mods</button>
-    <button onclick="showSection('texture')">Texture</button>
-    <button onclick="showSection('download')">Download</button>
-    <button onclick="showSection('community')">Community</button>
-    <button onclick="showSection('skins')">Player Skins</button>
-    <button onclick="showSection('opensource')">Open Source</button>
-  </div>
-</nav>
-
-<div class="container">
-  <div id="home" class="section active">
-    <div class="card">
-      <h2>Welcome to FrostClient Classic</h2>
-      <p class="small-muted">FrostClient is an open-source Minecraft PvP client based on CloudClient for Minecraft 1.8.9. It focuses on visual polish, FPS optimization and modular client-side utilities. (Source: project README)</p>
-      <p style="margin-top:10px;"><a href="https://github.com/QuiteFrosty/FrostClient" target="_blank" style="color:var(--highlight);text-decoration:underline;">View project on GitHub</a>. :contentReference[oaicite:3]{index=3}</p>
-    </div>
-  </div>
-
-  <div id="about" class="section">
-    <div class="card">
-      <h2>About FrostClient</h2>
-      <p>FrostClient is a community-maintained, open-source PvP client built on the CloudClient framework. This site provides downloads, texture packs, and safe documentation for the 1.8.9 release.</p>
-      <p class="small-muted">License: GPL / GNU derivatives. See repository for build instructions and source code. :contentReference[oaicite:4]{index=4}</p>
-    </div>
-  </div>
-
-  <div id="features" class="section">
-    <div class="card">
-      <h2>Features (high level)</h2>
-      <ul style="margin-top:8px;color:#dbe9ee;line-height:1.7;">
-        <li>HUD editor and modular GUI system</li>
-        <li>Performance-oriented options and lightweight texture support</li>
-        <li>Visual modules (motion blur, animation utilities) and replay support</li>
-        <li>Mod menu and per-module keybinds</li>
-      </ul>
-      <p class="small-muted" style="margin-top:8px;">These high-level features are documented in the project README. :contentReference[oaicite:5]{index=5}</p>
-    </div>
-  </div>
-
-  <!-- === MODS SECTION (FACTUAL, SAFE) === -->
-  <div id="mods" class="section">
-    <div class="card">
-      <h2>Included Modules & Utilities (1.8.9)</h2>
-      <p class="small-muted">Below are the publicly-documented, non-exploit / non-cheat utilities & visual modules mentioned in the open-source repository. This list is factual and safe — cheat modules are intentionally excluded. If you maintain the repo and want more detail, use "Import JSON" to manage the exact list.</p>
-
-      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="btn" id="import-json-btn">Import JSON</button>
-        <button class="btn" id="edit-list-btn" style="background:transparent;color:var(--highlight);box-shadow:none;border:1px solid rgba(0,255,255,0.08);">Edit List</button>
-        <a href="https://github.com/QuiteFrosty/FrostClient" target="_blank" style="align-self:center;color:var(--highlight);text-decoration:underline;">View repository</a>
-      </div>
-
-      <div id="mods-grid" class="mods-grid" style="margin-top:14px;">
-        <!-- cards injected by JS -->
-      </div>
-
-      <div id="mods-warning" class="warning" style="display:none;">
-        Warning: The imported list appears to contain modules that might violate server rules. Those entries are hidden here by policy.
-      </div>
-
-      <textarea id="mods-editor" style="display:none;width:100%;min-height:140px;margin-top:12px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);color:var(--text);border:1px solid rgba(255,255,255,0.03);"></textarea>
-      <div style="margin-top:8px;">
-        <button id="save-edits" class="btn" style="display:none;">Save</button>
-        <button id="cancel-edits" class="btn" style="display:none;background:transparent;color:var(--highlight);border:1px solid rgba(0,255,255,0.08);">Cancel</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- TEXTURE SECTION -->
-  <div id="texture" class="section">
-    <div class="card texture-card">
-      <h2>FPS Boost Texture Pack</h2>
-      <img class="texture-preview" src="https://i.imgur.com/pEUoxNO.jpeg" alt="Texture preview">
-      <p class="small-muted">This lightweight texture pack reduces high-resolution textures to improve frame rate and clarity for PvP. Recommended for low/mid-end systems. Use with FrostClient Classic 1.8.9.</p>
-
-      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px;">
-        <a href="https://files.fm/u/f6zwr88wmf" target="_blank"><button class="btn">Download Texture Pack</button></a>
-        <a href="https://frost-client.vercel.app/fps.html" target="_blank"><button class="btn" style="background:transparent;color:var(--highlight);border:1px solid rgba(0,255,255,0.08);">Test Your FPS</button></a>
-      </div>
-
-      <p class="small-muted" style="margin-top:12px;">To measure improvement: test FPS in the same environment (same world/area, same graphics settings, same player activity) with the texture pack on and off. Results depend on GPU/CPU, Java version, Forge and in-game settings.</p>
-    </div>
-  </div>
-
-  <div id="download" class="section">
-    <div class="card">
-      <h2>Download FrostClient Classic</h2>
-      <p class="small-muted">Stable builds & instructions are available via the project's GitHub pages. Use the repository's build instructions if you'd rather compile locally. :contentReference[oaicite:6]{index=6}</p>
-      <a href="https://files.fm/u/nefahadbty" target="_blank"><button class="btn" style="margin-top:8px;">Download Now</button></a>
-    </div>
-  </div>
-
-  <div id="community" class="section">
-    <div class="card">
-      <h2>Community</h2>
-      <p class="small-muted">Join the project's community channels (linked from the repo) for development chat, issues and contributions.</p>
-      <a href="http://dsc.gg/frost-client" target="_blank"><button class="btn" style="margin-top:8px;background:transparent;color:var(--highlight);border:1px solid rgba(0,255,255,0.08);">Join Discord</button></a>
-    </div>
-  </div>
-
-  <div id="skins" class="section">
-    <div class="card">
-      <h2>Popular Minecraft Skins (Fixed List)</h2>
-      <p class="small-muted">Famous player skins for inspiration.</p>
-      <div id="skins-gallery"></div>
-      <div style="margin-top:10px;color:#cbd6dd;font-style:italic;">The skins are for inspiration; apply a skin to your Minecraft account through official Minecraft.net or launcher.</div>
-    </div>
-  </div>
-
-  <div id="opensource" class="section">
-    <div class="card">
-      <h2>Open Source</h2>
-      <p class="small-muted">This site and FrostClient Classic source are public. Use the repository and README for build and contribution instructions. :contentReference[oaicite:7]{index=7}</p>
-    </div>
-  </div>
-</div>
-
-<button id="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
-
-<script>
-/* Navigation and theme */
-function showSection(id){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo({top:80, behavior:'smooth'});
-}
-function toggleTheme(){
-  document.body.classList.toggle('light-theme');
-  if(document.body.classList.contains('light-theme')){
-    document.documentElement.style.setProperty('--bg1','#f5f8fa');
-    document.documentElement.style.setProperty('--bg2','#e6eef6');
-    document.documentElement.style.setProperty('--card','#fff');
-    document.documentElement.style.setProperty('--text','#111');
-  } else {
-    document.documentElement.style.setProperty('--bg1','#0d1117');
-    document.documentElement.style.setProperty('--bg2','#001F3F');
-    document.documentElement.style.setProperty('--card','#151a21');
-    document.documentElement.style.setProperty('--text','#EEE');
-  }
-}
-
-/* === FULL PLAYER LIST (original) === */
-const players = [
-  'JoafineCraft123','Technoblade','TommyInnit','WilburSoot','Sapnap',
-  'GeorgeNotFound','Tubbo','BadBoyHalo','CaptainPuffy','Quackity',
-  'Philza','Fundy','Nihachu','KarlJacobs','Ranboo',
-  'Vikkstar123','DanTDM','PrestonPlayz','LDShadowLady','Grian',
-  'MumboJumbo','HermitCraft','Stampy','BdoubleO100','Xisumavoid',
-  'IBallisticsquid','GoodTimesWithScar','ZedaphPlays','Keralis','BajanCanadian',
-  'SSundee','JeromeASF','CaptainSparklez','SkyDoesMinecraft','AntVenom',
-  'Paulsoaresjr','Yogscast','LDShadowLady','PopularMMOs','Technoblade',
-  'DreamWasTaken','WilburSoot','TommyInnit','BadBoyHalo','Fundy',
-  'Ranboo','GeorgeNotFound','Sapnap','KarlJacobs','Technoblade2',
-  'Tubbo','CatWithARamenHat','DreamFan','Dream_','Minecrafter',
-  'Steve','Alex','Herobrine','Notch','CaptainSparklez2',
-  'DreamTeam','EliteCraft','PixelCraft','BlockBuilder','BuilderBob',
-  'CraftyCat','ZombieHunter','CreeperKiller','DiamondMiner','EnderDragon',
-  'NetherExplorer','RedstoneEngineer','PotionMaster','WizardSteve','FarmerJoe',
-  'LumberJack','MinerMike','ExplorerEve','SurvivorSam','NightStalker',
-  'Moonlight','Sunshine','StarGazer','CloudWalker','FireWalker',
-  'IceQueen','ShadowNinja','ThunderBolt','Lightning','WaterBender',
-  'EarthShaker','WindRider','StormCaller','Frostbite','Glitch',
-  'PixelHero','BlockBoss','CraftMaster','MineLord','MidCourt','sniffle234','vitorcardoso9',
-  'spriteprime','MatheusFR5600','Mendrake','littlecospbxnny7','suicice','_Vxmpyre','Mini','NuyuRain0516',
-  'WhatPack','Zacroxx','luqinha','m0xiez','LissaCutie','Geomajesus','Myheart_',
-  'Jenny','sudew','Top','radacow','Saohy','nyelis','Mountan',
-  'rltq','xiaojiangMC','MichealBobek','AgentFF007','Yuukael',
-  'Hugich_Play','favisms','MrV1cTor15','WhereHaveYou',
-  'iLalah','ahahaha000000000','Trump','B0MBIES','AAA_','nico43217714','Kumikaze','MotinhaGod','zXsoloX',
-  'AntiBook','Tibedra','HasselPholen','TheFlyingAthos','CookieSpin','8000ff','Spyro','rremorse'
-];
-const gallery = document.getElementById('skins-gallery');
-players.forEach(username=>{
-  const card = document.createElement('div');
-  card.className = 'skin-card';
-  card.innerHTML = `<img src="https://mc-heads.net/body/${encodeURIComponent(username)}" alt="Skin: ${username}"><div style="color:var(--highlight);font-weight:700;">${username}</div>`;
-  gallery.appendChild(card);
-});
-
-/* === MODS: factual safe list (sourced from README & repo pages) ===
-   NOTE: This list intentionally excludes any exploit/cheat modules.
-   If you are a repo maintainer and want the exact source-of-truth, import
-   a JSON file produced from your repo's module manifest.
-   Source: repository README and folder structure. :contentReference[oaicite:8]{index=8}
-*/
-const safeMods = {
-  "Performance": [
-    "FPS Display",
-    "Frame Limiter",
-    "Lightweight Texture Loader",
-    "Performance Tweaks (Render distance / particle limits)"
-  ],
-  "Visual & HUD": [
-    "HUD Editor",
-    "Custom Crosshair",
-    "Keystrokes",
-    "CPS Counter",
-    "Motion Blur (optional)",
-    "Animation Utilities"
-  ],
-  "Utility": [
-    "Coordinates Display",
-    "Armor Status",
-    "Zoom",
-    "Inventory Helper",
-    "Auto-Screenshot",
-    "Replay Module"
-  ],
-  "Networking / Info": [
-    "Ping Indicator",
-    "Reconnect Helper"
-  ]
-};
-
-const modsGrid = document.getElementById('mods-grid');
-function renderMods(mods){
-  modsGrid.innerHTML = '';
-  Object.keys(mods).forEach(cat=>{
-    const card = document.createElement('div');
-    card.className = 'mods-card card';
-    card.innerHTML = `<h3>${cat}</h3>`;
-    const ul = document.createElement('ul');
-    mods[cat].forEach(m=>{
-      const li = document.createElement('li');
-      li.textContent = m;
-      ul.appendChild(li);
-    });
-    card.appendChild(ul);
-    modsGrid.appendChild(card);
-  });
-  // hide/show warning if suspicious words found
-  const joined = JSON.stringify(mods).toLowerCase();
-  if(/cheat|aimbot|x-?ray|auto-aim|exploit|forceop|unauthorized/i.test(joined)){
-    document.getElementById('mods-warning').style.display = 'block';
-  } else document.getElementById('mods-warning').style.display = 'none';
-}
-// initial render using safe list
-renderMods(safeMods);
-
-/* Edit / Import UI */
-const importBtn = document.getElementById('import-json-btn');
-const editBtn = document.getElementById('edit-list-btn');
-const editor = document.getElementById('mods-editor');
-const saveBtn = document.getElementById('save-edits');
-const cancelBtn = document.getElementById('cancel-edits');
-
-editBtn.addEventListener('click', ()=>{
-  editor.style.display='block';
-  editor.value = JSON.stringify(safeMods, null, 2);
-  saveBtn.style.display='inline-block';
-  cancelBtn.style.display='inline-block';
-  saveBtn.classList.add('btn'); cancelBtn.classList.add('btn');
-});
-cancelBtn.addEventListener('click', ()=>{
-  editor.style.display='none';
-  saveBtn.style.display='none';
-  cancelBtn.style.display='none';
-});
-saveBtn.addEventListener('click', ()=>{
-  try{
-    const parsed = JSON.parse(editor.value);
-    // basic safety filter: if contains obvious cheat-words, refuse
-    const joined = JSON.stringify(parsed).toLowerCase();
-    if(/cheat|aimbot|x-?ray|auto-aim|exploit|forceop|unauthorized/i.test(joined)){
-      alert('The provided list looks like it contains disallowed cheat/exploit modules. Edit and remove those entries first.');
-      return;
-    }
-    renderMods(parsed);
-    editor.style.display='none';
-    saveBtn.style.display='none';
-    cancelBtn.style.display='none';
-  }catch(e){
-    alert('Invalid JSON. Please fix formatting.');
-  }
-});
-
-importBtn.addEventListener('click', ()=>{
-  const input = document.createElement('input');
-  input.type='file'; input.accept='application/json';
-  input.onchange = e=>{
-    const f = e.target.files[0]; if(!f) return;
-    const r = new FileReader();
-    r.onload = ev=>{
-      try{
-        const parsed = JSON.parse(ev.target.result);
-        // safety check
-        const joined = JSON.stringify(parsed).toLowerCase();
-        if(/cheat|aimbot|x-?ray|auto-aim|exploit|forceop|unauthorized/i.test(joined)){
-          alert('Imported file contains disallowed or suspicious modules and was not loaded.');
-          return;
-        }
-        renderMods(parsed);
-        alert('Mods imported successfully.');
-      }catch(err){
-        alert('Failed to parse JSON file.');
-      }
-    };
-    r.readAsText(f);
-  };
-  input.click();
-});
-</script>
-
+  <h1>🚀 **Site Cancelled**</h1>
+  <p>_This website has been **entirely cancelled** by the owner of Space Community._</p>
+  <code>
+    # Notice<br>
+    The project has been discontinued permanently.<br>
+    Please do not expect further updates or content.
+  </code>
 </body>
 </html>

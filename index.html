@@ -5,313 +5,321 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Frost Client - Installer Guide</title>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+*{margin:0;padding:0;box-sizing:border-box}
 
-body {
+body{
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #0b1a33, #1a3a5c);
-    min-height: 100vh;
-    padding: 20px;
-    color: #fff;
+    background: linear-gradient(135deg,#0b1a33,#1a3a5c);
+    min-height:100vh;
+    padding:20px;
+    color:#fff;
+    overflow-x:hidden;
 }
 
-.container { max-width: 1000px; margin: 0 auto; }
-
-.header, .card, .footer {
-    background: rgba(255,255,255,0.95);
-    color: #000;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Floating Background Glow */
+body::before{
+    content:"";
+    position:fixed;
+    width:600px;
+    height:600px;
+    background: radial-gradient(circle,#3498db33,transparent 70%);
+    top:-200px;
+    right:-200px;
+    z-index:0;
 }
 
-.card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+.container{max-width:1000px;margin:0 auto;position:relative;z-index:1}
+
+/* Glass effect */
+.header,.card,.footer{
+    background:rgba(255,255,255,0.95);
+    color:#000;
+    border-radius:20px;
+    padding:25px;
+    margin-bottom:25px;
+    backdrop-filter:blur(10px);
+    opacity:0;
+    transform:translateY(40px);
+    transition:all .8s ease;
 }
 
-.header h1 { font-size: 2em; text-align: center; }
-.header p { text-align: center; color: #4a5568; }
-
-.btn {
-    display: inline-block;
-    background: #3498db;
-    color: white;
-    padding: 12px 25px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    margin: 5px 0;
-    transition: all 0.3s;
-    cursor: pointer;
+.show{
+    opacity:1!important;
+    transform:translateY(0)!important;
 }
 
-.btn:hover {
-    background: #2980b9;
-    transform: scale(1.05);
+.header{
+    text-align:center;
+    position:relative;
+    overflow:hidden;
 }
 
-.file-info {
-    background: #e0e0e0;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    margin: 15px 0;
+.header h1{
+    font-size:2.3em;
+    background:linear-gradient(90deg,#3498db,#00b894);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 }
 
-.features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
+.header p{color:#555;margin-bottom:15px}
+
+.btn{
+    display:inline-block;
+    background:#3498db;
+    color:#fff;
+    padding:12px 25px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:bold;
+    margin:6px;
+    position:relative;
+    overflow:hidden;
+    transition:.3s;
 }
 
-.feature {
-    background: #f0f0f0;
-    padding: 8px 12px;
-    border-radius: 8px;
-    flex: 1 1 45%;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: background 0.3s;
+.btn:hover{
+    background:#2980b9;
+    transform:translateY(-3px);
+    box-shadow:0 6px 20px rgba(0,0,0,.2);
 }
 
-.feature:hover {
-    background: #e6f2ff;
+/* Ripple effect */
+.btn::after{
+    content:"";
+    position:absolute;
+    width:0;
+    height:0;
+    background:rgba(255,255,255,.4);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    top:50%;
+    left:50%;
+    transition:.5s;
 }
 
-.steps { margin: 20px 0; }
-
-.step { margin-bottom: 15px; display: flex; }
-
-.step-number {
-    font-weight: bold;
-    margin-right: 10px;
-    min-width: 25px;
+.btn:active::after{
+    width:300px;
+    height:300px;
 }
 
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 10px;
-    margin-top: 15px;
+.file-info{
+    background:#e0e0e0;
+    padding:15px;
+    border-radius:15px;
+    text-align:center;
+    margin:15px 0;
 }
 
-.gallery img {
-    width: 100%;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s;
+.features{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:10px;
 }
 
-.gallery img:hover {
-    transform: scale(1.05);
+.feature{
+    background:#f0f0f0;
+    padding:10px;
+    border-radius:10px;
+    flex:1 1 45%;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    transition:.3s;
+}
+
+.feature:hover{
+    background:#e6f2ff;
+    transform:scale(1.03);
+}
+
+.steps .step{
+    margin-bottom:15px;
+    display:flex;
+}
+
+.step-number{
+    font-weight:bold;
+    margin-right:10px;
+    min-width:25px;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:10px;
+    margin-top:15px;
+}
+
+.gallery img{
+    width:100%;
+    border-radius:12px;
+    cursor:pointer;
+    transition:.4s;
+}
+
+.gallery img:hover{
+    transform:scale(1.08);
 }
 
 /* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.9);
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
 }
 
-.modal img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 15px;
+.modal img{
+    max-width:90%;
+    max-height:90%;
+    border-radius:15px;
+    animation:zoom .3s ease;
 }
 
-.modal-close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 30px;
-    color: white;
-    cursor: pointer;
+@keyframes zoom{
+    from{transform:scale(.7);opacity:0}
+    to{transform:scale(1);opacity:1}
 }
 
-@media (max-width:768px) {
-    .features { flex-direction: column; }
+.modal-close{
+    position:absolute;
+    top:20px;
+    right:30px;
+    font-size:35px;
+    color:#fff;
+    cursor:pointer;
+}
+
+/* Loader */
+.loader{
+    display:none;
+    margin-top:10px;
+}
+
+.loader span{
+    display:inline-block;
+    width:8px;
+    height:8px;
+    background:#3498db;
+    border-radius:50%;
+    margin:0 3px;
+    animation:bounce 1s infinite alternate;
+}
+
+.loader span:nth-child(2){animation-delay:.2s}
+.loader span:nth-child(3){animation-delay:.4s}
+
+@keyframes bounce{
+    to{transform:translateY(-8px)}
+}
+
+@media(max-width:768px){
+    .features{flex-direction:column}
 }
 </style>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
 <div class="container">
 
-<!-- Header -->
 <div class="header">
     <h1>FrostClient</h1>
-    <p>ATLauncher & CurseForge Installer Guide</p>
-    <div style="text-align:center;">
-        <span class="btn"><i class="fas fa-cube"></i> Minecraft 1.8.9</span>
-        <span class="btn"><i class="fas fa-laptop"></i> Client-side</span>
-        <span class="btn"><i class="fas fa-code-branch"></i> By Joafine</span>
-    </div>
+    <p>Universal Installer (ATLauncher + CurseForge)</p>
+    <span class="btn"><i class="fas fa-cube"></i> Minecraft 1.8.9</span>
+    <span class="btn"><i class="fas fa-laptop"></i> Client-side</span>
+    <span class="btn"><i class="fas fa-bolt"></i> FPS Boost Included</span>
 </div>
 
-<!-- Installer Card -->
 <div class="card">
-    <h2>Installer</h2>
+    <h2>Installer Download</h2>
     <div class="file-info">
-        <div style="font-size: 2em; margin-bottom:10px;">
-            <i class="fas fa-file-excel"></i>
-        </div>
         <p><strong>File:</strong> installer.exe</p>
         <p><strong>Size:</strong> 5.2 MB</p>
 
         <a href="https://www.mediafire.com/file/afmp7ey6sav1gci/installer.exe/file"
-           class="btn" target="_blank">
-            <i class="fas fa-download"></i> Download Installer
+           class="btn"
+           onclick="startDownload()"
+           target="_blank">
+           <i class="fas fa-download"></i> Download Installer
         </a>
 
-        <div style="background:#fff3cd; border-left:4px solid #ffc107;
-                    padding:10px; border-radius:5px; margin-top:15px;">
-            <i class="fas fa-info-circle"></i>
-            <strong>Note:</strong> Official installer with ATLauncher
-            and CurseForge export option included.
+        <div class="loader" id="loader">
+            <span></span><span></span><span></span>
         </div>
 
-        <!-- NEW FEATURE BOX -->
-        <div style="background:#e6fffa; border-left:4px solid #00b894;
-                    padding:10px; border-radius:5px; margin-top:15px;">
-            <i class="fas fa-bolt"></i>
-            <strong>New:</strong> CurseForge download option available!
-            <br>You can export and import the instance into
-            other launchers that support CurseForge format.
-            <br>Includes built-in FPS Boost for better performance.
+        <div style="background:#e6fffa;border-left:4px solid #00b894;padding:10px;border-radius:8px;margin-top:15px;">
+            <strong>Inside the Installer:</strong><br>
+            • Install for ATLauncher<br>
+            • Export CurseForge Version<br>
+            • Importable in other CurseForge-compatible launchers<br>
+            • Built-in FPS Optimization
         </div>
     </div>
 
-    <h3>Installed Components:</h3>
+    <h3>Included Features:</h3>
     <div class="features">
         <div class="feature"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> FrostClient v1.8.9</div>
-        <div class="feature"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> ATLauncher Instance</div>
-        <div class="feature"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> CurseForge Instance Export</div>
-        <div class="feature"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> Importable in other launchers</div>
+        <div class="feature"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> CurseForge Export Option</div>
         <div class="feature"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> Custom Cape Support</div>
         <div class="feature"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> HUD Customization</div>
-        <div class="feature"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> PVP Features</div>
-        <div class="feature"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> Performance Tweaks</div>
-        <div class="feature"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> Built-in FPS Boost</div>
-    </div>
-
-    <div style="background:#e8f4fd; padding:10px;
-                border-radius:5px; margin-top:15px;">
-        <i class="fas fa-shield-alt"></i>
-        <strong>Virus Total Scan:</strong> Clean (0/70 detections)
+        <div class="feature"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> PVP Enhancements</div>
+        <div class="feature"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> Performance Boost</div>
     </div>
 </div>
 
-<!-- Steps -->
 <div class="card steps">
-    <h2>How to Use</h2>
-
-    <div class="step">
-        <span class="step-number">1.</span>
-        <span>Download <strong>installer.exe</strong>
-        and run as administrator.</span>
-    </div>
-
-    <div class="step">
-        <span class="step-number">2.</span>
-        <span>Choose installation type:
-        <br>• Automatic (ATLauncher)
-        <br>• CurseForge Version (Exportable)</span>
-    </div>
-
-    <div class="step">
-        <span class="step-number">3.</span>
-        <span>If CurseForge version is selected,
-        import it in any launcher that supports
-        CurseForge instance importing.</span>
-    </div>
-
-    <div class="step">
-        <span class="step-number">4.</span>
-        <span>Wait for installation to complete.</span>
-    </div>
-
-    <div class="step">
-        <span class="step-number">5.</span>
-        <span>Launch your preferred launcher
-        and start FrostClient.</span>
-    </div>
+    <h2>How It Works</h2>
+    <div class="step"><span class="step-number">1.</span>Download and run installer.exe</div>
+    <div class="step"><span class="step-number">2.</span>Select installation type (ATLauncher or CurseForge)</div>
+    <div class="step"><span class="step-number">3.</span>If CurseForge selected, import in compatible launcher</div>
+    <div class="step"><span class="step-number">4.</span>Launch and enjoy optimized FPS</div>
 </div>
 
-<!-- Quick Links -->
-<div class="card" style="text-align:center;">
-    <h2>Quick Access</h2>
-    <a href="https://discord.gg/We6xFMA8uY"
-       class="btn" target="_blank">
-       <i class="fab fa-discord"></i> Discord
-    </a>
-
-    <a href="https://github.com/QuiteFrosty/FrostClient/tree/develop/1.8.9/cloudclient"
-       class="btn" target="_blank">
-       <i class="fab fa-github"></i> Source Code
-    </a>
-
-    <a href="http://www.mediafire.com/file/wln54v4oviwzwaj/installer.exe"
-       class="btn" target="_blank">
-       <i class="fas fa-download"></i> Installer
-    </a>
-</div>
-
-<!-- Gallery -->
-<div class="card">
-    <h2>Gallery</h2>
-    <div class="gallery">
-        <img src="https://cdn.modrinth.com/data/aKCamzi7/images/c46ff7181310c783f6b1d4fba95985494baad70d_350.webp" onclick="openModal(this.src)">
-        <img src="https://cdn.modrinth.com/data/aKCamzi7/images/a0059ad8656da1d37a8d1825e9bfaf53171a9e16_350.webp" onclick="openModal(this.src)">
-        <img src="https://cdn.modrinth.com/data/aKCamzi7/images/eba9a3e1d1aebaca187489e3f9b9302522573830_350.webp" onclick="openModal(this.src)">
-        <img src="https://cdn.modrinth.com/data/aKCamzi7/images/75d8624d669989d97f45d80fbfe75c27a49c62e2_350.webp" onclick="openModal(this.src)">
-        <img src="https://cdn.modrinth.com/data/aKCamzi7/images/337131f2ee3bb9a6ead2c2dd14a3cdd3e625495d_350.webp" onclick="openModal(this.src)">
-        <img src="https://cdn.modrinth.com/data/aKCamzi7/images/bfa3deaeb1bc536ea6a4c4305e998e6aa6f856cd_350.webp" onclick="openModal(this.src)">
-    </div>
-</div>
-
-<!-- Footer -->
 <div class="footer">
-    <p style="text-align:center;">
-        FrostClient | ATLauncher & CurseForge Support |
-        Created by Joafine
-    </p>
+    <p style="text-align:center;">FrostClient Classic | Universal Installer | By Joafine</p>
 </div>
 
 </div>
 
-<!-- Modal -->
 <div id="modal" class="modal" onclick="closeModal()">
-    <span class="modal-close">&times;</span>
-    <img id="modalImg" src="">
+<span class="modal-close">&times;</span>
+<img id="modalImg">
 </div>
 
 <script>
-function openModal(src) {
-    document.getElementById('modal').style.display = 'flex';
-    document.getElementById('modalImg').src = src;
-    document.body.style.overflow = 'hidden';
+function startDownload(){
+    document.getElementById("loader").style.display="block";
 }
 
-function closeModal() {
-    document.getElementById('modal').style.display = 'none';
-    document.body.style.overflow = 'auto';
+function openModal(src){
+    document.getElementById('modal').style.display='flex';
+    document.getElementById('modalImg').src=src;
 }
 
-document.addEventListener('keydown', e => {
-    if(e.key === 'Escape') closeModal();
+function closeModal(){
+    document.getElementById('modal').style.display='none';
+}
+
+/* Scroll animation */
+const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add('show');
+        }
+    });
+});
+document.querySelectorAll('.card,.header,.footer').forEach(el=>{
+    observer.observe(el);
 });
 </script>
 
 </body>
 </html>
+

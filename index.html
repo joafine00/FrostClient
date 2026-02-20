@@ -1,66 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site Closed - New Website</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-        }
-        .container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            max-width: 600px;
-            margin: 20px;
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 28px;
-        }
-        p {
-            color: #666;
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-        .link {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 18px;
-            display: inline-block;
-            transition: background-color 0.3s;
-        }
-        .link:hover {
-            background-color: #45a049;
-        }
-        .website {
-            font-weight: bold;
-            color: #4CAF50;
-            word-break: break-all;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site Closed - New Website</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c1c1c);
+        background-size: 400% 400%;
+        animation: gradientBG 12s ease infinite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        color: white;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .container {
+        backdrop-filter: blur(15px);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255,255,255,0.15);
+        padding: 50px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        max-width: 700px;
+        animation: fadeIn 1.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+        font-size: 32px;
+        margin-bottom: 25px;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+
+    .markdown-box {
+        background: rgba(0,0,0,0.4);
+        padding: 20px;
+        border-radius: 12px;
+        margin: 25px 0;
+        text-align: left;
+        font-family: monospace;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .markdown-box blockquote {
+        border-left: 4px solid #00f2fe;
+        padding-left: 15px;
+        color: #00f2fe;
+        margin-bottom: 15px;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 50px;
+        background: linear-gradient(45deg, #00f2fe, #4facfe);
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .website {
+        font-weight: bold;
+        color: #00f2fe;
+        word-break: break-all;
+        text-shadow: 0 0 10px rgba(0,242,254,0.7);
+    }
+
+    .link {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 15px 35px;
+        border-radius: 50px;
+        font-size: 18px;
+        text-decoration: none;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(45deg, #00f2fe, #4facfe);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .link:hover {
+        transform: scale(1.08);
+        box-shadow: 0 0 25px rgba(0,242,254,0.8);
+    }
+
+    .link::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255,255,255,0.3);
+        transform: skewX(-25deg);
+        transition: 0.5s;
+    }
+
+    .link:hover::before {
+        left: 200%;
+    }
+
+    footer {
+        margin-top: 25px;
+        font-size: 14px;
+        opacity: 0.7;
+    }
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>⚠️ This Site Has Been Closed</h1>
-        <p>The new website is:</p>
-        <p class="website">https://frostclient.kesug.com/</p>
-        <a href="https://frostclient.kesug.com/" class="link" target="_blank">Go to New Website</a>
+
+<div class="container">
+
+    <div class="badge">🚀 Website Update</div>
+
+    <h1>⚠️ This Site Has Been Closed</h1>
+
+    <div class="markdown-box">
+        <blockquote>
+            📢 The project has moved to a new official address.
+        </blockquote>
+
+        🔗 **New Website:**  
+        <div class="website">https://frostclient.kesug.com/</div>
+
+        💡 Please update your bookmarks.
     </div>
+
+    <a href="https://frostclient.kesug.com/" class="link" target="_blank">
+        🌍 Go to New Website
+    </a>
+
+    <footer>
+        ✨ Thank you for visiting
+    </footer>
+
+</div>
+
 </body>
 </html>
